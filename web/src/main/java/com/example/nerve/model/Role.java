@@ -1,10 +1,10 @@
 package com.example.nerve.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -22,7 +22,7 @@ public class Role {
     @Column(unique = true, nullable = false, name = "role_name")
     private String roleName;
 
-    @ManyToMany(mappedBy = "roles")
     @JsonIgnore
+    @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 }

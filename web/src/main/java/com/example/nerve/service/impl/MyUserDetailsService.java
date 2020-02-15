@@ -2,7 +2,7 @@ package com.example.nerve.service.impl;
 
 import com.example.nerve.model.*;
 import com.example.nerve.model.User;
-import com.example.nerve.repository.interfaces.JpaUserRepository;
+import com.example.nerve.repository.jpa.JpaUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
