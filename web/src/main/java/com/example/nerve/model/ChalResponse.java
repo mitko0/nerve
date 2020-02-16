@@ -17,13 +17,13 @@ public class ChalResponse {
     ChallengeKey id = new ChallengeKey();
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("sender_id")
     @JoinColumn(name = "sender_id")
     private User sender;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("receiver_id")
     @JoinColumn(name = "receiver_id")
     private User receiver;

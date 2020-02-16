@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+    <form action="/api/user/new" method="post" enctype="multipart/form-data">
+        <input type="text" name="username" placeholder="username">
+        <input type="password" name="password" placeholder="password">
+        <input type="email" name="email" placeholder="email">
+        <input type="file" name="pic" accept="image/*">
+        <input type="submit" >
+    </form>
+</body>
+</html>

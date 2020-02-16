@@ -18,13 +18,13 @@ public class Streak {
     private StreakKey id = new StreakKey();
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("user1_id")
     @JoinColumn(name = "user1_id")
     private User user1;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("user2_id")
     @JoinColumn(name = "user2_id")
     private User user2;

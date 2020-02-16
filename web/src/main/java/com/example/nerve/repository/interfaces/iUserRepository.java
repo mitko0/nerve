@@ -14,6 +14,8 @@ public interface iUserRepository {
 
     Page<User> findPageable(Pageable pageable);
 
+    List<User> searchByUsername(String username);
+
     Optional<User> findByUsername(String username);
 
     Optional<User> findById(Long id);

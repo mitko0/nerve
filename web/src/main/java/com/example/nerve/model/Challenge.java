@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -19,13 +18,13 @@ public class Challenge {
     private ChallengeKey id = new ChallengeKey();
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("sender_id")
     @JoinColumn(name = "sender_id", insertable = false, updatable = false)
     private User sender;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("receiver_id")
     @JoinColumn(name = "receiver_id", columnDefinition = "bigint default -1", insertable = false, updatable = false)
     private User receiver;

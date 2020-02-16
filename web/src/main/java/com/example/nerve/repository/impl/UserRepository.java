@@ -34,6 +34,11 @@ public class UserRepository implements iUserRepository {
     }
 
     @Override
+    public List<User> searchByUsername(String username) {
+        return repo.searchByUsername(username);
+    }
+
+    @Override
     public Optional<User> findByUsername(String username) {
         return repo.findByUsername(username);
     }

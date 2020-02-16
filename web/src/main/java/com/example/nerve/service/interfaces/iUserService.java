@@ -2,13 +2,13 @@ package com.example.nerve.service.interfaces;
 
 import com.example.nerve.model.User;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface iUserService {
-    User createUser(User user);
+    User createUser(User user, MultipartFile pic);
 
     User updateUserById(Long id,
                                   Optional<String> username,
@@ -24,7 +24,9 @@ public interface iUserService {
 
     List<User> all();
 
-    Page<User> usersPaged(Pageable pageable);
+    Page<User> usersPaged(int listSize, int pageNo);
+
+    List<User> search(String term);
 
     Optional<User> getByUsername(String username);
 

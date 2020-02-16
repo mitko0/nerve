@@ -2,21 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ca0f091-229b-4dcc-98ab-7ac1f772efe3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/NerveApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/NerveApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/ChalResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/ChalResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/Challenge.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/Challenge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/Streak.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/Streak.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/impl/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/impl/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/interfaces/JpaUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/jpa/JpaUserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/interfaces/TestRepository.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/interfaces/iUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/interfaces/iUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/jpa/JpaUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/jpa/JpaUserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/MyUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/MyUserDetailsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/interfaces/iUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/interfaces/iUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/controllers/TestController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/UserApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/UserApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/UserApi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,6 +31,7 @@
         <option value="JavaScript File" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -56,6 +58,7 @@
     <option name="showVisibilityIcons" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
@@ -64,12 +67,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../`fax/semestar v5/`jetBeans/IdeaProjects/wp-2019" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -128,6 +132,9 @@
       <workItem from="1581767054521" duration="33000" />
       <workItem from="1581767097003" duration="312000" />
       <workItem from="1581767472497" duration="24260000" />
+      <workItem from="1581798166475" duration="44000" />
+      <workItem from="1581859144060" duration="9484000" />
+      <workItem from="1581869061481" duration="21389000" />
     </task>
     <servers />
   </component>
@@ -139,11 +146,18 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/frontend" />
+    </ignored-roots>
   </component>
   <component name="WindowStateProjectService">
     <state x="1032" y="199" key="#Project_Structure" timestamp="1581767324970">
@@ -154,10 +168,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="828" y="181" width="1092" height="899" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1581767384903" />
-    <state x="1245" y="253" key="#com.intellij.ide.util.MemberChooser" timestamp="1581796624075">
+    <state x="1245" y="253" key="#com.intellij.ide.util.MemberChooser" timestamp="1581881479618">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1245" y="253" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1581796624075" />
+    <state x="1245" y="253" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1581881479618" />
     <state x="1103" y="324" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1581767379076">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -174,78 +188,86 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="396" height="466" key="DebuggerActiveHint/0.0.1920.1080@0.0.1920.1080" timestamp="1581784929708" />
-    <state x="1180" y="234" key="FileChooserDialogImpl" timestamp="1581796155431">
+    <state x="1180" y="234" key="FileChooserDialogImpl" timestamp="1581880357399">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1180" y="234" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1581796155431" />
-    <state width="914" height="294" key="GridCell.Tab.0.bottom" timestamp="1581797860136">
+    <state x="1180" y="234" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1581880357399" />
+    <state width="914" height="294" key="GridCell.Tab.0.bottom" timestamp="1581895634417">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="294" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1581797860136" />
-    <state width="914" height="294" key="GridCell.Tab.0.center" timestamp="1581797860136">
+    <state width="914" height="294" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1581895634417" />
+    <state width="914" height="294" key="GridCell.Tab.0.center" timestamp="1581895634417">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="294" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1581797860136" />
-    <state width="914" height="294" key="GridCell.Tab.0.left" timestamp="1581797860136">
+    <state width="914" height="294" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1581895634417" />
+    <state width="914" height="294" key="GridCell.Tab.0.left" timestamp="1581895634417">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="294" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1581797860136" />
-    <state width="914" height="294" key="GridCell.Tab.0.right" timestamp="1581797860136">
+    <state width="914" height="294" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1581895634417" />
+    <state width="914" height="294" key="GridCell.Tab.0.right" timestamp="1581895634417">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="294" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1581797860136" />
-    <state width="914" height="294" key="GridCell.Tab.1.bottom" timestamp="1581797860136">
+    <state width="914" height="294" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1581895634417" />
+    <state width="914" height="294" key="GridCell.Tab.1.bottom" timestamp="1581895634417">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="294" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1581797860136" />
-    <state width="914" height="294" key="GridCell.Tab.1.center" timestamp="1581797860136">
+    <state width="914" height="294" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1581895634417" />
+    <state width="914" height="294" key="GridCell.Tab.1.center" timestamp="1581895634417">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="294" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1581797860136" />
-    <state width="914" height="294" key="GridCell.Tab.1.left" timestamp="1581797860136">
+    <state width="914" height="294" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1581895634417" />
+    <state width="914" height="294" key="GridCell.Tab.1.left" timestamp="1581895634417">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="294" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1581797860136" />
-    <state width="914" height="294" key="GridCell.Tab.1.right" timestamp="1581797860136">
+    <state width="914" height="294" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1581895634417" />
+    <state width="914" height="294" key="GridCell.Tab.1.right" timestamp="1581895634417">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="294" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1581797860136" />
-    <state width="914" height="363" key="GridCell.Tab.2.bottom" timestamp="1581797860136">
+    <state width="914" height="294" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1581895634417" />
+    <state width="914" height="359" key="GridCell.Tab.2.bottom" timestamp="1581895634410">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="363" key="GridCell.Tab.2.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1581797860136" />
-    <state width="914" height="363" key="GridCell.Tab.2.center" timestamp="1581797860136">
+    <state width="914" height="359" key="GridCell.Tab.2.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1581895634410" />
+    <state width="914" height="359" key="GridCell.Tab.2.center" timestamp="1581895634410">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="363" key="GridCell.Tab.2.center/0.0.1920.1080@0.0.1920.1080" timestamp="1581797860136" />
-    <state width="914" height="363" key="GridCell.Tab.2.left" timestamp="1581797860136">
+    <state width="914" height="359" key="GridCell.Tab.2.center/0.0.1920.1080@0.0.1920.1080" timestamp="1581895634410" />
+    <state width="914" height="359" key="GridCell.Tab.2.left" timestamp="1581895634410">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="363" key="GridCell.Tab.2.left/0.0.1920.1080@0.0.1920.1080" timestamp="1581797860136" />
-    <state width="914" height="363" key="GridCell.Tab.2.right" timestamp="1581797860136">
+    <state width="914" height="359" key="GridCell.Tab.2.left/0.0.1920.1080@0.0.1920.1080" timestamp="1581895634410" />
+    <state width="914" height="359" key="GridCell.Tab.2.right" timestamp="1581895634410">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="363" key="GridCell.Tab.2.right/0.0.1920.1080@0.0.1920.1080" timestamp="1581797860136" />
-    <state x="880" y="115" key="SettingsEditor" timestamp="1581767232174">
+    <state width="914" height="359" key="GridCell.Tab.2.right/0.0.1920.1080@0.0.1920.1080" timestamp="1581895634410" />
+    <state x="880" y="115" key="SettingsEditor" timestamp="1581798196851">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="880" y="115" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1581767232174" />
-    <state x="1136" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1581767475258">
+    <state x="880" y="115" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1581798196851" />
+    <state x="1136" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1581859164776">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1136" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1581767475258" />
+    <state x="1136" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1581859164776" />
     <state x="1249" y="461" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1581796751092">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1249" y="461" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1080@0.0.1920.1080" timestamp="1581796751092" />
-    <state x="1136" y="275" width="607" height="536" key="find.popup" timestamp="1581776421067">
+    <state x="1170" y="310" key="extract.method.dialog" timestamp="1581894876101">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1136" y="275" width="607" height="536" key="find.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1581776421067" />
-    <state x="1103" y="240" width="672" height="676" key="search.everywhere.popup" timestamp="1581786071361">
+    <state x="1170" y="310" key="extract.method.dialog/0.0.1920.1080@0.0.1920.1080" timestamp="1581894876101" />
+    <state x="1136" y="275" width="607" height="536" key="find.popup" timestamp="1581895536986">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1103" y="240" width="672" height="676" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1581786071361" />
+    <state x="1136" y="275" width="607" height="536" key="find.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1581895536986" />
+    <state x="685" y="161" key="new project wizard" timestamp="1581859698940">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="685" y="161" key="new project wizard/0.0.1920.1080@0.0.1920.1080" timestamp="1581859698940" />
+    <state x="1103" y="240" width="672" height="676" key="search.everywhere.popup" timestamp="1581883166315">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1103" y="240" width="672" height="676" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1581883166315" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -264,6 +286,21 @@
           <url>file://$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/ChallengeApi.java</url>
           <line>25</line>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/UserApi.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/UserApi.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/Constants.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
