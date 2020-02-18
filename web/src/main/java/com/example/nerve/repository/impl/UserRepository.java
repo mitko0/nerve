@@ -1,6 +1,8 @@
 package com.example.nerve.repository.impl;
 
-import com.example.nerve.model.User;
+import com.example.nerve.model.entity.Role;
+import com.example.nerve.model.entity.User;
+import com.example.nerve.repository.jpa.JpaRoleRepository;
 import com.example.nerve.repository.jpa.JpaUserRepository;
 import com.example.nerve.repository.interfaces.iUserRepository;
 import org.springframework.data.domain.Page;
@@ -62,4 +64,5 @@ public class UserRepository implements iUserRepository {
     public void deleteAll() {
         repo.deleteAll();
     }
+
 }

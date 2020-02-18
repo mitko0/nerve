@@ -1,7 +1,8 @@
-package com.example.nerve.model;
+package com.example.nerve.model.composite_key;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -13,6 +14,7 @@ import java.sql.Timestamp;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Embeddable
 public class ChallengeKey implements Serializable {
     @Column(name = "sender_id")
@@ -24,20 +26,4 @@ public class ChallengeKey implements Serializable {
     @Column(name = "date_created")
     @CreationTimestamp
     private Timestamp dateCreated;
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-
-        if (!(o instanceof ChallengeKey)) {
-            return false;
-        }
-        ChallengeKey obj = (ChallengeKey)o;
-
-        return obj.dateCreated == this.dateCreated
-                && obj.senderId.equals(this.senderId)
-                && obj.receiverId.equals(this.receiverId);
-    }
 }

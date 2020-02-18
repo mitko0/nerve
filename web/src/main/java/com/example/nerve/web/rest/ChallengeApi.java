@@ -1,6 +1,7 @@
 package com.example.nerve.web.rest;
 
-import com.example.nerve.model.Challenge;
+import com.example.nerve.model.entity.Challenge;
+import com.example.nerve.model.view_model.ChallengeUsers;
 import com.example.nerve.service.interfaces.iChallengeService;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,8 @@ public class ChallengeApi {
         return service.saveChallenge(challenge);
     }
 
-    @GetMapping(value = "/search", params = "by")
-    public List<Challenge> by(@RequestParam String by) {
-        return service.allByUser(by);
+    @GetMapping(value = "/search", params = "username")
+    public List<ChallengeUsers> by(@RequestParam String username) {
+        return service.search(username);
     }
 }

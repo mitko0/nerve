@@ -2,6 +2,9 @@ package com.example.nerve.model;
 
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import org.jetbrains.annotations.NotNull;
+
 import static java.nio.file.StandardCopyOption.*;
 
 import java.io.IOException;
@@ -15,23 +18,19 @@ public class Constants {
     public static final String fileBasePath = System.getProperty("user.dir") + "/web/src/main/resources/static";
 
 
-    public static String saveFile(MultipartFile file, String username, String location) {
+    public static String saveFile(@NotNull MultipartFile file, String name, String location) throws IOException {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-        fileName = username + fileExtension(fileName);
+        fileName = name + fileExtension(fileName);
 
         Path path = Paths.get(Constants.fileBasePath + location, fileName);
-        try {
-            //Files.write(path, file.getBytes());
-            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
         return String.format("%s/%s", location, fileName);
     }
 
-    public static String renameFile(String file, String newName, String location) throws IOException {
-        newName = newName + fileExtension(file);
-        Files.move(Paths.get(fileBasePath, file), Paths.get(fileBasePath, location, newName), REPLACE_EXISTING);
+    public static String renameFile(String fileLocation, String newName, String location) throws IOException {
+        newName = newName.concat(fileExtension(fileLocation));
+        Files.move(Paths.get(fileBasePath, fileLocation), Paths.get(fileBasePath, location, newName), REPLACE_EXISTING);
         return String.format("%s/%s", profileImageFolder, newName);
     }
 

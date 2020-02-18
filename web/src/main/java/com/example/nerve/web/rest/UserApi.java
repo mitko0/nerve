@@ -1,6 +1,6 @@
 package com.example.nerve.web.rest;
 
-import com.example.nerve.model.User;
+import com.example.nerve.model.entity.User;
 import com.example.nerve.service.interfaces.iUserService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -11,12 +11,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.nio.file.FileSystemException;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/api/users",  produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api/users", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 public class UserApi {
     private final iUserService service;
 
@@ -28,9 +27,7 @@ public class UserApi {
     public User getUser(@RequestParam(value = "id", required = false, defaultValue = "1") Long id,
                         @RequestParam(value = "username", required = false) String username) {
 
-        if (username != null && !username.equals(""))
-            return service.getByUsername(username).orElseThrow(RuntimeException::new);
-        return service.getById(id).orElseThrow(RuntimeException::new);
+        return service.getUser(Optional.ofNullable(id), Optional.ofNullable(username));
     }
 
     @GetMapping("/all")
@@ -57,39 +54,32 @@ public class UserApi {
         return service.createUser(user, pic);
     }
 
-    @PatchMapping(value = "/update")
-    public User update(@RequestParam(value = "name", required = false) String username,
-                       @RequestParam(value = "id", required = false, defaultValue = "1") Long id,
+    @PatchMapping
+    public User update(@RequestParam(value = "id", required = false) Long id,
+                       @RequestParam(value = "name", required = false) String username,
                        @ModelAttribute @Valid User user) {
 
-        User u = new User();
-        if(username != null && !username.equals("")) {
-            u = service.updateUserByUsername(username,
-                    Optional.ofNullable(user.getUsername()),
-                    Optional.ofNullable(user.getEmail()),
-                    Optional.ofNullable(user.getPassword()));
-        }
-        else {
-            try {
-                u = service.updateUserById(id,
-                        Optional.ofNullable(user.getUsername()),
-                        Optional.ofNullable(user.getEmail()),
-                        Optional.ofNullable(user.getPassword()));
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return u;
+        return service.updateUser(Optional.ofNullable(id), Optional.ofNullable(username),
+                Optional.ofNullable(user.getUsername()),
+                Optional.ofNullable(user.getEmail()),
+                Optional.ofNullable(user.getPassword()));
     }
 
-    @DeleteMapping("/delete/{username}")
-    public void deleteByUsername(@PathVariable String username) {
-        service.deleteByUsername(username);
+    @PatchMapping(value = "/updatePic")
+    public User updateProfilePic(@RequestParam(value = "name", required = false) String username,
+                                 @RequestParam(value = "id", required = false, defaultValue = "1") Long id,
+                                 @RequestAttribute MultipartFile pic) {
+
+        return service.updateProfilePic(Optional.ofNullable(id),
+                Optional.ofNullable(username),
+                pic);
     }
 
-    @DeleteMapping(value = "/delete", params = "id")
-    public void deleteById(@RequestParam Long id) {
-        service.deleteById(id);
+    @DeleteMapping("/delete")
+    public void deleteUser(@RequestParam(value = "id", required = false) Long id,
+                           @RequestParam(value = "username", required = false) String username) {
+
+        service.deleteUser(Optional.ofNullable(id), Optional.ofNullable(username));
     }
+
 }

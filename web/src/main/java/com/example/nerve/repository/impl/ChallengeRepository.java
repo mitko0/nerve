@@ -1,6 +1,7 @@
 package com.example.nerve.repository.impl;
 
-import com.example.nerve.model.Challenge;
+import com.example.nerve.model.entity.Challenge;
+import com.example.nerve.model.view_model.ChallengeUsers;
 import com.example.nerve.repository.interfaces.iChallengeRepository;
 import com.example.nerve.repository.jpa.JpaChallengeRepository;
 import org.springframework.stereotype.Repository;
@@ -21,37 +22,37 @@ public class ChallengeRepository implements iChallengeRepository {
     }
 
     @Override
-    public List<Challenge> search(String username) {
+    public List<ChallengeUsers> search(String username) {
         return repo.search(username);
     }
 
     @Override
-    public List<Challenge> allForUser(String username) {
+    public List<ChallengeUsers> allForUser(String username) {
         return repo.allForUser(username);
     }
 
     @Override
-    public List<Challenge> allForUserId(Long id) {
+    public List<ChallengeUsers> allForUserId(Long id) {
         return repo.allForUserId(id);
     }
 
     @Override
-    public List<Challenge> allToUser(String username) {
+    public List<ChallengeUsers> allToUser(String username) {
         return repo.allToUser(username);
     }
 
     @Override
-    public List<Challenge> allToUserId(Long id) {
-        return allToUserId(id);
+    public List<ChallengeUsers> allToUserId(Long id) {
+        return repo.allToUserId(id);
     }
 
     @Override
-    public List<Challenge> allByUser(String username) {
+    public List<ChallengeUsers> allByUser(String username) {
         return repo.allByUser(username);
     }
 
     @Override
-    public List<Challenge> allByUserId(Long id) {
+    public List<ChallengeUsers> allByUserId(Long id) {
         return repo.allByUserId(id);
     }
 
@@ -59,4 +60,5 @@ public class ChallengeRepository implements iChallengeRepository {
     public void deleteChallenge(Challenge challenge) {
         repo.delete(challenge);
     }
+
 }

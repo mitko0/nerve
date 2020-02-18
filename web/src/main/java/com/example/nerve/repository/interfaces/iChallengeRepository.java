@@ -1,25 +1,27 @@
 package com.example.nerve.repository.interfaces;
 
-import com.example.nerve.model.Challenge;
+import com.example.nerve.model.entity.Challenge;
+import com.example.nerve.model.view_model.ChallengeUsers;
 
 import java.util.List;
 
 public interface iChallengeRepository {
     Challenge save(Challenge challenge);
 
-    List<Challenge> search(String username);
+    List<ChallengeUsers> search(String username);
 
-    List<Challenge> allForUser(String username);
+    List<ChallengeUsers> allForUser(String username);
 
-    List<Challenge> allForUserId(Long id);
+    List<ChallengeUsers> allForUserId(Long id);
 
-    List<Challenge> allToUser(String username);
+    List<ChallengeUsers> allToUser(String username);
 
-    List<Challenge> allToUserId(Long id);
+    List<ChallengeUsers> allToUserId(Long id);
 
-    List<Challenge> allByUser(String username);
+    List<ChallengeUsers> allByUser(String username);
 
-    List<Challenge> allByUserId(Long id);
+    List<ChallengeUsers> allByUserId(Long id);
 
     void deleteChallenge(Challenge challenge);
+
 }

@@ -1,6 +1,7 @@
 package com.example.nerve.service.impl;
 
-import com.example.nerve.model.Challenge;
+import com.example.nerve.model.entity.Challenge;
+import com.example.nerve.model.view_model.ChallengeUsers;
 import com.example.nerve.repository.interfaces.iChallengeRepository;
 import com.example.nerve.service.interfaces.iChallengeService;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,12 @@ public class ChallengeService implements iChallengeService {
     }
 
     @Override
-    public List<Challenge> allByUser(String username) {
+    public List<ChallengeUsers> search(String username) {
+        return repo.search(username);
+    }
+
+    @Override
+    public List<ChallengeUsers> allByUser(String username) {
         return repo.allByUser(username);
     }
 }
