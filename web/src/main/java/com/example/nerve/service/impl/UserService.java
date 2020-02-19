@@ -1,7 +1,9 @@
 package com.example.nerve.service.impl;
 
 import com.example.nerve.model.Constants;
+import com.example.nerve.model.entity.Challenge;
 import com.example.nerve.model.entity.User;
+import com.example.nerve.repository.interfaces.iChallengeRepository;
 import com.example.nerve.repository.interfaces.iUserRepository;
 import com.example.nerve.service.interfaces.iUserService;
 import org.jetbrains.annotations.NotNull;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -20,11 +23,13 @@ import java.util.Optional;
 public class UserService implements iUserService {
     private final BCryptPasswordEncoder encoder;
     private final iUserRepository repo;
+    private final iChallengeRepository chalRepo;
 
 
-    public UserService(BCryptPasswordEncoder encoder, iUserRepository repo) {
+    public UserService(BCryptPasswordEncoder encoder, iUserRepository repo, iChallengeRepository chalRepo) {
         this.encoder = encoder;
         this.repo = repo;
+        this.chalRepo = chalRepo;
     }
 
     @Override
@@ -141,6 +146,9 @@ public class UserService implements iUserService {
 
     @Override
     public User getUser(Optional<Long> id, Optional<String> username) {
+        if (id.isEmpty() && username.isEmpty())
+            throw new RuntimeException("m:: Nothing to search by!");
+
         final User[] user = {new User()};
 
         id.ifPresent((val) -> user[0] = repo.findById(val)
@@ -154,7 +162,24 @@ public class UserService implements iUserService {
 
     @Override
     public void deleteUser(Optional<Long> id, Optional<String> username) {
-        id.ifPresent(repo::deleteById);
-        username.ifPresent(repo::deleteByUsername);
+        if (id.isEmpty() && username.isEmpty())
+            throw new RuntimeException("m:: Nothing to search by!");
+
+
+        id.ifPresent((val) -> {
+            User user = repo.findById(val).orElseThrow(() -> new RuntimeException("m:: User not found!"));
+            List<Challenge> challenges = new ArrayList<>(user.getChallengesFrom());
+            challenges.addAll(user.getChallengesTo());
+            chalRepo.deleteAll(challenges);
+            repo.deleteById(val);
+        });
+
+        username.ifPresent((val) -> {
+            User user = repo.findByUsername(val).orElseThrow(() -> new RuntimeException("m:: User not found!"));
+            List<Challenge> challenges = new ArrayList<>(user.getChallengesFrom());
+            challenges.addAll(user.getChallengesTo());
+            chalRepo.deleteAll(challenges);
+            repo.deleteByUsername(val);
+        });
     }
 }

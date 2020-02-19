@@ -6,6 +6,7 @@ import com.example.nerve.repository.interfaces.iChallengeRepository;
 import com.example.nerve.repository.jpa.JpaChallengeRepository;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
@@ -22,8 +23,23 @@ public class ChallengeRepository implements iChallengeRepository {
     }
 
     @Override
+    public List<Challenge> saveAll(List<Challenge> challenges) {
+        return repo.saveAll(challenges);
+    }
+
+    @Override
     public List<ChallengeUsers> search(String username) {
         return repo.search(username);
+    }
+
+    @Override
+    public List<ChallengeUsers> allBeforeDate(Timestamp tDate) {
+        return repo.allBeforeDate(tDate);
+    }
+
+    @Override
+    public List<ChallengeUsers> allAfterDate(Timestamp tDate) {
+        return repo.allAfterDate(tDate);
     }
 
     @Override
@@ -59,6 +75,11 @@ public class ChallengeRepository implements iChallengeRepository {
     @Override
     public void deleteChallenge(Challenge challenge) {
         repo.delete(challenge);
+    }
+
+    @Override
+    public void deleteAll(List<Challenge> challenges) {
+        repo.deleteAll(challenges);
     }
 
 }

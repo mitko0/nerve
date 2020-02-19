@@ -12,7 +12,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -76,6 +75,8 @@ public class User {
     @OneToMany(mappedBy = "user2")
     @NotFound(action = NotFoundAction.IGNORE)
     private List<Streak> u2;
+
+    // triggers
 
     // overrides
     @Override

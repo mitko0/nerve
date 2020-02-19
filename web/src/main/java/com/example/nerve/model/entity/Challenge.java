@@ -10,6 +10,7 @@ import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -38,6 +39,8 @@ public class Challenge {
     private Timestamp dateEnd;
 
     private String descr;
+
+    // triggers?
 
     // overrides
     @Override
