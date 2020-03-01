@@ -9,7 +9,6 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -35,10 +34,15 @@ public class Challenge {
     @JoinColumn(name = "receiver_id", columnDefinition = "bigint default -1", insertable = false, updatable = false)
     private User receiver;
 
-    @Column(name = "date_end")
-    private Timestamp dateEnd;
+    @Column(name = "end_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endDate;
 
-    private String descr;
+    @Column(name = "description_")
+    private String description;
+
+    @Column(columnDefinition = "boolean default false")
+    private boolean responded;
 
     // triggers?
 

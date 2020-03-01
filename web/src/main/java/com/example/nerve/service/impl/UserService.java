@@ -126,6 +126,7 @@ public class UserService implements iUserService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return user[0];
     }
 
@@ -164,7 +165,6 @@ public class UserService implements iUserService {
     public void deleteUser(Optional<Long> id, Optional<String> username) {
         if (id.isEmpty() && username.isEmpty())
             throw new RuntimeException("m:: Nothing to search by!");
-
 
         id.ifPresent((val) -> {
             User user = repo.findById(val).orElseThrow(() -> new RuntimeException("m:: User not found!"));

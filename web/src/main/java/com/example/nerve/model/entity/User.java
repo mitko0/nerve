@@ -41,7 +41,6 @@ public class User {
     @Column(name = "profile_picture")
     private String profilePicLocation;
 
-
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
     private Role role;

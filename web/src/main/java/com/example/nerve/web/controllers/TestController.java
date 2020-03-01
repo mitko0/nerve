@@ -12,10 +12,9 @@ import java.io.IOException;
 public class TestController {
 
     @GetMapping("/views")
-    public String showImage(HttpServletRequest request) throws IOException {
-        Resource resource = new ClassPathResource("classpath:lada1.jpg");
-        request.setAttribute("img", "/profilePics/default.jpg");
-        return "image-template";
+    public String showImage(HttpServletRequest request) {
+        request.setAttribute("img", "/responseFiles/asd.mp4");
+        return "video-template";
     }
 
     @GetMapping("/newUser")

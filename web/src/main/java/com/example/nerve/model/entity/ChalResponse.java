@@ -9,6 +9,7 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -33,9 +34,15 @@ public class ChalResponse {
     @JoinColumn(name = "receiver_id")
     private User receiver;
 
-    @Column(name = "response_file")
-    private String responseFile;
+    @Column(name = "challenge_date", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date challengeDate;
 
+    @Column(name = "public_responder")
+    private Long publicResponder;
+
+    @Column(name = "response_file")
+    private String responseFilePath;
     // overrides
     @Override
     public String toString() {

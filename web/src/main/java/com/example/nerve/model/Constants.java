@@ -12,8 +12,10 @@ import java.nio.file.*;
 import java.util.Objects;
 
 public class Constants {
-    public static final Long publicChallenge = -1L;
+    public static final long points = 10;
+    public static final long publicChallenge = -1;
     public static final String profileImageFolder = "/profilePics";
+    public static final String responseFilesFolder = "/responseFiles";
     public static final String defaultProfilePicture = "default.jpg";
     public static final String fileBasePath = System.getProperty("user.dir") + "/web/src/main/resources/static";
 

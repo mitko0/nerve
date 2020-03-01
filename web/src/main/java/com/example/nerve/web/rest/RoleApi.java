@@ -1,6 +1,5 @@
 package com.example.nerve.web.rest;
 
-
 import com.example.nerve.model.entity.Role;
 import com.example.nerve.model.entity.User;
 import com.example.nerve.service.interfaces.iRoleService;
@@ -64,15 +63,15 @@ public class RoleApi {
     }
 
     @PostMapping(value = "/promote-user", params = {"role-id", "user-id"})
-    public User addRoleToUser(@RequestParam(value = "role-id", required = false) Integer roleId,
-                              @RequestParam(value = "user-id", required = false) Long userId) {
+    public User addRoleToUser(@RequestParam(value = "role-id") Integer roleId,
+                              @RequestParam(value = "user-id") Long userId) {
 
         return service.addRoleToUser(roleId, userId);
     }
 
     @PostMapping(value = "/demote-user", params = {"role-id", "user-id"})
-    public void removeUserFromRole(@RequestParam(value = "role-id", required = false) Integer roleId,
-                                   @RequestParam(value = "user-id", required = false) Long userId) {
+    public void removeUserFromRole(@RequestParam(value = "role-id") Integer roleId,
+                                   @RequestParam(value = "user-id") Long userId) {
 
         service.removeUserFromRole(userId, roleId);
     }

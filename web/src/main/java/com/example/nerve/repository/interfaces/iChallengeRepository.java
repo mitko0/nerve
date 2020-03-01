@@ -1,10 +1,12 @@
 package com.example.nerve.repository.interfaces;
 
+import com.example.nerve.model.composite_key.ChallengeKey;
 import com.example.nerve.model.entity.Challenge;
 import com.example.nerve.model.view_model.ChallengeUsers;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface iChallengeRepository {
 
@@ -12,11 +14,13 @@ public interface iChallengeRepository {
 
     List<Challenge> saveAll(List<Challenge> challenges);
 
+    Optional<Challenge> findById(ChallengeKey key);
+
     List<ChallengeUsers> search(String username);
 
-    List<ChallengeUsers> allBeforeDate(Timestamp tDate);
+    List<ChallengeUsers> allBeforeDate(Date tDate);
 
-    List<ChallengeUsers> allAfterDate(Timestamp tDate);
+    List<ChallengeUsers> allAfterDate(Date tDate);
 
     List<ChallengeUsers> allForUser(String username);
 

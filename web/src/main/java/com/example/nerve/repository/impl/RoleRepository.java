@@ -4,7 +4,6 @@ import com.example.nerve.model.entity.Role;
 import com.example.nerve.model.entity.User;
 import com.example.nerve.repository.interfaces.iRoleRepository;
 import com.example.nerve.repository.jpa.JpaRoleRepository;
-import com.example.nerve.repository.jpa.JpaUserRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

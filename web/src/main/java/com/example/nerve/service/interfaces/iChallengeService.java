@@ -2,9 +2,8 @@ package com.example.nerve.service.interfaces;
 
 import com.example.nerve.model.entity.Challenge;
 import com.example.nerve.model.view_model.ChallengeUsers;
+import org.joda.time.DateTime;
 
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,9 +19,9 @@ public interface iChallengeService {
 
     List<ChallengeUsers> allToUser(Optional<Long> id, Optional<String> username);
 
-    List<ChallengeUsers> beforeDate(String timestamp);
+    List<ChallengeUsers> beforeDate(DateTime date);
 
-    List<ChallengeUsers> afterDate(String timestamp);
+    List<ChallengeUsers> afterDate(DateTime date);
 
     void deleteAll(List<Challenge> challenges);
 

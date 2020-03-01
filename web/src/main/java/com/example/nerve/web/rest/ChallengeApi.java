@@ -3,16 +3,18 @@ package com.example.nerve.web.rest;
 import com.example.nerve.model.entity.Challenge;
 import com.example.nerve.model.view_model.ChallengeUsers;
 import com.example.nerve.service.interfaces.iChallengeService;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.InvalidPathException;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "api/challenges", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api/challenges", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 public class ChallengeApi {
     private final iChallengeService service;
 
@@ -21,7 +23,10 @@ public class ChallengeApi {
     }
 
     @PostMapping
-    public Challenge newChallenge(@RequestBody Challenge challenge) {
+    public Challenge newChallenge(@RequestBody Challenge challenge,
+                                  @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date endDate) {
+
+        challenge.setEndDate(endDate);
         return service.saveChallenge(challenge);
     }
 
@@ -43,14 +48,15 @@ public class ChallengeApi {
         }
     }
 
-    @GetMapping(value = "/{when}", params = "stamp")
+    @GetMapping(value = "/{when}", params = "date")
     public List<ChallengeUsers> forUser(@PathVariable String when,
-                                        @RequestParam String stamp) {
+                                        @RequestParam(value = "date") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) DateTime date) {
 
+        when = when.toLowerCase();
         switch (when) {
-            case "before": return service.beforeDate(stamp);
-            case "after": return service.afterDate(stamp);
-            default: throw new InvalidPathException(when, "Invalid value");
+            case "before": return service.beforeDate(date);
+            case "after": return service.afterDate(date);
+            default: throw new InvalidPathException(when, "m:: Invalid value");
         }
     }
 

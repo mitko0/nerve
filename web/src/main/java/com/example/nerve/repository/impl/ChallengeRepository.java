@@ -1,13 +1,15 @@
 package com.example.nerve.repository.impl;
 
+import com.example.nerve.model.composite_key.ChallengeKey;
 import com.example.nerve.model.entity.Challenge;
 import com.example.nerve.model.view_model.ChallengeUsers;
 import com.example.nerve.repository.interfaces.iChallengeRepository;
 import com.example.nerve.repository.jpa.JpaChallengeRepository;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ChallengeRepository implements iChallengeRepository {
@@ -28,17 +30,22 @@ public class ChallengeRepository implements iChallengeRepository {
     }
 
     @Override
+    public Optional<Challenge> findById(ChallengeKey key) {
+        return repo.findById(key);
+    }
+
+    @Override
     public List<ChallengeUsers> search(String username) {
         return repo.search(username);
     }
 
     @Override
-    public List<ChallengeUsers> allBeforeDate(Timestamp tDate) {
+    public List<ChallengeUsers> allBeforeDate(Date tDate) {
         return repo.allBeforeDate(tDate);
     }
 
     @Override
-    public List<ChallengeUsers> allAfterDate(Timestamp tDate) {
+    public List<ChallengeUsers> allAfterDate(Date tDate) {
         return repo.allAfterDate(tDate);
     }
 

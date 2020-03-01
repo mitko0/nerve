@@ -1,6 +1,5 @@
 package com.example.nerve.repository.interfaces;
 
-import com.example.nerve.model.entity.Role;
 import com.example.nerve.model.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

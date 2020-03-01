@@ -44,7 +44,7 @@ public class UserApi {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User newUser(@ModelAttribute @Valid User user,
+    public User newUser(@Valid @ModelAttribute User user,
                         @RequestParam(value = "pic", required = false) MultipartFile pic,
                         HttpServletResponse response,
                         UriComponentsBuilder builder) {

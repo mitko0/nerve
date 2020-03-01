@@ -6,10 +6,9 @@ import com.example.nerve.model.view_model.ChallengeUsers;
 import com.example.nerve.repository.interfaces.iChallengeRepository;
 import com.example.nerve.repository.interfaces.iUserRepository;
 import com.example.nerve.service.interfaces.iChallengeService;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,15 +31,13 @@ public class ChallengeService implements iChallengeService {
         sender.challenge(challenge);
         receiver.acceptChallenge(challenge);
 
-        Date now = new Date();
-        //new Timestamp( ZonedDateTime.now(ZoneId.of("UTC")).toInstant().toEpochMilli() );
-        // timezone diff bug, hardcoded
-        Timestamp t = new Timestamp(now.getTime() + 60*60*1000);
-        challenge.getId().setDateCreated(t);
+        DateTime dt = new DateTime();
+        //db time bug
+        dt = dt.plusHours(1);
+        challenge.getId().setCreateDate(dt.toDate());
 
-        if (challenge.getDateEnd() == null || challenge.getDateEnd().before(t)) {
-            Timestamp t24 = new Timestamp(t.getTime() + 24*60*60*1000);
-            challenge.setDateEnd(t24);
+        if (challenge.getEndDate() == null || challenge.getEndDate().before(dt.toDate())) {
+            challenge.setEndDate(dt.plusDays(1).toDate());
         }
 
         return repo.save(challenge);
@@ -91,15 +88,15 @@ public class ChallengeService implements iChallengeService {
     }
 
     @Override
-    public List<ChallengeUsers> beforeDate(String timestamp) {
-        Timestamp ts = Timestamp.valueOf(timestamp);
-        return repo.allBeforeDate(ts);
+    public List<ChallengeUsers> beforeDate(DateTime date) {
+        //db time bug
+        return repo.allBeforeDate(date.plusHours(1).toDate());
     }
 
     @Override
-    public List<ChallengeUsers> afterDate(String timestamp) {
-        Timestamp ts = Timestamp.valueOf(timestamp);
-        return repo.allAfterDate(ts);
+    public List<ChallengeUsers> afterDate(DateTime date) {
+        //db time bug
+        return repo.allAfterDate(date.plusHours(1).toDate());
     }
 
     @Override
