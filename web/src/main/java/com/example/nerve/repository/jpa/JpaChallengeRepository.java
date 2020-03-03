@@ -9,8 +9,14 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface JpaChallengeRepository extends JpaRepository<Challenge, ChallengeKey> {
+
+    @Query("select c from Challenge c " +
+            "where c.endDate >= current_timestamp " +
+            "and c.id = :key")
+    Optional<Challenge> findValidById(ChallengeKey key);
 
     @Query("select new com.example.nerve.model.view_model.ChallengeUsers(c, s, r) " +
             "from Challenge c join c.sender s on c.id.senderId = s.id join c.receiver r on c.id.receiverId = r.id " +

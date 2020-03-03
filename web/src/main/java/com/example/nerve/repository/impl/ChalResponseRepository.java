@@ -43,4 +43,9 @@ public class ChalResponseRepository implements iChalResponseRepository {
     public void deleteById(ChallengeKey key) {
         repo.deleteById(key);
     }
+
+    @Override
+    public void deletePublic(Long responderId, Long receiverId, Date createDate) {
+        repo.deletePublic(responderId, receiverId, createDate);
+    }
 }

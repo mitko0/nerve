@@ -12,9 +12,17 @@ public interface iStreakRepository {
 
     Optional<Streak> findById(StreakKey key);
 
+    Optional<Streak> findValidById(StreakKey key);
+
     List<Streak> findByUsername(String username);
 
+    List<Streak> findValidByUsername(String username);
+
     List<Streak> findByUserId(Long id);
+
+    List<Streak> findValidByUserId(Long id);
+
+    void deleteById(StreakKey key);
 
     void deleteExpired();
 }

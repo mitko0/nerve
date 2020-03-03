@@ -18,4 +18,6 @@ public interface iChalResponseRepository {
     void delete(ChalResponse response);
 
     void deleteById(ChallengeKey key);
+
+    void deletePublic(Long responderId, Long receiverId, Date createDate);
 }

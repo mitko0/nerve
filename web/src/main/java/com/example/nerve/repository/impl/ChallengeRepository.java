@@ -31,7 +31,7 @@ public class ChallengeRepository implements iChallengeRepository {
 
     @Override
     public Optional<Challenge> findById(ChallengeKey key) {
-        return repo.findById(key);
+        return repo.findValidById(key);
     }
 
     @Override

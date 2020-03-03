@@ -50,4 +50,24 @@ public class ChallengeResponseApi {
 
         return responseService.getByChallengeId(senderId, receiverId, challengeDate);
     }
+
+    @DeleteMapping
+    public void deleteResponse(@RequestParam Long senderId,
+                               @RequestParam Long receiverId,
+                               @RequestParam
+                               @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date createDate) {
+
+        ChallengeKey key = new ChallengeKey(senderId, receiverId, createDate);
+        responseService.deleteById(key);
+    }
+
+    @DeleteMapping("/public")
+    public void deletePublic(@RequestParam Long responderId,
+                             @RequestParam Long receiverId,
+                             @RequestParam
+                             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date createDate) {
+
+        responseService.deletePublic(responderId, receiverId, createDate);
+    }
+
 }

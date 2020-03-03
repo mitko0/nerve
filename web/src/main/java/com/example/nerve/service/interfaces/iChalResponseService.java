@@ -15,4 +15,8 @@ public interface iChalResponseService {
     ChalResponse getById(ChallengeKey key);
 
     List<ChalResponse> getByChallengeId(Long senderId, Long receiverId, Date challengeDate);
+
+    void deleteById(ChallengeKey key);
+
+    void deletePublic(Long responderId, Long receiverId, Date createDate);
 }

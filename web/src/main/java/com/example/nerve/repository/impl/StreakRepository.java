@@ -24,7 +24,12 @@ public class StreakRepository implements iStreakRepository {
 
     @Override
     public Optional<Streak> findById(StreakKey key) {
-        return repo.findByIdValid(key);
+        return repo.findById(key);
+    }
+
+    @Override
+    public Optional<Streak> findValidById(StreakKey key) {
+        return repo.findValidById(key);
     }
 
     @Override
@@ -33,8 +38,23 @@ public class StreakRepository implements iStreakRepository {
     }
 
     @Override
+    public List<Streak> findValidByUsername(String username) {
+        return repo.findValidByUsername(username);
+    }
+
+    @Override
     public List<Streak> findByUserId(Long id) {
         return repo.findByUserId(id);
+    }
+
+    @Override
+    public List<Streak> findValidByUserId(Long id) {
+        return repo.findValidByUserId(id);
+    }
+
+    @Override
+    public void deleteById(StreakKey key) {
+        repo.deleteById(key);
     }
 
     @Override

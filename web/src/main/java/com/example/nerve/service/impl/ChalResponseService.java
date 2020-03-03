@@ -37,6 +37,7 @@ public class ChalResponseService implements iChalResponseService {
     public ChalResponse createResponse(Date challengeDate, ChalResponse response, MultipartFile file, Optional<Long> responderId) {
         DateTime nowDT = new DateTime();
         DateTime challengeDateDT = new DateTime(challengeDate);
+
         long responseSenderId = response.getId().getSenderId();
         long responseReceiverId = response.getId().getReceiverId();
 
@@ -55,6 +56,8 @@ public class ChalResponseService implements iChalResponseService {
                 userRepo.save(user);
             }
             else {
+                DateTime longDT = new DateTime().plusYears(1);
+                challenge.setEndDate(longDT.toDate());
                 challenge.setResponded(true);
                 chalRepo.save(challenge);
                 streakService.setStreak(responseSenderId, responseReceiverId);
@@ -70,12 +73,13 @@ public class ChalResponseService implements iChalResponseService {
                 saveLocation = Constants.responseFilesFolder + "/image";
 
             String createDateS = nowDT.toString();
-            createDateS = createDateS.replaceAll("[^0-9]", "_");
 
             String name = String.format("%d_%d_%s",
                     response.getId().getSenderId(),
                     response.getId().getReceiverId(),
                     createDateS);
+            name = name.replaceAll("[^0-9]", "_");
+
             try {
                 String location = Constants.saveFile(file, name, saveLocation);
                 response.setResponseFilePath(location);
@@ -98,6 +102,22 @@ public class ChalResponseService implements iChalResponseService {
     @Override
     public List<ChalResponse> getByChallengeId(Long senderId, Long receiverId, Date challengeDate) {
         //db time bug
-        return repo.findByChallengeId(senderId, receiverId, challengeDate);
+        DateTime dt = new DateTime(challengeDate).plusHours(1);
+        return repo.findByChallengeId(senderId, receiverId, dt.toDate());
+    }
+
+    @Override
+    public void deleteById(ChallengeKey key) {
+        //db time bug
+        DateTime dt = new DateTime(key.getCreateDate()).plusHours(1);
+        key.setCreateDate(dt.toDate());
+        repo.deleteById(key);
+    }
+
+    @Override
+    public void deletePublic(Long responderId, Long receiverId, Date createDate) {
+        //db time bug
+        DateTime dt = new DateTime(createDate).plusHours(1);
+        repo.deletePublic(responderId, receiverId, dt.toDate());
     }
 }

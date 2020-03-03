@@ -1,5 +1,6 @@
 package com.example.nerve.service.impl;
 
+import com.example.nerve.model.composite_key.ChallengeKey;
 import com.example.nerve.model.entity.Challenge;
 import com.example.nerve.model.entity.User;
 import com.example.nerve.model.view_model.ChallengeUsers;
@@ -25,21 +26,33 @@ public class ChallengeService implements iChallengeService {
 
     @Override
     public Challenge saveChallenge(Challenge challenge) {
-        User sender = userRepo.findById(challenge.getId().getSenderId()).orElseThrow(() -> new RuntimeException("m:: User not found!"));
-        User receiver = userRepo.findById(challenge.getId().getReceiverId()).orElseThrow(() -> new RuntimeException("m:: User not found!"));
+        long senderId = challenge.getId().getSenderId();
+        long receiverId = challenge.getId().getReceiverId();
+
+        User sender = userRepo.findById(senderId).orElseThrow(() -> new RuntimeException("m:: User not found!"));
+        User receiver = userRepo.findById(receiverId).orElseThrow(() -> new RuntimeException("m:: User not found!"));
 
         sender.challenge(challenge);
         receiver.acceptChallenge(challenge);
 
-        DateTime dt = new DateTime();
+        DateTime nowDt = new DateTime();
         //db time bug
-        dt = dt.plusHours(1);
-        challenge.getId().setCreateDate(dt.toDate());
+        nowDt = nowDt.plusHours(1);
+        challenge.getId().setCreateDate(nowDt.toDate());
 
-        if (challenge.getEndDate() == null || challenge.getEndDate().before(dt.toDate())) {
-            challenge.setEndDate(dt.plusDays(1).toDate());
+        if (challenge.getEndDate() == null || challenge.getEndDate().before(nowDt.minusHours(1).toDate())) {
+            /*//production xd
+            challenge.setEndDate(nowDt.plusDays(1).toDate());*/
+            //development
+            challenge.setEndDate(nowDt.plusMinutes(4).toDate());
+        }
+        else {
+            //db time bug
+            DateTime endDate = new DateTime(challenge.getEndDate());
+            challenge.setEndDate(endDate.plusHours(1).toDate());
         }
 
+        challenge.setResponded(false);
         return repo.save(challenge);
     }
 
@@ -97,6 +110,22 @@ public class ChallengeService implements iChallengeService {
     public List<ChallengeUsers> afterDate(DateTime date) {
         //db time bug
         return repo.allAfterDate(date.plusHours(1).toDate());
+    }
+
+    @Override
+    public Challenge updateChallenge(Challenge challenge) {
+        DateTime cCreateDateDt = new DateTime(challenge.getId().getCreateDate());
+        DateTime cEndDateDt = new DateTime(challenge.getEndDate());
+
+        //db time bug
+        ChallengeKey key = challenge.getId();
+        key.setCreateDate(cCreateDateDt.plusHours(1).toDate());
+
+        Challenge update = repo.findById(key).orElseThrow(() -> new RuntimeException("m:: Invalid id!"));
+        update.setDescription(challenge.getDescription());
+        //db time bug
+        update.setEndDate(cEndDateDt.plusHours(1).toDate());
+        return repo.save(update);
     }
 
     @Override

@@ -23,6 +23,8 @@ public interface iChallengeService {
 
     List<ChallengeUsers> afterDate(DateTime date);
 
+    Challenge updateChallenge(Challenge challenge);
+
     void deleteAll(List<Challenge> challenges);
 
 }
