@@ -13,7 +13,7 @@ public class TestController {
 
     @GetMapping("/views")
     public String showImage(HttpServletRequest request) {
-        request.setAttribute("img", "/responseFiles/asd.mp4");
+        request.setAttribute("img", "/responseFiles/video/2_1_2020_03_03_12_08_54_075_01_00.mp4");
         return "video-template";
     }
 
