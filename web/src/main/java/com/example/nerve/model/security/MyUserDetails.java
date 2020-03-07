@@ -13,7 +13,7 @@ import java.util.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MyUserPrincipal implements UserDetails {
+public class MyUserDetails implements UserDetails {
     private User user;
 
     @Override

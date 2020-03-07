@@ -16,7 +16,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new BCryptPasswordEncoder();
     }
 
-    @Override
+    /*@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
         registry.addResourceHandler("/static/***")
@@ -29,5 +29,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("/WEB-INF/view/react/build/");
         registry.addResourceHandler("/index.html")
                 .addResourceLocations("/WEB-INF/view/react/build/index.html");
-    }
+    }*/
 }
