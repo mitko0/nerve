@@ -2,6 +2,7 @@
   <dictionary name="mitko">
     <words>
       <w>axios</w>
+      <w>clsx</w>
       <w>mins</w>
     </words>
   </dictionary>

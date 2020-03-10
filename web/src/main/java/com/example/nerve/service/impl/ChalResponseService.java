@@ -92,6 +92,17 @@ public class ChalResponseService implements iChalResponseService {
     }
 
     @Override
+    public ChalResponse rateResponse(ChallengeKey key, short rating) {
+        rating = (short)(Math.abs(rating) % 5);
+        //db time bug
+        DateTime dt = new DateTime(key.getCreateDate()).plusHours(1);
+        key.setCreateDate(dt.toDate());
+        ChalResponse response = repo.findById(key).orElseThrow();
+        response.setRating(rating);
+        return repo.save(response);
+    }
+
+    @Override
     public ChalResponse getById(ChallengeKey key) {
         //db time bug
         DateTime dt = new DateTime(key.getCreateDate()).plusHours(1);

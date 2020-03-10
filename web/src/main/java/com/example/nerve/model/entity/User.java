@@ -25,7 +25,7 @@ public class User {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    @Pattern(regexp = "([a-zA-Z0-9.!=_]{4,})")
+    @Pattern(regexp = "^[a-zA-Z0-9.!=_]{4,}$")
     private String username;
 
     @Email(message = "Invalid email")

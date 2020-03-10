@@ -45,8 +45,7 @@ public class ChallengeService implements iChallengeService {
             challenge.setEndDate(nowDt.plusDays(1).toDate());*/
             //development
             challenge.setEndDate(nowDt.plusMinutes(4).toDate());
-        }
-        else {
+        } else {
             //db time bug
             DateTime endDate = new DateTime(challenge.getEndDate());
             challenge.setEndDate(endDate.plusHours(1).toDate());
@@ -115,7 +114,6 @@ public class ChallengeService implements iChallengeService {
     @Override
     public Challenge updateChallenge(Challenge challenge) {
         DateTime cCreateDateDt = new DateTime(challenge.getId().getCreateDate());
-        DateTime cEndDateDt = new DateTime(challenge.getEndDate());
 
         //db time bug
         ChallengeKey key = challenge.getId();
@@ -123,6 +121,9 @@ public class ChallengeService implements iChallengeService {
 
         Challenge update = repo.findById(key).orElseThrow(() -> new RuntimeException("m:: Invalid id!"));
         update.setDescription(challenge.getDescription());
+        DateTime cEndDateDt = challenge.getEndDate() != null ?
+                new DateTime(challenge.getEndDate()) :
+                new DateTime(update.getEndDate());
         //db time bug
         update.setEndDate(cEndDateDt.plusHours(1).toDate());
         return repo.save(update);

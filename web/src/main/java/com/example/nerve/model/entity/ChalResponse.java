@@ -7,8 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import java.util.Date;
 
 @Data
@@ -40,6 +42,10 @@ public class ChalResponse {
 
     @Column(name = "public_responder")
     private Long publicResponder;
+
+    @Column(columnDefinition = "smallint default 0")
+    @Range(max = 5)
+    private short rating;
 
     @Column(name = "response_file")
     private String responseFilePath;

@@ -4,6 +4,7 @@ import com.example.nerve.model.security.AuthenticationResponse;
 import com.example.nerve.service.jwt.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -12,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/api/authenticate")
 public class AuthenticationApi {
@@ -35,7 +36,7 @@ public class AuthenticationApi {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         }
         catch (BadCredentialsException e) {
-            throw new Exception("Invalid username or password", e);
+            return ResponseEntity.status(401).body(e.getMessage());
         }
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -43,4 +44,9 @@ public class AuthenticationApi {
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
+
+    /*@RequestMapping(method = RequestMethod.HEAD)
+    public boolean validToken(String token) {
+
+    }*/
 }

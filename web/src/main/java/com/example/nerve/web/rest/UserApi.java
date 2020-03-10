@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/api/users")
 public class UserApi {
@@ -44,7 +44,7 @@ public class UserApi {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User newUser(@Valid @ModelAttribute User user,
+    public User newUser(@ModelAttribute @Valid User user,
                         @RequestParam(value = "pic", required = false) MultipartFile pic,
                         HttpServletResponse response,
                         UriComponentsBuilder builder) {

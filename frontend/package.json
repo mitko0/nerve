@@ -9,16 +9,22 @@
     "@testing-library/user-event": "latest",
     "axios": "latest",
     "bootstrap": "latest",
+    "clsx": "latest",
     "font-awesome": "latest",
     "jquery": "latest",
+    "jquery-ui": "latest",
+    "json-schema": "latest",
+    "jwt-decode": "latest",
     "moment": "latest",
     "popper.js": "latest",
     "qs": "latest",
     "react": "latest",
+    "react-bootstrap": "latest",
     "react-dom": "latest",
     "react-moment": "latest",
     "react-router-dom": "latest",
-    "react-scripts": "latest"
+    "react-scripts": "latest",
+    "history": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

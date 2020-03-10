@@ -3,20 +3,25 @@ package com.example.nerve.web.rest;
 import com.example.nerve.model.entity.Challenge;
 import com.example.nerve.model.view_model.ChallengeUsers;
 import com.example.nerve.service.interfaces.iChallengeService;
+import com.example.nerve.service.jwt.JwtService;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.nio.file.InvalidPathException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/api/challenges", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 public class ChallengeApi {
+    @Autowired
+    private JwtService jwtService;
     private final iChallengeService service;
 
     public ChallengeApi(iChallengeService service) {
@@ -56,7 +61,8 @@ public class ChallengeApi {
 
     @GetMapping(value = "/{when}", params = "date")
     public List<ChallengeUsers> forUser(@PathVariable String when,
-                                        @RequestParam(value = "date") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) DateTime date) {
+                                        @RequestParam(value = "date")
+                                        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) DateTime date) {
 
         when = when.toLowerCase();
         switch (when) {
@@ -74,9 +80,11 @@ public class ChallengeApi {
                                      @RequestParam
                                      @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date createDateTime,
                                      @RequestParam(required = false)
-                                     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date endDateTime) {
+                                     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date endDateTime,
+                                     HttpServletRequest request) {
 
-        challenge.setEndDate(endDateTime);
+        if (endDateTime != null)
+            challenge.setEndDate(endDateTime);
         challenge.getId().setCreateDate(createDateTime);
         return service.updateChallenge(challenge);
     }

@@ -12,6 +12,8 @@ public interface iChalResponseService {
 
     ChalResponse createResponse(Date challengeDate, ChalResponse response, MultipartFile file, Optional<Long> responderID);
 
+    ChalResponse rateResponse(ChallengeKey key, short rating);
+
     ChalResponse getById(ChallengeKey key);
 
     List<ChalResponse> getByChallengeId(Long senderId, Long receiverId, Date challengeDate);

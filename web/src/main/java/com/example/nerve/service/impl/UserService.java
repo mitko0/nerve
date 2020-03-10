@@ -2,8 +2,10 @@ package com.example.nerve.service.impl;
 
 import com.example.nerve.model.Constants;
 import com.example.nerve.model.entity.Challenge;
+import com.example.nerve.model.entity.Role;
 import com.example.nerve.model.entity.User;
 import com.example.nerve.repository.interfaces.iChallengeRepository;
+import com.example.nerve.repository.interfaces.iRoleRepository;
 import com.example.nerve.repository.interfaces.iUserRepository;
 import com.example.nerve.service.interfaces.iUserService;
 import org.jetbrains.annotations.NotNull;
@@ -22,13 +24,15 @@ import java.util.Optional;
 @Service
 public class UserService implements iUserService {
     private final BCryptPasswordEncoder encoder;
-    private final iUserRepository repo;
+    private final iUserRepository userRepo;
+    private final iRoleRepository roleRepo;
     private final iChallengeRepository chalRepo;
 
 
-    public UserService(BCryptPasswordEncoder encoder, iUserRepository repo, iChallengeRepository chalRepo) {
+    public UserService(BCryptPasswordEncoder encoder, iUserRepository repo, iRoleRepository roleRepo, iChallengeRepository chalRepo) {
         this.encoder = encoder;
-        this.repo = repo;
+        this.userRepo = repo;
+        this.roleRepo = roleRepo;
         this.chalRepo = chalRepo;
     }
 
@@ -51,8 +55,10 @@ public class UserService implements iUserService {
             }
         }
 
+        Role role = roleRepo.findByName("user").orElseThrow();
+        user.setRole(role);
         user.setPassword(encoder.encode(user.getPassword()));
-        return repo.save(user);
+        return userRepo.save(user);
     }
 
     @Override
@@ -68,10 +74,10 @@ public class UserService implements iUserService {
         final User[] user = {new User()};
 
         id.ifPresent((val) ->
-                user[0] = repo.findById(val).orElseThrow(RuntimeException::new));
+                user[0] = userRepo.findById(val).orElseThrow(RuntimeException::new));
 
         username.ifPresent((val) ->
-                user[0] = repo.findByUsername(val).orElseThrow(RuntimeException::new));
+                user[0] = userRepo.findByUsername(val).orElseThrow(RuntimeException::new));
 
         String name = newUsername.orElse(user[0].getUsername());
         String pwd = password.orElse(user[0].getPassword());
@@ -93,13 +99,13 @@ public class UserService implements iUserService {
         user[0].setUsername(name);
         user[0].setEmail(mail);
         user[0].setPassword(encoder.encode(pwd));
-        return repo.save(user[0]);
+        return userRepo.save(user[0]);
     }
 
     @Override
     public User updateUser(@NotNull User user) {
         user.setPassword(encoder.encode(user.getPassword()));
-        return repo.save(user);
+        return userRepo.save(user);
     }
 
     @Override
@@ -113,10 +119,10 @@ public class UserService implements iUserService {
         final User[] user = {new User()};
 
         id.ifPresent((val) ->
-                user[0] = repo.findById(val).orElseThrow(RuntimeException::new));
+                user[0] = userRepo.findById(val).orElseThrow(RuntimeException::new));
 
         username.ifPresent((val) ->
-                user[0] = repo.findByUsername(val).orElseThrow(RuntimeException::new));
+                user[0] = userRepo.findByUsername(val).orElseThrow(RuntimeException::new));
 
         if (pic.isEmpty())
             return user[0];
@@ -132,17 +138,17 @@ public class UserService implements iUserService {
 
     @Override
     public List<User> allUsers() {
-        return repo.findAll();
+        return userRepo.findAll();
     }
 
     @Override
     public Page<User> usersPaged(int listSize, int pageNo) {
-        return repo.findPageable(PageRequest.of(pageNo, listSize));
+        return userRepo.findPageable(PageRequest.of(pageNo, listSize));
     }
 
     @Override
     public List<User> search(String term) {
-        return repo.searchByUsername(term);
+        return userRepo.searchByUsername(term);
     }
 
     @Override
@@ -152,10 +158,10 @@ public class UserService implements iUserService {
 
         final User[] user = {new User()};
 
-        id.ifPresent((val) -> user[0] = repo.findById(val)
+        id.ifPresent((val) -> user[0] = userRepo.findById(val)
                 .orElseThrow(() -> new RuntimeException("m:: User not found!")));
 
-        username.ifPresent((val) -> user[0] = repo.findByUsername(val)
+        username.ifPresent((val) -> user[0] = userRepo.findByUsername(val)
                 .orElseThrow(() -> new RuntimeException("m:: User not found!")));
 
         return user[0];
@@ -167,19 +173,19 @@ public class UserService implements iUserService {
             throw new RuntimeException("m:: Nothing to search by!");
 
         id.ifPresent((val) -> {
-            User user = repo.findById(val).orElseThrow(() -> new RuntimeException("m:: User not found!"));
+            User user = userRepo.findById(val).orElseThrow(() -> new RuntimeException("m:: User not found!"));
             List<Challenge> challenges = new ArrayList<>(user.getChallengesFrom());
             challenges.addAll(user.getChallengesTo());
             chalRepo.deleteAll(challenges);
-            repo.deleteById(val);
+            userRepo.deleteById(val);
         });
 
         username.ifPresent((val) -> {
-            User user = repo.findByUsername(val).orElseThrow(() -> new RuntimeException("m:: User not found!"));
+            User user = userRepo.findByUsername(val).orElseThrow(() -> new RuntimeException("m:: User not found!"));
             List<Challenge> challenges = new ArrayList<>(user.getChallengesFrom());
             challenges.addAll(user.getChallengesTo());
             chalRepo.deleteAll(challenges);
-            repo.deleteByUsername(val);
+            userRepo.deleteByUsername(val);
         });
     }
 }

@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/api/roles", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 public class RoleApi {

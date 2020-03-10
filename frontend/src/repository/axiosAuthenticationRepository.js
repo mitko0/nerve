@@ -6,7 +6,6 @@ const AuthenticationService = {
         const data = {
             ...auth
         };
-        debugger
         const formParams = qs.stringify(data);
         return axios.post('/api/authenticate', formParams, {
             headers: {

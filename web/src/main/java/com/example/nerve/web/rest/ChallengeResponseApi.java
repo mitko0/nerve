@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/api/responses", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 public class ChallengeResponseApi {
@@ -31,6 +31,17 @@ public class ChallengeResponseApi {
                                     @RequestParam(required = false) Long responderId) {
 
         return responseService.createResponse(challengedDate, response, file, Optional.ofNullable(responderId));
+    }
+
+    @PostMapping("/rate")
+    public ChalResponse rateResponse(@RequestParam short rating,
+                                     @RequestParam Long senderId,
+                                     @RequestParam Long receiverId,
+                                     @RequestParam
+                                     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date createDate) {
+
+        ChallengeKey key = new ChallengeKey(senderId, receiverId, createDate);
+        return responseService.rateResponse(key, rating);
     }
 
     @GetMapping

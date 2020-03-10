@@ -1,3 +1,17 @@
-.br-all > * {
+.br-all * {
     border: 1px solid red;
+}
+
+.hover:hover {
+    cursor: help;
+}
+
+@media (max-height: 700px) {
+    .mb-9 {
+        margin-bottom: 90px;
+    }
+
+    .mt-9 {
+        margin-top: 90px;
+    }
 }
