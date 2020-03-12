@@ -77,7 +77,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function Header() {
+export default function Header(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -161,7 +161,7 @@ export default function Header() {
 
     return (
         <div className={classes.grow}>
-            <AppBar position="static">
+            <AppBar position={props.position} >
                 <Toolbar>
                     <IconButton
                         edge="start"

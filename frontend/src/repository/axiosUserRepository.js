@@ -1,23 +1,20 @@
 import axios from '../axios/Axios'
 import qs from 'qs'
-
-const getToken = () => {
-    return window.localStorage.getItem("jwt");
-};
+import ts from "./localStorage";
 
 const UserService = {
-    fetchUser: (id, username) => {
+    getUser: (id, username) => {
         return axios.get(`/api/users?id=${id}&username=${username}`, {
             headers: {
-                'Authorization': 'Bearer ' + getToken()
+                'Authorization': 'Bearer ' + ts.getToken()
             }
         });
     },
 
-    fetchAllUsers: () => {
+    getAllUsers: () => {
         return axios.get('/api/users/all', {
             headers: {
-                'Authorization': 'Bearer ' + getToken()
+                'Authorization': 'Bearer ' + ts.getToken()
             }
         });
     },
@@ -25,7 +22,7 @@ const UserService = {
     searchUsers: (term) => {
         return axios.get(`/api/users?term=${term}`, {
             headers: {
-                'Authorization': 'Bearer ' + getToken()
+                'Authorization': 'Bearer ' + ts.getToken()
             }
         });
     },
@@ -51,7 +48,7 @@ const UserService = {
         return axios.patch(`/api/users?id=${id}&username=${username}`, formParams, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authentication': 'Bearer ' + getToken()
+                'Authentication': 'Bearer ' + ts.getToken()
             }
         });
     },
@@ -63,7 +60,7 @@ const UserService = {
     deleteUser: (id, username) => {
         axios.delete(`/api/users/delete?id=${id}&username=${username}`, {
             headers: {
-                'Authorization': 'Bearer ' + getToken()
+                'Authorization': 'Bearer ' + ts.getToken()
             }
         });
     }

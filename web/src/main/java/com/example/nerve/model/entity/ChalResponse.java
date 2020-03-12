@@ -49,7 +49,10 @@ public class ChalResponse {
 
     @Column(name = "response_file")
     private String responseFilePath;
-    // overrides
+
+    @Transient
+    private String base64;
+
     @Override
     public String toString() {
         return "";

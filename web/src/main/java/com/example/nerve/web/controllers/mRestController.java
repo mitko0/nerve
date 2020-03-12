@@ -27,16 +27,4 @@ public class mRestController {
     public Streak beginStreak(@RequestParam Long id1, @RequestParam Long id2) {
         return streakService.setStreak(id1, id2);
     }
-
-    /*@PostMapping(value = "/responses")
-    public ChalResponse createResponse(@ModelAttribute ChalResponse response,
-                                       @RequestParam(value = "media") MultipartFile file,
-                                       @RequestParam(required = false) Long responderId) {
-        return responseService.createResponse(response, file, Optional.ofNullable(responderId));
-    }*/
-
-    @GetMapping("/responses")
-    public ChalResponse get(@ModelAttribute ChallengeKey key) {
-        return responseService.getById(key);
-    }
 }

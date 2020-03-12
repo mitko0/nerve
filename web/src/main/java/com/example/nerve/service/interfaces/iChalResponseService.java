@@ -4,6 +4,7 @@ import com.example.nerve.model.composite_key.ChallengeKey;
 import com.example.nerve.model.entity.ChalResponse;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -12,11 +13,11 @@ public interface iChalResponseService {
 
     ChalResponse createResponse(Date challengeDate, ChalResponse response, MultipartFile file, Optional<Long> responderID);
 
-    ChalResponse rateResponse(ChallengeKey key, short rating);
+    ChalResponse rateResponse(ChallengeKey key, short rating) throws IOException;
 
-    ChalResponse getById(ChallengeKey key);
+    ChalResponse getById(ChallengeKey key) throws IOException;
 
-    List<ChalResponse> getByChallengeId(Long senderId, Long receiverId, Date challengeDate);
+    List<ChalResponse> getByChallengeId(Long senderId, Long receiverId, Date challengeDate) throws IOException;
 
     void deleteById(ChallengeKey key);
 

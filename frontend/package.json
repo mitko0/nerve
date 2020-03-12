@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "latest",
+    "@material-ui/lab": "^4.0.0-alpha.45",
     "@testing-library/jest-dom": "latest",
     "@testing-library/react": "latest",
     "@testing-library/user-event": "latest",
@@ -11,6 +12,7 @@
     "bootstrap": "latest",
     "clsx": "latest",
     "font-awesome": "latest",
+    "history": "latest",
     "jquery": "latest",
     "jquery-ui": "latest",
     "json-schema": "latest",
@@ -24,7 +26,8 @@
     "react-moment": "latest",
     "react-router-dom": "latest",
     "react-scripts": "latest",
-    "history": "latest"
+    "react-swipeable-views": "^0.13.9",
+    "react-swipeable-views-utils": "^0.13.9"
   },
   "scripts": {
     "start": "react-scripts start",

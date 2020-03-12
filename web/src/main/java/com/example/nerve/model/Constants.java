@@ -7,8 +7,10 @@ import org.jetbrains.annotations.NotNull;
 
 import static java.nio.file.StandardCopyOption.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.Base64;
 import java.util.Objects;
 
 public class Constants {
@@ -39,5 +41,10 @@ public class Constants {
     public static String fileExtension(String name) {
         int ext = name.lastIndexOf(".");
         return name.substring(ext);
+    }
+
+    public static String toBase64(String filePath) throws IOException {
+        File file = new File(Constants.fileBasePath + filePath);
+        return Base64.getEncoder().encodeToString(Files.readAllBytes(file.toPath()));
     }
 }

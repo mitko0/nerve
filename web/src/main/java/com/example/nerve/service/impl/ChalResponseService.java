@@ -14,6 +14,7 @@ import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -92,29 +93,38 @@ public class ChalResponseService implements iChalResponseService {
     }
 
     @Override
-    public ChalResponse rateResponse(ChallengeKey key, short rating) {
-        rating = (short)(Math.abs(rating) % 5);
+    public ChalResponse rateResponse(ChallengeKey key, short rating) throws IOException {
+        rating = (short)(Math.abs(rating) % 6);
         //db time bug
         DateTime dt = new DateTime(key.getCreateDate()).plusHours(1);
         key.setCreateDate(dt.toDate());
+
         ChalResponse response = repo.findById(key).orElseThrow();
         response.setRating(rating);
+        response.setBase64(Constants.toBase64(response.getResponseFilePath()));
         return repo.save(response);
     }
 
     @Override
-    public ChalResponse getById(ChallengeKey key) {
+    public ChalResponse getById(ChallengeKey key) throws IOException {
         //db time bug
         DateTime dt = new DateTime(key.getCreateDate()).plusHours(1);
         key.setCreateDate(dt.toDate());
-        return repo.findById(key).orElseThrow();
+        ChalResponse response = repo.findById(key).orElseThrow();
+        response.setBase64(Constants.toBase64(response.getResponseFilePath()));
+        return response;
     }
 
     @Override
-    public List<ChalResponse> getByChallengeId(Long senderId, Long receiverId, Date challengeDate) {
+    public List<ChalResponse> getByChallengeId(Long senderId, Long receiverId, Date challengeDate) throws IOException {
         //db time bug
         DateTime dt = new DateTime(challengeDate).plusHours(1);
-        return repo.findByChallengeId(senderId, receiverId, dt.toDate());
+
+        List<ChalResponse> responses = repo.findByChallengeId(senderId, receiverId, dt.toDate());
+        for (ChalResponse response : responses) {
+            response.setBase64(Constants.toBase64(response.getResponseFilePath()));
+        }
+        return responses;
     }
 
     @Override

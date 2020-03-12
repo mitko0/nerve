@@ -6,6 +6,39 @@
     cursor: help;
 }
 
+.wrap {
+    word-wrap: break-word;
+}
+
+.challenge {
+    position: relative;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.challenge .details {
+    max-width: 91%;
+    max-height: 51px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.challenge button#more {
+    position: absolute;
+    top: -8px;
+    right: 0;
+}
+
+.mt-6 {
+    margin-top: 4rem !important;
+}
+
+.mt-7 {
+    margin-top: 5rem !important;
+}
+
 @media (max-height: 700px) {
     .mb-9 {
         margin-bottom: 90px;

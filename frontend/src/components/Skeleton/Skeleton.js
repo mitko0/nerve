@@ -1,27 +1,24 @@
 import React, {Component} from "react";
-import Post from "../Post/Post";
+import {Container, Row, Col} from "react-bootstrap";
+import {Card} from "@material-ui/core";
 
 class Skeleton extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
-            <div className='row mt-5'>
-                <div className='col-md-3 order-sm-1 order-md-0' id='left'>
-                    {this.props.left}
-                </div>
+            <Container>
+                <Row className='mt-7'>
+                    <Col xs={12} md={8} id="left">
+                        {this.props.children}
+                    </Col>
 
-                <div className='col-md-6 order-sm-0 order-md-1 d-flex justify-content-center' id='center'>
-                    {/*{this.props.center}*/}
-                    <Post/>
-                </div>
-
-                <div className='col-md-3 order-sm-2' id='right'>
-                    {this.props.right}
-                </div>
-            </div>
+                    <Col xs={12} md={4} id="right">
+                        <Card raised className='position-fixed p-3'>
+                            ega se sera f nego xd
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 }

@@ -60,7 +60,7 @@ public class ChallengeApi {
     }
 
     @GetMapping(value = "/{when}", params = "date")
-    public List<ChallengeUsers> forUser(@PathVariable String when,
+    public List<ChallengeUsers> forDate(@PathVariable String when,
                                         @RequestParam(value = "date")
                                         @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) DateTime date) {
 
