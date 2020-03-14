@@ -27,7 +27,6 @@ public class Role {
     @OneToMany(mappedBy = "role")
     private List<User> users;
 
-    // cascading baby
     @PreRemove
     public void preDelete() {
         users.forEach(user -> user.setRole(null));
@@ -38,13 +37,11 @@ public class Role {
         users.forEach(user -> user.setRole(this));
     }
 
-    // overrides
     @Override
     public String toString() {
         return "";
     }
 
-    // methods
     public void setRoleToUser(User user) {
         users.add(user);
         user.setRole(this);

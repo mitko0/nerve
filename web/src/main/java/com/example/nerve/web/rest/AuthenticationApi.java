@@ -4,7 +4,6 @@ import com.example.nerve.model.security.AuthenticationResponse;
 import com.example.nerve.service.jwt.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -31,7 +30,7 @@ public class AuthenticationApi {
     @PostMapping
     public ResponseEntity<?> createToken(@RequestParam String username,
                                          @RequestParam String password,
-                                         @RequestParam(required = false, defaultValue = "false") boolean remember) throws Exception {
+                                         @RequestParam(required = false, defaultValue = "false") boolean remember) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         }
@@ -44,9 +43,4 @@ public class AuthenticationApi {
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
-
-    /*@RequestMapping(method = RequestMethod.HEAD)
-    public boolean validToken(String token) {
-
-    }*/
 }

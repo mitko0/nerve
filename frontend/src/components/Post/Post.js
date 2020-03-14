@@ -13,10 +13,6 @@ import Challenge from "../Challenge/Challenge";
 import Response from "../Response/Response";
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        maxWidth: '100%',
-        marginBottom: '50px',
-    },
     media: {
         height: 0,
         paddingTop: '56.25%', // 16:9
@@ -40,7 +36,7 @@ const Post = (props) => {
     const classes = useStyles();
 
     return (
-        <Card raised className={classes.root}>
+        <Card raised className='card-response ml-auto'>
             <CardHeader
                 avatar={
                     <Avatar className={classes.avatar}>
@@ -55,19 +51,10 @@ const Post = (props) => {
                 title={props.title}
                 subheader={props.subheader}
             />
+
             <Challenge description={props.description} />
-            <hr/>
-            <Response name={props.name} challengeId={props.challengeId} owner={props.owner}/>
-            {/*<div>
-                <Box component="fieldset" mb={3} borderColor="transparent">
-                    <Rating
-                        name={props.name}
-                        value={value}
-                        onChange={(event, value) => handleRating(value)}
-                    />
-                </Box>
-                <img src={"https://dummyimage.com/600x400/fff/000000"} alt={''} className='img-fluid w-100'/>
-            </div>*/}
+            <Response challengeId={props.challengeId} owner={props.owner}/>
+
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
                     <FavoriteIcon/>

@@ -1,5 +1,6 @@
 package com.example.nerve.model;
 
+import com.example.nerve.model.view_model.FileDetails;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,6 +10,7 @@ import static java.nio.file.StandardCopyOption.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLConnection;
 import java.nio.file.*;
 import java.util.Base64;
 import java.util.Objects;
@@ -43,8 +45,14 @@ public class Constants {
         return name.substring(ext);
     }
 
-    public static String toBase64(String filePath) throws IOException {
+    public static FileDetails fileDetails(String filePath) throws IOException {
         File file = new File(Constants.fileBasePath + filePath);
-        return Base64.getEncoder().encodeToString(Files.readAllBytes(file.toPath()));
+
+        FileDetails details = new FileDetails();
+        details.setBase64(Base64.getEncoder().encodeToString(Files.readAllBytes(file.toPath())));
+        details.setFormat(fileExtension(filePath));
+        details.setMimeType(URLConnection.guessContentTypeFromName(file.getName()));
+
+        return details;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.nerve.model.entity;
 
+import com.example.nerve.model.Constants;
+import com.example.nerve.model.view_model.FileDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +13,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
+import java.io.IOException;
 import java.util.List;
 
 @Data
@@ -40,6 +43,9 @@ public class User {
 
     @Column(name = "profile_picture")
     private String profilePicLocation;
+
+    @Transient
+    private FileDetails fileDetails;
 
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
@@ -75,15 +81,11 @@ public class User {
     @NotFound(action = NotFoundAction.IGNORE)
     private List<Streak> u2;
 
-    // triggers
-
-    // overrides
     @Override
     public String toString() {
         return "";
     }
 
-    // methods
     public void challenge(Challenge challenge) {
         this.challengesTo.add(challenge);
         challenge.setSender(this);
@@ -92,5 +94,12 @@ public class User {
     public void acceptChallenge(Challenge challenge) {
         this.challengesFrom.add(challenge);
         challenge.setReceiver(this);
+    }
+
+    @PostLoad
+    @PostPersist
+    @PostUpdate
+    public void updateFileDetails() throws IOException {
+        fileDetails = Constants.fileDetails(this.profilePicLocation);
     }
 }

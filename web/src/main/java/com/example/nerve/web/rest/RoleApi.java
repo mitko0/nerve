@@ -63,14 +63,14 @@ public class RoleApi {
         service.deleteRole(Optional.ofNullable(id), Optional.ofNullable(name));
     }
 
-    @PostMapping(value = "/promote-user", params = {"role-id", "user-id"})
+    @PostMapping(value = "/promote-user")
     public User addRoleToUser(@RequestParam(value = "role-id") Integer roleId,
                               @RequestParam(value = "user-id") Long userId) {
 
         return service.addRoleToUser(roleId, userId);
     }
 
-    @PostMapping(value = "/demote-user", params = {"role-id", "user-id"})
+    @PostMapping(value = "/demote-user")
     public void removeUserFromRole(@RequestParam(value = "role-id") Integer roleId,
                                    @RequestParam(value = "user-id") Long userId) {
 

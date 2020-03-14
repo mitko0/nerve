@@ -24,7 +24,7 @@ public class UserApi {
     }
 
     @GetMapping
-    public User getUser(@RequestParam(value = "id", required = false, defaultValue = "1") Long id,
+    public User getUser(@RequestParam(value = "id", required = false) Long id,
                         @RequestParam(value = "username", required = false) String username) {
 
         return service.getUser(Optional.ofNullable(id), Optional.ofNullable(username));
@@ -67,7 +67,7 @@ public class UserApi {
 
     @PatchMapping(value = "/updatePic")
     public User updateProfilePic(@RequestParam(value = "name", required = false) String username,
-                                 @RequestParam(value = "id", required = false, defaultValue = "1") Long id,
+                                 @RequestParam(value = "id", required = false) Long id,
                                  @RequestAttribute MultipartFile pic) {
 
         return service.updateProfilePic(Optional.ofNullable(id),

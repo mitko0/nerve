@@ -13,11 +13,11 @@ public interface iChalResponseService {
 
     ChalResponse createResponse(Date challengeDate, ChalResponse response, MultipartFile file, Optional<Long> responderID);
 
-    ChalResponse rateResponse(ChallengeKey key, short rating) throws IOException;
+    ChalResponse rateResponse(ChallengeKey key, short rating);
 
-    ChalResponse getById(ChallengeKey key) throws IOException;
+    ChalResponse getById(ChallengeKey key);
 
-    List<ChalResponse> getByChallengeId(Long senderId, Long receiverId, Date challengeDate) throws IOException;
+    List<ChalResponse> getByChallengeId(Long senderId, Long receiverId, Date challengeDate);
 
     void deleteById(ChallengeKey key);
 

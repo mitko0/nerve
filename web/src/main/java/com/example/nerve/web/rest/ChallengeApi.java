@@ -3,14 +3,12 @@ package com.example.nerve.web.rest;
 import com.example.nerve.model.entity.Challenge;
 import com.example.nerve.model.view_model.ChallengeUsers;
 import com.example.nerve.service.interfaces.iChallengeService;
-import com.example.nerve.service.jwt.JwtService;
 import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.nio.file.InvalidPathException;
 import java.util.Date;
 import java.util.List;
@@ -20,8 +18,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/api/challenges", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 public class ChallengeApi {
-    @Autowired
-    private JwtService jwtService;
     private final iChallengeService service;
 
     public ChallengeApi(iChallengeService service) {
@@ -29,7 +25,7 @@ public class ChallengeApi {
     }
 
     @PostMapping
-    public Challenge newChallenge(@ModelAttribute Challenge challenge,
+    public Challenge newChallenge(@ModelAttribute @Valid Challenge challenge,
                                   @RequestParam(required = false)
                                   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date endDateTime) {
 
@@ -76,12 +72,11 @@ public class ChallengeApi {
     }
 
     @PatchMapping
-    public Challenge updateChallenge(@ModelAttribute Challenge challenge,
+    public Challenge updateChallenge(@ModelAttribute @Valid Challenge challenge,
                                      @RequestParam
                                      @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date createDateTime,
                                      @RequestParam(required = false)
-                                     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date endDateTime,
-                                     HttpServletRequest request) {
+                                     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date endDateTime) {
 
         if (endDateTime != null)
             challenge.setEndDate(endDateTime);

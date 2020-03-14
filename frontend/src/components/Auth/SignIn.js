@@ -1,19 +1,25 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import {makeStyles} from '@material-ui/core/styles';
-import AuthenticationService from '../../repository/axiosAuthenticationRepository';
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import IconButton from "@material-ui/core/IconButton";
+import {
+    TextField,
+    FormControlLabel,
+    Checkbox,
+    makeStyles,
+    FormControl,
+    InputLabel,
+    InputAdornment,
+    IconButton,
+    OutlinedInput
+} from '@material-ui/core';
 import {Visibility, VisibilityOff} from "@material-ui/icons";
 import clsx from "clsx";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
+
 import Sign from "./Sign";
-import LoadButton from "../CustomInput/LoadButton";
+import ButtonLoad from "../CustomInput/ButtonLoad";
+
+import AuthenticationService from '../../repository/axiosAuthenticationRepository';
+import TokenService from "../../repository/localStorage";
+
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -41,7 +47,6 @@ export default function SignIn() {
     const [values, setValues] = React.useState({
         username: '',
         password: '',
-        weightRange: '',
         showPassword: false,
         finishAsync: true
     });
@@ -58,7 +63,7 @@ export default function SignIn() {
         event.preventDefault();
     };
 
-    const authenticate = async (event) => {
+    const handleAuthentication = async (event) => {
         event.preventDefault();
 
         const auth = {
@@ -68,26 +73,29 @@ export default function SignIn() {
         };
 
         setValues({...values, finishAsync: false});
-        await AuthenticationService.authenticate(auth).then((response) => {
-            window.localStorage.setItem("jwt", response.data.jwt);
-            setValues({...values, finishAsync: true});
+        await AuthenticationService.authenticate(auth).then(({data: {jwt}}) => {
+            TokenService.setToken(jwt);
             history.push("/home");
         }).catch((error) => {
             document.getElementById("signInError")
                 .innerHTML = error.response ? error.response.data.toString() : error;
-            setValues({...values, finishAsync: true});
             //console.clear();
         });
+        setValues({...values, finishAsync: true});
     };
 
     return (
-        <Sign title={"Sign In"}
-              footer
-              description={"Don't have an account?"}
-              linkText={"Sign up"}
-              to={"/sign-up"}
+        <Sign
+            title={"Sign In"}
+            description={"Don't have an account?"}
+            linkText={"Sign up"}
+            to={"/sign-up"}
+            footer
         >
-            <form className={classes.form} onSubmit={authenticate}>
+            <form
+                className={classes.form}
+                onSubmit={handleAuthentication}
+            >
                 <TextField
                     variant="outlined"
                     margin="normal"
@@ -98,12 +106,12 @@ export default function SignIn() {
                     name="username"
                     autoFocus
                 />
-
-                <FormControl className={clsx(classes.margin, classes.textField)}
-                             variant="outlined"
-                             margin="normal"
-                             fullWidth
-                             required
+                <FormControl
+                    className={clsx(classes.margin, classes.textField)}
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    required
                 >
                     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                     <OutlinedInput
@@ -132,7 +140,7 @@ export default function SignIn() {
                     control={<Checkbox name="remember" color="primary"/>}
                     label="Remember me"
                 />
-                <LoadButton
+                <ButtonLoad
                     text={'Sign in'}
                     disabled={!values.finishAsync}
                     type="submit"
@@ -140,10 +148,9 @@ export default function SignIn() {
                     variant="contained"
                     color="primary"
                     className={classes.submit}
-                    loading={values.finishAsync}
+                    loading={!values.finishAsync}
                     radius={"24px"}
                 />
-
                 <div className='text-danger' id={"signInError"}>&nbsp;</div>
             </form>
         </Sign>

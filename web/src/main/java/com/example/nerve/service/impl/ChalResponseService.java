@@ -93,7 +93,7 @@ public class ChalResponseService implements iChalResponseService {
     }
 
     @Override
-    public ChalResponse rateResponse(ChallengeKey key, short rating) throws IOException {
+    public ChalResponse rateResponse(ChallengeKey key, short rating) {
         rating = (short)(Math.abs(rating) % 6);
         //db time bug
         DateTime dt = new DateTime(key.getCreateDate()).plusHours(1);
@@ -101,30 +101,23 @@ public class ChalResponseService implements iChalResponseService {
 
         ChalResponse response = repo.findById(key).orElseThrow();
         response.setRating(rating);
-        response.setBase64(Constants.toBase64(response.getResponseFilePath()));
         return repo.save(response);
     }
 
     @Override
-    public ChalResponse getById(ChallengeKey key) throws IOException {
+    public ChalResponse getById(ChallengeKey key) {
         //db time bug
         DateTime dt = new DateTime(key.getCreateDate()).plusHours(1);
         key.setCreateDate(dt.toDate());
-        ChalResponse response = repo.findById(key).orElseThrow();
-        response.setBase64(Constants.toBase64(response.getResponseFilePath()));
-        return response;
+        return repo.findById(key).orElseThrow();
     }
 
     @Override
-    public List<ChalResponse> getByChallengeId(Long senderId, Long receiverId, Date challengeDate) throws IOException {
+    public List<ChalResponse> getByChallengeId(Long senderId, Long receiverId, Date challengeDate) {
         //db time bug
         DateTime dt = new DateTime(challengeDate).plusHours(1);
 
-        List<ChalResponse> responses = repo.findByChallengeId(senderId, receiverId, dt.toDate());
-        for (ChalResponse response : responses) {
-            response.setBase64(Constants.toBase64(response.getResponseFilePath()));
-        }
-        return responses;
+        return repo.findByChallengeId(senderId, receiverId, dt.toDate());
     }
 
     @Override

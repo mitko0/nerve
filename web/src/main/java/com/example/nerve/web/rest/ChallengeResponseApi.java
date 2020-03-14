@@ -1,26 +1,14 @@
 package com.example.nerve.web.rest;
 
-import com.example.nerve.model.Constants;
 import com.example.nerve.model.composite_key.ChallengeKey;
 import com.example.nerve.model.entity.ChalResponse;
 import com.example.nerve.service.interfaces.iChalResponseService;
-import com.nimbusds.oauth2.sdk.Response;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.util.Base64;
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +25,7 @@ public class ChallengeResponseApi {
     }
 
     @PostMapping
-    public ChalResponse newResponse(@ModelAttribute ChalResponse response,
+    public ChalResponse newResponse(@ModelAttribute @Valid ChalResponse response,
                                     @RequestParam
                                     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date challengedDate,
                                     @RequestParam(value = "media") MultipartFile file,
@@ -46,12 +34,12 @@ public class ChallengeResponseApi {
         return responseService.createResponse(challengedDate, response, file, Optional.ofNullable(responderId));
     }
 
-    @PostMapping("/rate")
+    @PatchMapping("/rate")
     public ChalResponse rateResponse(@RequestParam short rating,
                                      @RequestParam Long senderId,
                                      @RequestParam Long receiverId,
                                      @RequestParam
-                                     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date createDate) throws IOException {
+                                     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date createDate) {
 
         ChallengeKey key = new ChallengeKey(senderId, receiverId, createDate);
         return responseService.rateResponse(key, rating);
@@ -61,7 +49,7 @@ public class ChallengeResponseApi {
     public ChalResponse getResponse(@RequestParam Long senderId,
                                     @RequestParam Long receiverId,
                                     @RequestParam
-                                    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date createDate) throws IOException {
+                                    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date createDate) {
 
         ChallengeKey key = new ChallengeKey(senderId, receiverId, createDate);
         return responseService.getById(key);
@@ -71,8 +59,7 @@ public class ChallengeResponseApi {
     public List<ChalResponse> getResponseForChallenge(@RequestParam Long senderId,
                                                       @RequestParam Long receiverId,
                                                       @RequestParam
-                                                      @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date
-                                                              challengeDate) throws IOException {
+                                                      @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date challengeDate) {
 
         return responseService.getByChallengeId(senderId, receiverId, challengeDate);
     }
@@ -81,8 +68,7 @@ public class ChallengeResponseApi {
     public void deleteResponse(@RequestParam Long senderId,
                                @RequestParam Long receiverId,
                                @RequestParam
-                               @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date
-                                       createDate) {
+                               @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date createDate) {
 
         ChallengeKey key = new ChallengeKey(senderId, receiverId, createDate);
         responseService.deleteById(key);
@@ -92,8 +78,7 @@ public class ChallengeResponseApi {
     public void deletePublic(@RequestParam Long responderId,
                              @RequestParam Long receiverId,
                              @RequestParam
-                             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date
-                                     createDate) {
+                             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date createDate) {
 
         responseService.deletePublic(responderId, receiverId, createDate);
     }

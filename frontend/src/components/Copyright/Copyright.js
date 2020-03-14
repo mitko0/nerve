@@ -1,18 +1,24 @@
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
 import React from "react";
+import {
+    Typography,
+    Link
+} from "@material-ui/core";
 
-function Copyright() {
+const Copyright = props => {
     return (
-        <Typography variant="body2" color="textSecondary">
+        <Typography
+            variant="body2"
+            color="textSecondary"
+        >
             {'Copyright © '}
-            <Link color="inherit" href="/">
+            <Link
+                color="inherit"
+                href="/">
                 Nerve
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
+            </Link>
+            {' '}{new Date().getFullYear()}{'.'}
         </Typography>
     );
-}
+};
 
 export default Copyright;

@@ -74,9 +74,42 @@ export default function Response(props) {
     const responses = state.responses;
 
     const name = flag ? responses[state.activeStep].id.createDate.toString() : 'empty';
+    const media = () => {
+        if (flag) {
+            return responses[state.activeStep].fileDetails.mimeType.includes('image') ?
+                <img
+                    src={flag ? `data:${responses[state.activeStep].fileDetails.mimeType};base64,${responses[state.activeStep].fileDetails.base64}` : ''}
+                    className='media'
+                    alt={''}/> :
+                <video className='media' controls>
+                    <source
+                        src={flag ? `data:${responses[state.activeStep].fileDetails.mimeType};base64,${responses[state.activeStep].fileDetails.base64}` : ''}/>
+                </video>;
+        }
+    };
 
-    return (
-        <div className={classes.root}>
+    const mobileStepper = flag && state.responses.length > 1? <MobileStepper
+        steps={state.responses.length}
+        position="static"
+        variant='dots'
+        activeStep={state.activeStep}
+        nextButton={
+            <Button size="small" onClick={handleNext}
+                    disabled={state.activeStep === state.responses.length - 1}>
+                Next
+                {theme.direction === 'rtl' ? <KeyboardArrowLeft/> : <KeyboardArrowRight/>}
+            </Button>
+        }
+        backButton={
+            <Button size="small" onClick={handleBack} disabled={state.activeStep === 0}>
+                {theme.direction === 'rtl' ? <KeyboardArrowRight/> : <KeyboardArrowLeft/>}
+                Back
+            </Button>
+        }
+    /> : '';
+
+    const body = flag ?
+        <div>
             <Paper square elevation={0} className={classes.header}>
                 <Rating
                     readOnly={props.owner !== ts.getUsername()}
@@ -85,32 +118,16 @@ export default function Response(props) {
                     onChange={(event, value) => handleRating(value)}
                 />
             </Paper>
-            <img src={flag? "data:image/png;base64," + responses[state.activeStep].base64 : ''}
-                 className='img-fluid w-100'
-                 alt={''} />
-            {/*<video width="400" controls>
-                <source src={flag? "data:image/png;base64," + responses[state.activeStep].base64 : ''} />
-            </video>*/}
+            <div className='d-flex justify-content-center align-items-center'>
+                {media()}
+            </div>
+            {mobileStepper}
+        </div>
+        : <div className='p-4 text-muted'>No responses found!</div>;
 
-            <MobileStepper
-                steps={state.responses.length}
-                position="static"
-                variant='dots'
-                activeStep={state.activeStep}
-                nextButton={
-                    <Button size="small" onClick={handleNext}
-                            disabled={state.activeStep === state.responses.length - 1}>
-                        Next
-                        {theme.direction === 'rtl' ? <KeyboardArrowLeft/> : <KeyboardArrowRight/>}
-                    </Button>
-                }
-                backButton={
-                    <Button size="small" onClick={handleBack} disabled={state.activeStep === 0}>
-                        {theme.direction === 'rtl' ? <KeyboardArrowRight/> : <KeyboardArrowLeft/>}
-                        Back
-                    </Button>
-                }
-            />
+    return (
+        <div className={classes.root}>
+            {body}
         </div>
     );
 }

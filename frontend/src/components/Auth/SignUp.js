@@ -1,18 +1,23 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
-import TextField from '@material-ui/core/TextField';
-import {makeStyles} from '@material-ui/core/styles';
-import Sign from "./Sign";
-import InputLabel from "@material-ui/core/InputLabel";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import IconButton from "@material-ui/core/IconButton";
+import {
+    TextField,
+    makeStyles,
+    InputLabel,
+    OutlinedInput,
+    InputAdornment,
+    IconButton,
+    FormControl,
+
+} from '@material-ui/core';
 import {Visibility, VisibilityOff} from "@material-ui/icons";
-import FormControl from "@material-ui/core/FormControl";
+
+import Sign from "./Sign";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import ErrorInput from "../CustomInput/ErrorInput";
+import InputError from "../CustomInput/InputError";
+import ButtonLoad from "../CustomInput/ButtonLoad";
+
 import UserService from "../../repository/axiosUserRepository";
-import LoadButton from "../CustomInput/LoadButton";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -50,7 +55,7 @@ export default function SignUp() {
         finishAsync: true,
         usernameError: false,
         emailError: false,
-        passwordError: false,
+        passwordError: false
     });
 
     const regex = {
@@ -78,43 +83,41 @@ export default function SignUp() {
         event.preventDefault();
     };
 
-    const validate = (value = '', regex = /.{4,}/) => (e) => {
+    const validate = (value = '', regex = /.{4,}/) => e => {
         setValues({...values, [e.target.name + 'Error']: !regex.test(value)});
     };
 
-    const formSubmit = async (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
-
-        const user = {
-            "username": event.target.username.value,
-            "password": event.target.password.value,
-            "email": event.target.email.value
-        };
+        const username = event.target.username.value;
+        const password = event.target.password.value;
+        const email = event.target.email.value;
 
         setValues({...values, finishAsync: false});
-
-        await UserService.createUser(user, null).then((response) => {
-            setValues({...values, finishAsync: true});
+        await UserService.createUser(username, email, password).then(() => {
             history.push("/sign-in");
         }).catch((err) => {
-            setValues({...values, finishAsync: true});
             document.getElementById("signUpError")
                 .innerText = err.response ?
                 (err.response.data.error + ": " + err.response.data.message.toString())
                 : err;
         });
-
+        setValues({...values, finishAsync: true});
     };
 
     return (
-        <Sign title={"Sign Up"}
-              footer
-              description={"Already have an account?"}
-              linkText={"Sign In"}
-              to={"/sign-in"}
+        <Sign
+            footer
+            title={"Sign Up"}
+            description={"Already have an account?"}
+            linkText={"Sign In"}
+            to={"/sign-in"}
         >
-            <form className={classes.form} onSubmit={formSubmit}>
-                <ErrorInput>
+            <form
+                className={classes.form}
+                onSubmit={handleFormSubmit}
+            >
+                <InputError>
                     <TextField
                         margin='normal'
                         name="username"
@@ -129,10 +132,9 @@ export default function SignUp() {
                         onChange={handleChange('username')}
                         inputProps={{tabIndex: "1"}}
                     />
-                    {values.usernameError ? <ErrorMessage title={messages.username}/> : ''}
-                </ErrorInput>
-
-                <ErrorInput>
+                    {values.usernameError && <ErrorMessage title={messages.username}/>}
+                </InputError>
+                <InputError>
                     <TextField
                         type='email'
                         margin='normal'
@@ -146,10 +148,10 @@ export default function SignUp() {
                         onChange={handleChange('email')}
                         inputProps={{tabIndex: "2"}}
                     />
-                    {values.emailError ? <ErrorMessage title={messages.email}/> : ''}
-                </ErrorInput>
+                    {values.emailError && <ErrorMessage title={messages.email}/>}
+                </InputError>
 
-                <ErrorInput>
+                <InputError>
                     <FormControl
                         variant="outlined"
                         margin="normal"
@@ -181,10 +183,9 @@ export default function SignUp() {
                             labelWidth={80}
                         />
                     </FormControl>
-                    {values.passwordError ? <ErrorMessage title={messages.minLength}/> : ''}
-                </ErrorInput>
-
-                <ErrorInput>
+                    {values.passwordError && <ErrorMessage title={messages.minLength}/>}
+                </InputError>
+                <InputError>
                     <FormControl
                         variant="outlined"
                         margin="normal"
@@ -215,10 +216,9 @@ export default function SignUp() {
                             labelWidth={145}
                         />
                     </FormControl>
-                    {values.password !== values.confirmPassword ? <ErrorMessage title={messages.mismatch}/> : ''}
-                </ErrorInput>
-
-                <LoadButton
+                    {values.password !== values.confirmPassword && <ErrorMessage title={messages.mismatch}/>}
+                </InputError>
+                <ButtonLoad
                     text={'Sign up'}
                     disabled={!values.finishAsync}
                     type="submit"
@@ -226,11 +226,10 @@ export default function SignUp() {
                     variant="contained"
                     color="primary"
                     className={classes.submit}
-                    loading={values.finishAsync}
+                    loading={!values.finishAsync}
                     radius={"24px"}
                     tabIndex={5}
                 />
-
                 <div className='text-danger' id={"signUpError"}>&nbsp;</div>
             </form>
         </Sign>

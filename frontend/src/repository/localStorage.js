@@ -1,8 +1,18 @@
 import decode from "jwt-decode";
 
 const TokenService = {
+    setToken: (token) => {
+        window.localStorage.setItem("jwt", token);
+    },
+
     getToken: () => {
         return window.localStorage.getItem("jwt");
+    },
+
+    getUsername: () => {
+        const jwt = localStorage.getItem('jwt');
+        let {sub} = decode(jwt);
+        return sub;
     },
 
     checkToken: () => {
@@ -18,10 +28,8 @@ const TokenService = {
         }
     },
 
-    getUsername: () => {
-        const jwt = localStorage.getItem('jwt');
-        let {sub} = decode(jwt);
-        return sub;
+    deleteToken: () => {
+        localStorage.removeItem('jwt');
     }
 };
 

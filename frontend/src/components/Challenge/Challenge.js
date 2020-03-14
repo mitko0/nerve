@@ -6,7 +6,8 @@ class Challenge extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: false
+            open: false,
+            showMore: false
         }
     }
 
@@ -21,7 +22,7 @@ class Challenge extends Component {
     showMore = () => {
         const details = document.getElementById("details");
         const challenge = document.getElementById("challenge");
-        
+
         const detailsW = parseFloat(window.getComputedStyle(details, null).getPropertyValue("width"));
         const detailsPL = parseFloat(window.getComputedStyle(details, null).getPropertyValue("padding-left"));
         const detailsPR = parseFloat(window.getComputedStyle(details, null).getPropertyValue("padding-right"));
@@ -37,7 +38,8 @@ class Challenge extends Component {
     };
 
     componentDidMount() {
-        document.getElementById("more").style.display = this.showMore()? "inline-block" : "none";
+        this.setState({open: this.showMore()})
+        //document.getElementById("more").style.display = this.showMore()? "inline-block" : "none";
     }
 
     render() {
@@ -46,9 +48,13 @@ class Challenge extends Component {
                 <div className='details' id="details">
                     {this.props.description}
                 </div>
-                <button type="button" id="more" className='btn btn-link' onClick={this.handleClick}>
+                <button type="button" id="more"
+                        className='btn btn-link'
+                        onClick={this.handleClick}
+                        style={{display: this.state.showMore ? 'inline-block' : 'none'}}>
                     <span className='text-muted'>more</span>
                 </button>
+
                 <SimpleModal open={this.state.open}
                              onClose={this.onClose}
                              text={this.props.description}/>

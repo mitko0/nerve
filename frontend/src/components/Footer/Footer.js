@@ -1,7 +1,10 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from "@material-ui/core/Grid";
+import {
+    makeStyles,
+    CssBaseline,
+    Grid
+} from '@material-ui/core';
+
 import Copyright from "../Copyright/Copyright";
 
 const useStyles = makeStyles(theme => ({
@@ -18,19 +21,24 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function Footer() {
+function Footer() {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <CssBaseline />
+            <CssBaseline/>
             <footer className={classes.footer}>
-                <Grid container justify={"center"}>
+                <Grid
+                    container
+                    justify={"center"}
+                >
                     <Grid item>
-                        <Copyright />
+                        <Copyright/>
                     </Grid>
                 </Grid>
             </footer>
         </div>
     );
 }
+
+export default Footer;

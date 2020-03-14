@@ -1,26 +1,42 @@
-import React, {Component} from "react";
-import {Container, Row, Col} from "react-bootstrap";
+import React from "react";
+import {Row, Col} from "react-bootstrap";
 import {Card} from "@material-ui/core";
 
-class Skeleton extends Component {
+import SideBar from "../Navbar/SideBar";
 
-    render() {
-        return (
-            <Container>
-                <Row className='mt-7'>
-                    <Col xs={12} md={8} id="left">
-                        {this.props.children}
-                    </Col>
-
-                    <Col xs={12} md={4} id="right">
-                        <Card raised className='position-fixed p-3'>
-                            ega se sera f nego xd
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
-        );
-    }
-}
+const Skeleton = props => {
+    return (
+        <Row className='mt-2 ml-0 mr-0'>
+            <Col
+                xs={3}
+                id="left"
+                className='d-flex justify-content-end'
+            >
+                <SideBar
+                    id={props.id}
+                    className='position-fixed'
+                />
+            </Col>
+            <Col
+                xs={9}
+                md={6}
+                id="center"
+            >
+                {props.children}
+            </Col>
+            <Col
+                xs={12}
+                md={3} id="right"
+            >
+                <Card
+                    raised
+                    className='position-fixed mr-3'
+                >
+                    oscce ce si se sera f nego
+                </Card>
+            </Col>
+        </Row>
+    );
+};
 
 export default Skeleton;

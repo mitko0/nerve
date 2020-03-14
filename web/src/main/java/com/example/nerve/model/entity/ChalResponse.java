@@ -1,6 +1,8 @@
 package com.example.nerve.model.entity;
 
+import com.example.nerve.model.Constants;
 import com.example.nerve.model.composite_key.ChallengeKey;
+import com.example.nerve.model.view_model.FileDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +12,7 @@ import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
+import java.io.IOException;
 import java.util.Date;
 
 @Data
@@ -51,10 +53,17 @@ public class ChalResponse {
     private String responseFilePath;
 
     @Transient
-    private String base64;
+    private FileDetails fileDetails;
 
     @Override
     public String toString() {
         return "";
+    }
+
+    @PostLoad
+    @PostPersist
+    @PostUpdate
+    public void updateFileDetails() throws IOException {
+        fileDetails = Constants.fileDetails(this.responseFilePath);
     }
 }

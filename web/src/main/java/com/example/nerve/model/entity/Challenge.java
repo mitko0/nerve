@@ -44,9 +44,6 @@ public class Challenge {
     @Column(columnDefinition = "boolean default false")
     private boolean responded;
 
-    // triggers?
-
-    // overrides
     @Override
     public String toString() {
         return "";
