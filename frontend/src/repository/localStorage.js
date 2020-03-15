@@ -1,12 +1,14 @@
 import decode from "jwt-decode";
+import moment from "moment";
 
-const TokenService = {
-    setToken: (token) => {
-        window.localStorage.setItem("jwt", token);
+const LSService = {
+    setItem: (name, value) => {
+        window.localStorage.setItem(name, JSON.stringify(value));
     },
 
-    getToken: () => {
-        return window.localStorage.getItem("jwt");
+    getItem: (name = 'jwt') => {
+        const strObj = window.localStorage.getItem(name);
+        return JSON.parse(strObj);
     },
 
     getUsername: () => {
@@ -22,15 +24,25 @@ const TokenService = {
         }
         try {
             let {exp} = decode(jwt);
-            return exp < new Date().getTime();
+            const mNow = new Date();
+            const mExp = new Date(exp * 1000);
+            console.log('now', mNow.toISOString());
+            console.log('exp', mExp.toISOString());
+            return mNow.getTime() < mExp.getTime();
         } catch (e) {
             return false;
         }
     },
 
-    deleteToken: () => {
+    removeItem: (name) => {
+        localStorage.removeItem(name);
+    },
+
+    clearLS: () => {
+        // localStorage.clear();
         localStorage.removeItem('jwt');
+        localStorage.removeItem('user');
     }
 };
 
-export default TokenService;
+export default LSService;

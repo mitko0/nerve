@@ -43,16 +43,21 @@ class SideBar extends Component {
                             component={Link}
                             to={element.to}
                             color='primary'
-                            className={clicked === element.id ? 'mb-2 button is-rounded is-danger' : 'mb-2 button is-rounded'}
                             onClick={() => this.handleClick(element.id)}
+                            className=
+                                {
+                                    clicked === element.id ?
+                                        'mb-2 button is-rounded is-small is-danger'
+                                        : 'mb-2 button is-rounded is-small'
+                                }
                         >
-                            <i className={'fa ' + element.fa} style={{fontSize: 23}}/>
+                            <i className={'fa ' + element.fa} style={{fontSize: 17}}/>
                             <span className='ml-2 md-display-none'>{element.text}</span>
                         </MenuItem>
                     ))}
 
-                    <button className='button is-rounded is-outlined is-danger is-fullwidth'>
-                        <i className='mr-1 fa fa-paper-plane' style={{fontSize: 23}}/>
+                    <button className='button is-rounded is-small is-outlined is-danger is-fullwidth'>
+                        <i className='mr-1 fa fa-paper-plane' style={{fontSize: 17}}/>
                         <span className='ml-2 md-display-none'>Post</span>
                     </button>
                 </MenuList>

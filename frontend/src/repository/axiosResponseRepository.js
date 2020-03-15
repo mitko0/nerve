@@ -1,19 +1,19 @@
 import axios from '../axios/Axios'
-import ts from "./localStorage";
-import DateFormatter from "../formatter/dateFormatter";
+import LSService from "./localStorage";
+import DateFormatter from "../formatter/DateFormatter";
 
 const ResponseService = {
-    newResponse: (key, challengedDate, media, responderId) => {
+    newResponse: (senderId, receiverId, challengedDate, media, responderId) => {
         let formData = new FormData();
-        formData.append('id.senderId', key.senderId);
-        formData.append('id.receiverId', key.receiverId);
+        formData.append('id.senderId', senderId);
+        formData.append('id.receiverId', receiverId);
         formData.append('challengedDate', DateFormatter.formatIso(challengedDate));
         formData.append('media', media);
         formData.append('responderId', responderId);
 
         return axios.post('/api/responses', formData, {
             headers: {
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         });
     },
@@ -27,7 +27,7 @@ const ResponseService = {
 
         return axios.patch('/api/responses/rate', formData, {
             headers: {
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         })
     },
@@ -40,20 +40,33 @@ const ResponseService = {
                 createDate: DateFormatter.formatIso(createDate)
             },
             headers: {
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         })
     },
 
     getResponsesForChallenge: (senderId, receiverId, challengeDate) => {
-        return axios.get('/api/responses/challenge?', {
+        return axios.get('/api/responses/challenge', {
             params: {
                 senderId,
                 receiverId,
                 challengeDate: DateFormatter.formatIso(challengeDate)
             },
             headers: {
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
+            }
+        })
+    },
+
+    getResponsesForChallengeWithUser: (senderId, receiverId, challengeDate) => {
+        return axios.get(`/api/responses/challenge-with-user`, {
+            params: {
+                senderId,
+                receiverId,
+                challengeDate: DateFormatter.formatIso(challengeDate)
+            },
+            headers: {
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         })
     },
@@ -66,7 +79,7 @@ const ResponseService = {
                 createDate: DateFormatter.formatIso(createDate)
             },
             headers: {
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         })
     }

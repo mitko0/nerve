@@ -1,5 +1,5 @@
 import axios from '../axios/Axios'
-import ts from "./localStorage";
+import LSService from "./localStorage";
 
 const StreakService = {
     getStreak: (user1Id, user2Id) => {
@@ -9,7 +9,7 @@ const StreakService = {
                 user2Id
             },
             headers: {
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         })
     },
@@ -20,7 +20,7 @@ const StreakService = {
                 username
             },
             headers: {
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         })
     },
@@ -31,7 +31,7 @@ const StreakService = {
                 'user-id': id
             },
             headers: {
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         })
     }

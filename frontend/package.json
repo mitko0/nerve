@@ -18,6 +18,7 @@
     "jquery-ui": "latest",
     "json-schema": "latest",
     "jwt-decode": "latest",
+    "mdbreact": "^4.25.3",
     "moment": "^2.24.0",
     "popper.js": "latest",
     "qs": "latest",

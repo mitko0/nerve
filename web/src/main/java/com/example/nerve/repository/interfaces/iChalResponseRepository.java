@@ -2,6 +2,8 @@ package com.example.nerve.repository.interfaces;
 
 import com.example.nerve.model.composite_key.ChallengeKey;
 import com.example.nerve.model.entity.ChalResponse;
+import com.example.nerve.model.entity.User;
+import com.example.nerve.model.view_model.DataHolder;
 
 import java.util.Date;
 import java.util.List;
@@ -14,6 +16,8 @@ public interface iChalResponseRepository {
     Optional<ChalResponse> findById(ChallengeKey id);
 
     List<ChalResponse> findByChallengeId(Long cSenderId, Long cReceiverId, Date challengeDate);
+
+    List<DataHolder<ChalResponse, User>> findWithUserByChallengeId(Long cSenderId, Long cReceiverId, Date challengeDate);
 
     void delete(ChalResponse response);
 

@@ -10,7 +10,6 @@ import './styles/App.css';
 import './styles/index.css';
 
 import App from './components/App/App';
-import AppDev from "./components/App/AppDev";
 import Test from "./tests/Test";
 
 ReactDOM.render(<App />, document.getElementById('root'));

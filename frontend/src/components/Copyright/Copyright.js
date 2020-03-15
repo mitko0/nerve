@@ -13,7 +13,8 @@ const Copyright = props => {
             {'Copyright © '}
             <Link
                 color="inherit"
-                href="/">
+                href="/"
+            >
                 Nerve
             </Link>
             {' '}{new Date().getFullYear()}{'.'}

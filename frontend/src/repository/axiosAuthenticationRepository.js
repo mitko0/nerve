@@ -9,6 +9,15 @@ const AuthenticationService = {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         });
+    },
+
+    authenticateWithUser: (auth) => {
+        const formParams = qs.stringify(auth);
+        return axios.post(`/api/authenticate/get-user`, formParams, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
     }
 };
 

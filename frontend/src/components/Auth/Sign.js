@@ -36,7 +36,7 @@ const SignFooter = (props) => {
                     <Grid item>
                         {props.description}
                         &nbsp;
-                        <ReactLink to={props.to}>{props.linkText}</ReactLink>
+                        <ReactLink to={props.to} className='text-danger'>{props.linkText}</ReactLink>
                     </Grid>
                 </Grid>
             </CardContent>

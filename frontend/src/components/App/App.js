@@ -1,11 +1,32 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Redirect, Switch} from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    Redirect
+} from "react-router-dom";
 
-import SignIn from '../Auth/SignIn';
-import SignUp from "../Auth/SignUp";
 import Skeleton from "../Skeleton/Skeleton";
+import SignUp from "../Auth/SignUp";
+import SignIn from '../Auth/SignIn';
+import Public from "../Sections/Public";
+import Private from "../Sections/Private";
+import Profile from "../Sections/Profile";
 
-import ts from "../../repository/localStorage";
+import LSService from "../../repository/localStorage";
+import SignOut from "../Auth/SignOut";
+
+
+const PrivateRoute = ({component: Component, ...rest}) => (
+    <Route {...rest} render={(props) => (
+        LSService.checkToken()
+            ? <Component {...props} {...rest} />
+            : <Redirect to={{
+                pathname: '/sign-in',
+                state: { from: props.location }
+            }} />
+    )}/>
+);
 
 class App extends Component {
     state = {
@@ -17,30 +38,19 @@ class App extends Component {
     };
 
     render() {
-        let valid = ts.checkToken();
-
         return (
-            <div className='dev-b'>
+            <div className=''>
                 <Router>
                     <Switch>
-                        <Route exact path="/sign-up" component={SignUp}/>
-                        <Route exact path="/sign-in" component={SignIn}/>
-                        <Route exact path="/sign-out">
-                            <Redirect to="/sign-in"/>
-                        </Route>
+                        <Route exact path='/sign-up' component={SignUp} />
+                        <Route exact path='/sign-in' component={SignIn} />
+                        <Route exact path='/sign-out' component={SignOut} />
+
                         <Skeleton id={this.state.id}>
-                            <Route exact path="/">
-                                {valid ? <Redirect to="/home"/> : <Redirect to="/sign-in"/>}
-                            </Route>
-                            <Route exact path="/home">
-                                <p>home</p>
-                            </Route>
-                            <Route exact path='/profile'>
-                                <p>profile</p>
-                            </Route>
-                            <Route exact path='/dn'>
-                                <p>dn</p>
-                            </Route>
+                            <PrivateRoute exact path='/' component={Public} />
+                            <PrivateRoute exact path='/home' component={Public} />
+                            <PrivateRoute exact path='/dn' component={Private} />
+                            <PrivateRoute exact path='/profile' component={Profile} />
                         </Skeleton>
                     </Switch>
                 </Router>

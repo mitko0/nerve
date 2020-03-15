@@ -1,39 +1,62 @@
-import React from "react";
-import { Avatar } from "@material-ui/core";
-import CardHeader from "@material-ui/core/CardHeader";
+import React, {Component} from "react";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
-const Challenge2 = (props) => {
-    const challenge = props.challenge;
-    const creator = props.creator;
+class Challenge2 extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false,
+            showMore: false
+        }
+    }
 
-    const src = `data:${creator.fileDetails.mimeType};base64,${creator.fileDetails.base64}`;
+    handleClick = () => {
+        this.setState({open: true})
+    };
 
-    return (
-        <div className='p-3' style={{width: '300px'}}>
-            {/*<div className='d-inline-block mr-3'>
-                <Avatar alt={creator.username}
-                        src={src}
-                />
-            </div>
-            <div className='d-inline-block'>
-                <div>{creator.username}</div>
-                <div className='text-muted small d-inline-block .details'>
-                    {challenge.description}
+    onClose = () => {
+        this.setState({open: false})
+    };
+
+    showMore = () => {
+        const details = document.getElementById("details");
+        const challenge = document.getElementById("challenge");
+
+        const detailsW = parseFloat(window.getComputedStyle(details, null).getPropertyValue("width"));
+        const detailsPL = parseFloat(window.getComputedStyle(details, null).getPropertyValue("padding-left"));
+        const detailsPR = parseFloat(window.getComputedStyle(details, null).getPropertyValue("padding-right"));
+
+        const challengeW = parseFloat(window.getComputedStyle(challenge, null).getPropertyValue("width"));
+        const challengePL = parseFloat(window.getComputedStyle(challenge, null).getPropertyValue("padding-left"));
+        const challengePR = parseFloat(window.getComputedStyle(challenge, null).getPropertyValue("padding-right"));
+
+        const v1 = Math.round((challengeW - challengePL - challengePR) * 0.91);
+        const v2 = Math.round(detailsW - detailsPL - detailsPR);
+
+        return v1 === v2;
+    };
+
+    componentDidMount() {
+        this.setState({open: this.showMore()})
+        //document.getElementById("more").style.display = this.showMore()? "inline-block" : "none";
+    }
+
+    render() {
+        return (
+            <div className='challenge' id="challenge">
+                <div className='details' id="details">
+                    {this.props.description}
                 </div>
-            </div>
-            <button className='btn btn-link p-0'>more</button>*/}
-            <CardHeader
-                avatar={
-                    <Avatar aria-label="recipe" >
-                        R
-                    </Avatar>
-                }
-                title="Shrimp and Chorizo Paella"
-                subheader="September 14, 2016"
+                <button type="button" id="more"
+                        className='btn btn-link'
+                        onClick={this.handleClick}
+                        style={{display: this.state.showMore ? 'inline-block' : 'none'}}>
+                    <span className='text-muted'>more</span>
+                </button>
 
-            />
-        </div>
-    );
-};
+            </div>
+        )
+    }
+}
 
 export default Challenge2;

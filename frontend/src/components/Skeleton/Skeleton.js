@@ -6,9 +6,10 @@ import SideBar from "../Navbar/SideBar";
 
 const Skeleton = props => {
     return (
-        <Row className='mt-2 ml-0 mr-0'>
+        <Row className={'mt-2 ml-0 mr-0 ' + props.className}>
             <Col
-                xs={3}
+                xs={2}
+                sm={3}
                 id="left"
                 className='d-flex justify-content-end'
             >
@@ -18,15 +19,17 @@ const Skeleton = props => {
                 />
             </Col>
             <Col
-                xs={9}
-                md={6}
+                xs={10}
+                sm={9}
+                lg={6}
                 id="center"
+                style={{height: '95vh'}}
             >
                 {props.children}
             </Col>
             <Col
                 xs={12}
-                md={3} id="right"
+                lg={3} id="right"
             >
                 <Card
                     raised

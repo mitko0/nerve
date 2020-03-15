@@ -1,16 +1,13 @@
 import React, {Component} from 'react';
 
-class ChallengeAdd extends Component{
-
+class Profile extends Component {
     render() {
         return (
             <div>
-                <form>
-
-                </form>
+                profile
             </div>
         );
     }
 }
 
-export default ChallengeAdd;
+export default Profile;

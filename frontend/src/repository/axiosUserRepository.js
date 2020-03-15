@@ -1,5 +1,5 @@
 import axios from '../axios/Axios'
-import ts from "./localStorage";
+import LSService from "./localStorage";
 
 const UserService = {
     getUser: (id, username) => {
@@ -9,7 +9,7 @@ const UserService = {
                 username
             },
             headers: {
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         });
     },
@@ -17,7 +17,7 @@ const UserService = {
     getAllUsers: () => {
         return axios.get('/api/users/all', {
             headers: {
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         });
     },
@@ -28,7 +28,7 @@ const UserService = {
                 term
             },
             headers: {
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         });
     },
@@ -53,7 +53,7 @@ const UserService = {
 
         return axios.patch('/api/users', formData, {
             headers: {
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         });
     },
@@ -66,7 +66,7 @@ const UserService = {
 
          return axios.patch('/api/users/updatePic', formData, {
              headers: {
-                 'Authorization': 'Bearer ' + ts.getToken()
+                 'Authorization': 'Bearer ' + LSService.getItem()
              }
          });
      },
@@ -77,7 +77,7 @@ const UserService = {
                 id, username
             },
             headers: {
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         });
     }

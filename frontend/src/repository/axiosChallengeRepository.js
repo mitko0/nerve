@@ -1,8 +1,8 @@
 import qs from 'qs'
 
 import axios from '../axios/Axios'
-import ts from "./localStorage";
-import DateFormatter from "../formatter/dateFormatter";
+import LSService from "./localStorage";
+import DateFormatter from "../formatter/DateFormatter";
 
 const getChallenge = (challenge) => {
     return {
@@ -24,7 +24,7 @@ const ChallengeService = {
         return axios.post('/api/challenges', formData, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         })
     },
@@ -35,7 +35,7 @@ const ChallengeService = {
                 username
             },
             headers: {
-                'Authorization': 'Bearer ' + ts.getToken(),
+                'Authorization': 'Bearer ' + LSService.getItem(),
             }
         })
     },
@@ -47,7 +47,7 @@ const ChallengeService = {
                 username
             },
             headers: {
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         })
     },
@@ -60,7 +60,7 @@ const ChallengeService = {
                 date: iso
             },
             headers: {
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         })
     },
@@ -72,7 +72,7 @@ const ChallengeService = {
         return axios.patch('/api/challenges', formData, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer ' + ts.getToken()
+                'Authorization': 'Bearer ' + LSService.getItem()
             }
         })
     }

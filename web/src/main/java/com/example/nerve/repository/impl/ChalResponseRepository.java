@@ -2,6 +2,8 @@ package com.example.nerve.repository.impl;
 
 import com.example.nerve.model.composite_key.ChallengeKey;
 import com.example.nerve.model.entity.ChalResponse;
+import com.example.nerve.model.entity.User;
+import com.example.nerve.model.view_model.DataHolder;
 import com.example.nerve.repository.interfaces.iChalResponseRepository;
 import com.example.nerve.repository.jpa.JpaChalResponseRepository;
 import org.springframework.stereotype.Repository;
@@ -32,6 +34,11 @@ public class ChalResponseRepository implements iChalResponseRepository {
     @Override
     public List<ChalResponse> findByChallengeId(Long cSenderId, Long cReceiverId, Date challengeDate) {
         return repo.findByChallengeId(cSenderId, cReceiverId, challengeDate);
+    }
+
+    @Override
+    public List<DataHolder<ChalResponse, User>> findWithUserByChallengeId(Long cSenderId, Long cReceiverId, Date challengeDate) {
+        return repo.findWithUserByChallengeId(cSenderId, cReceiverId, challengeDate);
     }
 
     @Override

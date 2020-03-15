@@ -2,7 +2,11 @@ package com.example.nerve.web.rest;
 
 import com.example.nerve.model.composite_key.ChallengeKey;
 import com.example.nerve.model.entity.ChalResponse;
+import com.example.nerve.model.entity.User;
+import com.example.nerve.model.view_model.DataHolder;
+import com.example.nerve.repository.jpa.JpaChalResponseRepository;
 import com.example.nerve.service.interfaces.iChalResponseService;
+import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
@@ -62,6 +66,15 @@ public class ChallengeResponseApi {
                                                       @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date challengeDate) {
 
         return responseService.getByChallengeId(senderId, receiverId, challengeDate);
+    }
+
+    @GetMapping("/challenge-with-user")
+    public List<DataHolder<ChalResponse, User>> getResponseForChallengeWithUser(@RequestParam Long senderId,
+                                                                                @RequestParam Long receiverId,
+                                                                                @RequestParam
+                                                                                @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date challengeDate) {
+
+        return responseService.getWithUserByChallengeId(senderId, receiverId, challengeDate);
     }
 
     @DeleteMapping

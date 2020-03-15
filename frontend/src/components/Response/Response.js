@@ -1,14 +1,29 @@
-import React, {useEffect} from 'react';
-import {makeStyles, useTheme} from '@material-ui/core/styles';
-import MobileStepper from '@material-ui/core/MobileStepper';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import Rating from "@material-ui/lab/Rating";
+import React, {useEffect, useState} from 'react';
+import {
+    KeyboardArrowLeft,
+    KeyboardArrowRight,
+    DeleteForever,
+} from '@material-ui/icons';
+import {
+    useTheme,
+    makeStyles,
+    MobileStepper,
+    Paper,
+    Button,
+    Avatar,
+    IconButton,
+} from '@material-ui/core';
+import {
+    Media,
+    Modal,
+} from "react-bootstrap";
+import {Rating} from "@material-ui/lab";
+
+import ResponseAdd from "./ResponseAdd";
+
 import ResponseService from "../../repository/axiosResponseRepository";
-import DateFormatter from "../../formatter/dateFormatter";
-import ts from "../../repository/localStorage";
+import DateFormatter from "../../formatter/DateFormatter";
+import LSService from "../../repository/localStorage";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -23,19 +38,23 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.background.default,
     },
     img: {
-        height: 255,
+        width: theme.spacing(4),
+        height: theme.spacing(4),
         overflow: 'hidden',
         display: 'block',
-        width: '100%',
+        border: '1px solid red',
+        marginTop: '7px',
     },
 }));
 
-export default function Response(props) {
+const Response = props => {
     const classes = useStyles();
     const theme = useTheme();
-    const [state, setState] = React.useState({
+
+    const [state, setState] = useState({
+        responses: [],
         activeStep: 0,
-        responses: []
+        showModal: false,
     });
 
     useEffect(() => {
@@ -43,91 +62,184 @@ export default function Response(props) {
     }, []);
 
     const handleNext = () => {
-        setState({...state, activeStep: state.activeStep + 1});
+        setState({...state, activeStep: activeStep + 1});
     };
 
     const handleBack = () => {
-        setState({...state, activeStep: state.activeStep - 1});
+        setState({...state, activeStep: activeStep - 1});
     };
 
     const handleRating = val => {
-        let newResponses = state.responses;
-        newResponses[state.activeStep].rating = val;
-        setState({...state, responses: newResponses});
+        const {responses, activeStep} = state;
+
+        responses[activeStep].attr1.rating = val;
+        setState({...state, responses: responses});
 
         const id = {
-            senderId: newResponses[state.activeStep].id.senderId,
-            receiverId: newResponses[state.activeStep].id.receiverId,
-            createDate: DateFormatter.formatIso(newResponses[state.activeStep].id.createDate)
+            senderId: responses[activeStep].attr1.id.senderId,
+            receiverId: responses[activeStep].attr1.id.receiverId,
+            createDate: DateFormatter.formatIso(responses[activeStep].attr1.id.createDate)
         };
-        ResponseService.rateResponse(id, val);
+        ResponseService.rateResponse(id, val).then(() => {})
     };
 
     const loadResponses = () => {
         const id = props.challengeId;
-        ResponseService.getResponsesForChallenge(id).then(response => {
-            setState({...state, responses: response.data})
-        })
+        ResponseService.getResponsesForChallengeWithUser(id.senderId, id.receiverId, id.createDate).then(({data}) => {
+            setState({...state, responses: data});
+        });
+    };
+
+    const handleDelete = () => {
+        const id = responses[activeStep].attr1.id;
+        ResponseService.deleteResponse(id.senderId, id.receiverId, id.createDate).then(() => {});
+
+        responses.splice(activeStep, 1);
+        let as = activeStep !== 0 ? activeStep - 1 : 0;
+        setState({...state, responses: responses, activeStep: as, showModal: false})
+    };
+
+    const handleAddFinish = (response) => {
+        debugger
+        responses.unshift(response);
+        setState({...state, responses: responses})
     };
 
     const flag = state.responses.length !== 0;
-    const responses = state.responses;
-
-    const name = flag ? responses[state.activeStep].id.createDate.toString() : 'empty';
-    const media = () => {
-        if (flag) {
-            return responses[state.activeStep].fileDetails.mimeType.includes('image') ?
-                <img
-                    src={flag ? `data:${responses[state.activeStep].fileDetails.mimeType};base64,${responses[state.activeStep].fileDetails.base64}` : ''}
-                    className='media'
-                    alt={''}/> :
-                <video className='media' controls>
-                    <source
-                        src={flag ? `data:${responses[state.activeStep].fileDetails.mimeType};base64,${responses[state.activeStep].fileDetails.base64}` : ''}/>
-                </video>;
-        }
-    };
-
-    const mobileStepper = flag && state.responses.length > 1? <MobileStepper
-        steps={state.responses.length}
-        position="static"
-        variant='dots'
-        activeStep={state.activeStep}
-        nextButton={
-            <Button size="small" onClick={handleNext}
-                    disabled={state.activeStep === state.responses.length - 1}>
-                Next
-                {theme.direction === 'rtl' ? <KeyboardArrowLeft/> : <KeyboardArrowRight/>}
-            </Button>
-        }
-        backButton={
-            <Button size="small" onClick={handleBack} disabled={state.activeStep === 0}>
-                {theme.direction === 'rtl' ? <KeyboardArrowRight/> : <KeyboardArrowLeft/>}
-                Back
-            </Button>
-        }
-    /> : '';
-
-    const body = flag ?
-        <div>
-            <Paper square elevation={0} className={classes.header}>
-                <Rating
-                    readOnly={props.owner !== ts.getUsername()}
-                    name={name}
-                    value={flag ? responses[state.activeStep].rating : 0}
-                    onChange={(event, value) => handleRating(value)}
-                />
-            </Paper>
-            <div className='d-flex justify-content-center align-items-center'>
-                {media()}
-            </div>
-            {mobileStepper}
-        </div>
-        : <div className='p-4 text-muted'>No responses found!</div>;
-
+    const {responses, activeStep, showModal} = state;
     return (
-        <div className={classes.root}>
-            {body}
+        <div className=''>
+            {
+                flag && <Media>
+                    <Media.Body>
+                        <Media className='ml-5 mr-3'>
+                            <Avatar
+                                className={classes.img}
+                                src={`data:${responses[activeStep].attr2.fileDetails.mimeType};base64,${responses[activeStep].attr2.fileDetails.base64}`}
+                                title={responses[activeStep].attr2.username}
+                            >
+                                R
+                            </Avatar>
+                            <Media.Body>
+                                <div className={classes.root}>
+                                    <div>
+                                        <Paper
+                                            square
+                                            elevation={0}
+                                            className={classes.header}
+                                        >
+                                            <Rating
+                                                readOnly={props.owner !== LSService.getUsername()}
+                                                name={responses[activeStep].attr1.id.createDate.toString()}
+                                                value={flag ? responses[activeStep].attr1.rating : 0}
+                                                onChange={(event, value) => handleRating(value)}
+                                            />
+                                            {
+                                                (
+                                                    props.owner === LSService.getUsername()
+                                                    || responses[activeStep].attr2.username === LSService.getUsername()
+                                                )
+                                                && <IconButton
+                                                    aria-label="respond"
+                                                    className='ml-auto'
+                                                    onClick={() => setState({...state, showModal: true})}
+                                                >
+                                                    <DeleteForever fontSize='large' color='secondary'/>
+                                                </IconButton>
+                                            }
+                                        </Paper>
+                                        <div
+                                            className='d-flex justify-content-center align-items-center media-holder'>
+                                            {
+                                                flag && responses[activeStep].attr1.fileDetails.mimeType.includes('image') ?
+                                                    <img
+                                                        src={`data:${responses[activeStep].attr1.fileDetails.mimeType};base64,${responses[activeStep].attr1.fileDetails.base64}`}
+                                                        className='m-media'
+                                                        alt={''}
+                                                    />
+                                                    : <video
+                                                        controls
+                                                        className='m-media'
+                                                    >
+                                                        <source
+                                                            src={flag && `data:${responses[activeStep].attr1.fileDetails.mimeType};base64,${responses[activeStep].attr1.fileDetails.base64}`}
+                                                        />
+                                                    </video>
+                                            }
+                                        </div>
+                                        {
+                                            responses.length > 1 &&
+                                            <MobileStepper
+                                                steps={responses.length}
+                                                position="static"
+                                                variant='progress'
+                                                activeStep={activeStep}
+                                                nextButton={
+                                                    <Button
+                                                        size="small"
+                                                        onClick={handleNext}
+                                                        disabled={activeStep === responses.length - 1}
+                                                    >
+                                                        Next
+                                                        {theme.direction === 'rtl' ? <KeyboardArrowLeft/> :
+                                                            <KeyboardArrowRight/>}
+                                                    </Button>
+                                                }
+                                                backButton={
+                                                    <Button
+                                                        size="small"
+                                                        onClick={handleBack}
+                                                        disabled={activeStep === 0}
+                                                    >
+                                                        {theme.direction === 'rtl' ? <KeyboardArrowRight/> :
+                                                            <KeyboardArrowLeft/>}
+                                                        Back
+                                                    </Button>
+                                                }
+                                            />
+                                        }
+                                    </div>
+                                </div>
+                            </Media.Body>
+                        </Media>
+                    </Media.Body>
+
+                    <Modal
+                        size='sm'
+                        show={showModal}
+                        onHide={() => setState({...state, showModal: false})}
+                    >
+                        <Modal.Header closeButton>
+                            <Modal.Title>Conformation</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Are you sure you want to delete this item ?!</Modal.Body>
+                        <Modal.Footer>
+                            <Button
+                                color='secondary'
+                                onClick={handleDelete}
+                            >
+                                Delete
+                            </Button>
+                            <Button
+                                color='primary'
+                                onClick={() => setState({...state, showModal: false})}
+                            >
+                                Cancel
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+
+                </Media>
+            }
+            <ResponseAdd
+                senderId={-1}
+                receiverId={props.challengeId.senderId}
+                challengedDate={props.challengeId.createDate}
+                responderId={LSService.getItem('user').id}
+                onFinish={handleAddFinish}
+            />
         </div>
-    );
-}
+    )
+};
+
+export default Response;

@@ -55,7 +55,8 @@ export default function SignUp() {
         finishAsync: true,
         usernameError: false,
         emailError: false,
-        passwordError: false
+        passwordError: false,
+        confirmPasswordError: false
     });
 
     const regex = {
@@ -84,7 +85,13 @@ export default function SignUp() {
     };
 
     const validate = (value = '', regex = /.{4,}/) => e => {
-        setValues({...values, [e.target.name + 'Error']: !regex.test(value)});
+        setValues({...values, [e.target.name + 'Error']: !value.match(regex)});
+    };
+
+    const passwordCheck = e => {
+        let flag = values.password !== values.confirmPassword;
+        setValues({...values, confirmPasswordError: flag});
+        handleChange('confirmPassword', e);
     };
 
     const handleFormSubmit = async (event) => {
@@ -95,14 +102,15 @@ export default function SignUp() {
 
         setValues({...values, finishAsync: false});
         await UserService.createUser(username, email, password).then(() => {
+            setValues({...values, finishAsync: true});
             history.push("/sign-in");
         }).catch((err) => {
+            setValues({...values, finishAsync: true});
             document.getElementById("signUpError")
                 .innerText = err.response ?
                 (err.response.data.error + ": " + err.response.data.message.toString())
                 : err;
         });
-        setValues({...values, finishAsync: true});
     };
 
     return (
@@ -128,7 +136,7 @@ export default function SignUp() {
                         label="Username"
                         autoFocus
                         error={values.usernameError}
-                        onBlur={validate(values.username, regex.username)}
+                        // onBlur={validate(values.username, regex.username)}
                         onChange={handleChange('username')}
                         inputProps={{tabIndex: "1"}}
                     />
@@ -144,7 +152,7 @@ export default function SignUp() {
                         id="email"
                         label="Email"
                         error={values.emailError}
-                        onBlur={validate(values.email, regex.email)}
+                        // onBlur={validate(values.email, regex.email)}
                         onChange={handleChange('email')}
                         inputProps={{tabIndex: "2"}}
                     />
@@ -166,7 +174,7 @@ export default function SignUp() {
                             value={values.password}
                             onChange={handleChange('password')}
                             error={values.passwordError}
-                            onBlur={validate(values.password, regex.password)}
+                            // onBlur={validate(values.password, regex.password)}
                             inputProps={{tabIndex: "3"}}
                             endAdornment={
                                 <InputAdornment position="end">
@@ -198,7 +206,7 @@ export default function SignUp() {
                             name={"confirmPassword"}
                             type={values.showConfirmPassword ? 'text' : 'password'}
                             value={values.confirmPassword}
-                            error={values.password !== values.confirmPassword}
+                            error={values.confirmPasswordError}
                             onChange={handleChange('confirmPassword')}
                             inputProps={{tabIndex: "4"}}
                             endAdornment={
@@ -216,19 +224,19 @@ export default function SignUp() {
                             labelWidth={145}
                         />
                     </FormControl>
-                    {values.password !== values.confirmPassword && <ErrorMessage title={messages.mismatch}/>}
+                    {values.confirmPasswordError && <ErrorMessage title={messages.mismatch}/>}
                 </InputError>
                 <ButtonLoad
                     text={'Sign up'}
-                    disabled={!values.finishAsync}
                     type="submit"
                     fullWidth
                     variant="contained"
-                    color="primary"
+                    color="secondary"
                     className={classes.submit}
                     loading={!values.finishAsync}
                     radius={"24px"}
                     tabIndex={5}
+                    disabled={!values.finishAsync}
                 />
                 <div className='text-danger' id={"signUpError"}>&nbsp;</div>
             </form>

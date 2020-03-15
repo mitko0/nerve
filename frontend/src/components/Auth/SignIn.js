@@ -1,5 +1,5 @@
-import React from 'react';
-import {useHistory} from 'react-router-dom';
+import React, {useState} from 'react';
+import {Redirect} from 'react-router-dom';
 import {
     TextField,
     FormControlLabel,
@@ -18,7 +18,7 @@ import Sign from "./Sign";
 import ButtonLoad from "../CustomInput/ButtonLoad";
 
 import AuthenticationService from '../../repository/axiosAuthenticationRepository';
-import TokenService from "../../repository/localStorage";
+import LSService from "../../repository/localStorage";
 
 
 const useStyles = makeStyles(theme => ({
@@ -41,14 +41,13 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function SignIn() {
+const SignIn = (props) => {
     const classes = useStyles();
-    const history = useHistory();
-    const [values, setValues] = React.useState({
+    const [values, setValues] = useState({
         username: '',
         password: '',
         showPassword: false,
-        finishAsync: true
+        finishAsync: true,
     });
 
     const handleChange = prop => event => {
@@ -73,86 +72,97 @@ export default function SignIn() {
         };
 
         setValues({...values, finishAsync: false});
-        await AuthenticationService.authenticate(auth).then(({data: {jwt}}) => {
-            TokenService.setToken(jwt);
-            history.push("/home");
+        await AuthenticationService.authenticateWithUser(auth).then(({data: {attr1, attr2}}) => {
+            LSService.setItem('user', attr1);
+            LSService.setItem('jwt', attr2);
+            setValues({...values, finishAsync: true});
         }).catch((error) => {
             document.getElementById("signInError")
                 .innerHTML = error.response ? error.response.data.toString() : error;
+            setValues({...values, finishAsync: true});
             //console.clear();
         });
-        setValues({...values, finishAsync: true});
+
     };
 
+    const {from} = props.location.state || {from: {pathname: '/'}};
     return (
-        <Sign
-            title={"Sign In"}
-            description={"Don't have an account?"}
-            linkText={"Sign up"}
-            to={"/sign-up"}
-            footer
-        >
-            <form
-                className={classes.form}
-                onSubmit={handleAuthentication}
+        <div>
+            {
+                LSService.checkToken()
+                && <Redirect to={from}/>
+            }
+            <Sign
+                title={"Sign In"}
+                description={"Don't have an account?"}
+                linkText={"Sign up"}
+                to={"/sign-up"}
+                footer
             >
-                <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="username"
-                    label="Username"
-                    name="username"
-                    autoFocus
-                />
-                <FormControl
-                    className={clsx(classes.margin, classes.textField)}
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    required
+                <form
+                    className={classes.form}
+                    onSubmit={handleAuthentication}
                 >
-                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                    <OutlinedInput
-                        id="outlined-adornment-password"
-                        name={"password"}
-                        type={values.showPassword ? 'text' : 'password'}
-                        value={values.password}
-                        onChange={handleChange('password')}
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                    edge="end"
-                                >
-                                    {values.showPassword ? <Visibility/> : <VisibilityOff/>}
-                                </IconButton>
-                            </InputAdornment>
-                        }
-                        labelWidth={80}
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="username"
+                        label="Username"
+                        name="username"
+                        autoFocus
                     />
-                </FormControl>
+                    <FormControl
+                        className={clsx(classes.margin, classes.textField)}
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        required
+                    >
+                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-password"
+                            name={"password"}
+                            type={values.showPassword ? 'text' : 'password'}
+                            value={values.password}
+                            onChange={handleChange('password')}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {values.showPassword ? <Visibility/> : <VisibilityOff/>}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            labelWidth={80}
+                        />
+                    </FormControl>
 
-                <FormControlLabel
-                    control={<Checkbox name="remember" color="primary"/>}
-                    label="Remember me"
-                />
-                <ButtonLoad
-                    text={'Sign in'}
-                    disabled={!values.finishAsync}
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                    loading={!values.finishAsync}
-                    radius={"24px"}
-                />
-                <div className='text-danger' id={"signInError"}>&nbsp;</div>
-            </form>
-        </Sign>
+                    <FormControlLabel
+                        control={<Checkbox name="remember" color="secondary"/>}
+                        label="Remember me"
+                    />
+                    <ButtonLoad
+                        text={'Sign in'}
+                        disabled={!values.finishAsync}
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="secondary"
+                        className={classes.submit}
+                        loading={!values.finishAsync}
+                        radius={"24px"}
+                    />
+                    <div className='text-danger' id={"signInError"}>&nbsp;</div>
+                </form>
+            </Sign>
+        </div>
     );
-}
+};
+
+export default SignIn;
