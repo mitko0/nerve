@@ -1,5 +1,4 @@
 import decode from "jwt-decode";
-import moment from "moment";
 
 const LSService = {
     setItem: (name, value) => {

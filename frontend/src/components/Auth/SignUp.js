@@ -59,11 +59,11 @@ export default function SignUp() {
         confirmPasswordError: false
     });
 
-    const regex = {
+   /* const regex = {
         username: /^[a-zA-Z0-9!.=_]{4,}$/,
         email: /(^(?![\s\S])|(^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$))/,
         password: /.{4,}/
-    };
+    };*/
 
     const messages = {
         username: "Username needs to be at least 4 characters long and can contain only numbers, letters and ! . = _",
@@ -84,7 +84,7 @@ export default function SignUp() {
         event.preventDefault();
     };
 
-    const validate = (value = '', regex = /.{4,}/) => e => {
+  /*  const validate = (value = '', regex = /.{4,}/) => e => {
         setValues({...values, [e.target.name + 'Error']: !value.match(regex)});
     };
 
@@ -92,7 +92,7 @@ export default function SignUp() {
         let flag = values.password !== values.confirmPassword;
         setValues({...values, confirmPasswordError: flag});
         handleChange('confirmPassword', e);
-    };
+    };*/
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();

@@ -29,6 +29,22 @@ const ChallengeService = {
         })
     },
 
+    newChallenges: (senderId, receiverIds, description, endDate) => {
+        const formData = new FormData();
+        formData.append('senderId', senderId);
+        formData.append('description', description);
+        formData.append('endDate', DateFormatter.formatIso(endDate));
+        receiverIds.forEach(id => {
+            formData.append('receiverIds', id);
+        });
+
+        return axios.post('/api/challenges/multiple', formData, {
+            headers: {
+                'Authorization': 'Bearer ' + LSService.getItem()
+            }
+        })
+    },
+
     search: (username = '') => {
         return axios.get('/api/challenges/search', {
             params: {

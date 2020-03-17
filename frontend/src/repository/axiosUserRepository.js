@@ -72,7 +72,7 @@ const UserService = {
      },
 
     deleteUser: (id, username) => {
-        axios.delete('/api/users/delete', {
+        return axios.delete('/api/users/delete', {
             params: {
                 id, username
             },

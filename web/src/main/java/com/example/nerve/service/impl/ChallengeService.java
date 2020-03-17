@@ -10,6 +10,8 @@ import com.example.nerve.service.interfaces.iChallengeService;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,6 +55,38 @@ public class ChallengeService implements iChallengeService {
 
         challenge.setResponded(false);
         return repo.save(challenge);
+    }
+
+    @Override
+    public List<Challenge> saveChallenges(Long senderId, List<Long> receiverIds, String description, Date endDate) {
+        List<Challenge> challenges = new ArrayList<>();
+
+        DateTime endDT;
+        DateTime nowDT = new DateTime();
+
+        if (endDate == null || endDate.before(new Date())) {
+            /*//production xd
+            challenge.setEndDate(nowDt.plusDays(1).toDate());*/
+            //development
+            endDT = new DateTime().plusMinutes(10);
+        } else {
+            //db time bug
+            endDT = new DateTime(endDate).plusHours(1);
+        }
+
+        for (long id : receiverIds) {
+            //db time bug
+            ChallengeKey key = new ChallengeKey(senderId, id, nowDT.plusHours(1).toDate());
+            Challenge challenge = new Challenge();
+
+            challenge.setId(key);
+            challenge.setDescription(description);
+            challenge.setEndDate(endDT.toDate());
+
+            challenges.add(challenge);
+        }
+
+        return repo.saveAll(challenges);
     }
 
     @Override

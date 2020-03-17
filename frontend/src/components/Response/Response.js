@@ -100,9 +100,8 @@ const Response = props => {
     };
 
     const handleAddFinish = (response) => {
-        debugger
         responses.unshift(response);
-        setState({...state, responses: responses})
+        setState({...state, activeStep: 0, responses: responses})
     };
 
     const flag = state.responses.length !== 0;
@@ -205,6 +204,7 @@ const Response = props => {
                     </Media.Body>
 
                     <Modal
+                        backdropClassName='bg-danger'
                         size='sm'
                         show={showModal}
                         onHide={() => setState({...state, showModal: false})}

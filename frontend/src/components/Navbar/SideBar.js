@@ -6,6 +6,8 @@ import {
     MenuItem
 } from "@material-ui/core";
 
+import {MyContext} from '../Context/ContextProvider';
+
 class SideBar extends Component {
     state = {
         arr: [
@@ -14,10 +16,10 @@ class SideBar extends Component {
             {id: 3, to: '/profile', fa: 'fa-user', text: 'Profile'},
             {id: 4, to: '/sign-out', fa: 'fa-sign-out', text: 'Sign out'}
         ],
-        clicked: this.props.id
+        clicked: this.props.id,
     };
 
-    handleClick = id => {
+    handleRedirect = id => {
         this.setState({clicked: id})
     };
 
@@ -25,43 +27,52 @@ class SideBar extends Component {
         const {arr, clicked} = this.state;
 
         return (
-            <div className={this.props.className}>
-                <MenuList className='d-inline-block'>
-                    <Typography className='mt-2 mb-2'>
-                        <Link to={'/'}>
-                            <img
-                                src='../../nerve-logo.png'
-                                alt={'logo'}
-                                width={'60px'}
-                            />
-                        </Link>
-                    </Typography>
+            <MyContext.Consumer>
+                {context => (
+                    <>
+                        <div className={this.props.className}>
+                            <MenuList className='d-inline-block'>
+                                <Typography className='mt-2 mb-2'>
+                                    <Link to={'/'}>
+                                        <img
+                                            src='../../nerve-logo.png'
+                                            alt={'logo'}
+                                            width={'60px'}
+                                        />
+                                    </Link>
+                                </Typography>
 
-                    {arr.map(element => (
-                        <MenuItem
-                            key={element.id}
-                            component={Link}
-                            to={element.to}
-                            color='primary'
-                            onClick={() => this.handleClick(element.id)}
-                            className=
-                                {
-                                    clicked === element.id ?
-                                        'mb-2 button is-rounded is-small is-danger'
-                                        : 'mb-2 button is-rounded is-small'
-                                }
-                        >
-                            <i className={'fa ' + element.fa} style={{fontSize: 17}}/>
-                            <span className='ml-2 md-display-none'>{element.text}</span>
-                        </MenuItem>
-                    ))}
+                                {arr.map(element => (
+                                    <MenuItem
+                                        key={element.id}
+                                        component={Link}
+                                        to={element.to}
+                                        color='primary'
+                                        onClick={() => this.handleRedirect(element.id)}
+                                        className=
+                                            {
+                                                clicked === element.id
+                                                    ? 'mb-2 button is-rounded is-small is-danger'
+                                                    : 'mb-2 button is-rounded is-small'
+                                            }
+                                    >
+                                        <i className={'fa ' + element.fa} style={{fontSize: 17}}/>
+                                        <span className='ml-2 md-display-none'>{element.text}</span>
+                                    </MenuItem>
+                                ))}
 
-                    <button className='button is-rounded is-small is-outlined is-danger is-fullwidth'>
-                        <i className='mr-1 fa fa-paper-plane' style={{fontSize: 17}}/>
-                        <span className='ml-2 md-display-none'>Post</span>
-                    </button>
-                </MenuList>
-            </div>
+                                <button
+                                    onClick={() => context.handleShowNewChallengeModal(true)}
+                                    className='button is-rounded is-small is-outlined is-danger is-fullwidth'
+                                >
+                                    <i className='mr-1 fa fa-paper-plane' style={{fontSize: 17}}/>
+                                    <span className='ml-2 md-display-none'>Post</span>
+                                </button>
+                            </MenuList>
+                        </div>
+                    </>
+                )}
+            </MyContext.Consumer>
         );
     }
 }

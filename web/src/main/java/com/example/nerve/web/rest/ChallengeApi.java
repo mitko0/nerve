@@ -33,6 +33,16 @@ public class ChallengeApi {
         return service.saveChallenge(challenge);
     }
 
+    @PostMapping("/multiple")
+    public List<Challenge> newChallenges(@RequestParam long senderId,
+                                  @RequestParam List<Long> receiverIds,
+                                  @RequestParam String description,
+                                  @RequestParam(required = false)
+                                  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS", iso = DateTimeFormat.ISO.DATE_TIME) Date endDate) {
+
+        return service.saveChallenges(senderId, receiverIds, description, endDate);
+    }
+
     @GetMapping(value = "/search", params = "username")
     public List<ChallengeUsers> search(@RequestParam String username) {
         return service.search(username);

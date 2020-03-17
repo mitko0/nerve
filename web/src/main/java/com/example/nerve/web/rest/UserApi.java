@@ -2,6 +2,7 @@ package com.example.nerve.web.rest;
 
 import com.example.nerve.model.entity.User;
 import com.example.nerve.service.interfaces.iUserService;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +41,9 @@ public class UserApi {
 
     @GetMapping(params = "term")
     public List<User> search(@RequestParam String term) {
-        return service.search(term);
+//        if (term.trim().length() != 0)
+            return service.search(term);
+//        return new ArrayList<>();
     }
 
     @PostMapping

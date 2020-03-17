@@ -16,7 +16,8 @@ public interface JpaChalResponseRepository extends JpaRepository<ChalResponse, C
 
     @Query("select new com.example.nerve.model.view_model.DataHolder(r, u) " +
             "from ChalResponse r join User u on (u.id <> -1 and r.id.senderId = u.id) or (r.publicResponder = u.id) " +
-            "where r.id.senderId = :cReceiverId and r.id.receiverId = :cSenderId and r.challengeDate = :challengeDate")
+            "where r.id.senderId = :cReceiverId and r.id.receiverId = :cSenderId and r.challengeDate = :challengeDate " +
+            "order by r.id.createDate desc ")
     List<DataHolder<ChalResponse, User>> findWithUserByChallengeId(Long cSenderId, Long cReceiverId, Date challengeDate);
 
     @Query("select r from ChalResponse r " +

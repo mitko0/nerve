@@ -23,7 +23,7 @@ const Skeleton = props => {
                 sm={9}
                 lg={6}
                 id="center"
-                style={{height: '95vh'}}
+                style={{height: '98vh'}}
             >
                 {props.children}
             </Col>
