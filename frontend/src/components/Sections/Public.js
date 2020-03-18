@@ -1,65 +1,36 @@
-import React, {Component} from 'react';
+import React, {useContext, useEffect} from 'react';
+
 
 import Post from "../Post/Post";
+import {MyContext} from '../Context/ContextProvider';
 
 import ChallengeService from "../../repository/axiosChallengeRepository";
-import ChallengeAdd from "../Challenge/ChallengeAdd";
-import LSService from "../../repository/localStorage";
 
-class Public extends Component {
-    state = {
-        showModal: true,
-        publicChallenges: []
-    };
+const Public = () => {
+    const context = useContext(MyContext);
 
-    handleNewChallenge = data => {
-        const challenges = this.state.publicChallenges;
-        const item = {
-            challenge: data[0],
-            sender: LSService.getItem('user')
-        };
-        challenges.unshift(item);
-        this.setState({publicChallenges: challenges})
-    };
-
-    handleHide = () => {
-        this.setState({showModal: false});
-    };
-
-    handleShow = () => {
-        this.setState({showModal: true});
-    };
-
-    componentDidMount() {
+    useEffect(() => {
         ChallengeService.forUser('for', -1, null).then(({data}) => {
-            this.setState({publicChallenges: data});
-        })
-    }
+            context.handlePublicChallengesUpdate(data);
+        });
+        context.handleSectionNoChange(0);
+    }, []);
 
-    render() {
-        return (
-            <div>
-                {
-                    this.state.publicChallenges.map((challenge, i) => {
-                        return (
-                            <Post
-                                key={i}
-                                data={challenge}
-                                showMore
-                                onNewChallenge={this.handleNewChallenge}
-                            />
-                        );
-                    })
-                }
-                <ChallengeAdd
-                    public
-                    show={this.state.showModal}
-                    onHide={this.handleHide}
-                    onNewChallenge={this.handleNewChallenge}
-                />
-            </div>
-        );
-    }
-}
+    return (
+        <div>
+            {
+                context.state.publicChallenges.map((challenge, i) => {
+                    return (
+                        <Post
+                            key={i}
+                            data={challenge}
+                            showMore
+                        />
+                    );
+                })
+            }
+        </div>
+    );
+};
 
 export default Public;

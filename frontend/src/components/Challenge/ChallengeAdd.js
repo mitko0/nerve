@@ -16,10 +16,9 @@ import {
 
 import {MyContext} from '../Context/ContextProvider';
 import InputSearch from "../CustomInput/InputSearch";
-import ChallengeService from "../../repository/axiosChallengeRepository";
 
+import ChallengeService from "../../repository/axiosChallengeRepository";
 import LSService from "../../repository/localStorage";
-import context from "react-router/modules/RouterContext";
 
 class ChallengeAdd extends Component {
     state = {
@@ -75,38 +74,39 @@ class ChallengeAdd extends Component {
     };
 
     render() {
-        const userFileDetails = LSService.getItem('user').fileDetails;
+        const user = LSService.getItem('user');
         const {users, description, selectedDate, validDate} = this.state;
         return (
-            <MyContext.Consumer>
-                {context => (
-                    <>
-                        <MuiPickersUtilsProvider utils={MomentUtils}>
-                            <Modal
-                                size={"lg"}
-                                backdropClassName='bg-danger'
-                                show={context.state.showNewChallengeModal}
-                                onHide={() => context.handleShowNewChallengeModal(false)}
-                            >
-                                <Modal.Header closeButton/>
-                                <Modal.Body>
-                                    {
-                                        !this.props.public
-                                        && <InputSearch
-                                            data={users}
-                                            onSelect={this.handleSelect}
-                                            onRemove={this.handleRemove}
-                                        />
-                                    }
-                                    <form onSubmit={this.handleFormSubmit}>
-                                        <Media>
-                                            <Avatar
-                                                className='border border-danger mr-2'
-                                                src={`data:${userFileDetails.mimeType};base64,${userFileDetails.base64}`}
-                                            >
-                                                R
-                                            </Avatar>
-                                            <Media.Body className='control'>
+            <>
+                {user && <MyContext.Consumer>
+                    {context => (
+                        <>
+                            <MuiPickersUtilsProvider utils={MomentUtils}>
+                                <Modal
+                                    size={"lg"}
+                                    backdropClassName='bg-danger'
+                                    show={context.state.showNewChallengeModal}
+                                    onHide={() => context.handleShowNewChallengeModal(false)}
+                                >
+                                    <Modal.Header closeButton/>
+                                    <Modal.Body>
+                                        {
+                                            !this.props.public
+                                            && <InputSearch
+                                                data={users}
+                                                onSelect={this.handleSelect}
+                                                onRemove={this.handleRemove}
+                                            />
+                                        }
+                                        <form onSubmit={this.handleFormSubmit}>
+                                            <Media>
+                                                <Avatar
+                                                    className='border border-danger mr-2'
+                                                    src={`data:${user.fileDetails.mimeType};base64,${user.fileDetails.base64}`}
+                                                >
+                                                    R
+                                                </Avatar>
+                                                <Media.Body className='control'>
                                         <textarea
                                             value={description}
                                             onChange={this.handleDescriptionChange}
@@ -114,45 +114,46 @@ class ChallengeAdd extends Component {
                                             className="textarea border-0"
                                             placeholder="Go easy on them..."
                                         />
-                                                <KeyboardDateTimePicker
-                                                    fullWidth
-                                                    autoOk
-                                                    disablePast
-                                                    required
-                                                    value={selectedDate}
-                                                    variant="inline"
-                                                    margin="normal"
-                                                    id="endDate"
-                                                    name="endDate"
-                                                    label="Challenge end date"
-                                                    format='YYYY-MM-DD HH:mm'
-                                                    onChange={this.handleDateChange}
-                                                    onError={this.handleErrorDate}
-                                                />
-                                                <div className='d-flex justify-content-end mt-3'>
-                                                    <Button
-                                                        disabled={
-                                                            description.length === 0
-                                                            || !validDate
-                                                            || (!this.props.public && users.size === 0)
-                                                        }
-                                                        type="submit"
-                                                        className='mt-1'
-                                                        variant="danger"
-                                                        onClick={() => context.handleShowNewChallengeModal(false)}
-                                                    >
-                                                        Challenge
-                                                    </Button>
-                                                </div>
-                                            </Media.Body>
-                                        </Media>
-                                    </form>
-                                </Modal.Body>
-                            </Modal>
-                        </MuiPickersUtilsProvider>
-                    </>
-                )}
-            </MyContext.Consumer>
+                                                    <KeyboardDateTimePicker
+                                                        fullWidth
+                                                        autoOk
+                                                        disablePast
+                                                        required
+                                                        value={selectedDate}
+                                                        variant="inline"
+                                                        margin="normal"
+                                                        id="endDate"
+                                                        name="endDate"
+                                                        label="Challenge end date"
+                                                        format='YYYY-MM-DD HH:mm'
+                                                        onChange={this.handleDateChange}
+                                                        onError={this.handleErrorDate}
+                                                    />
+                                                    <div className='d-flex justify-content-end mt-3'>
+                                                        <Button
+                                                            disabled={
+                                                                description.length === 0
+                                                                || !validDate
+                                                                || (!this.props.public && users.size === 0)
+                                                            }
+                                                            type="submit"
+                                                            className='mt-1'
+                                                            variant="danger"
+                                                            onClick={() => context.handleShowNewChallengeModal(false)}
+                                                        >
+                                                            Challenge
+                                                        </Button>
+                                                    </div>
+                                                </Media.Body>
+                                            </Media>
+                                        </form>
+                                    </Modal.Body>
+                                </Modal>
+                            </MuiPickersUtilsProvider>
+                        </>
+                    )}
+                </MyContext.Consumer>}
+            </>
         );
     }
 }

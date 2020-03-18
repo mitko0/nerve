@@ -18,7 +18,7 @@ const ButtonLoad = (props) => {
             {
                 props.loading ?
                     <CircularProgress size={props.radius}/> :
-                    <span>{props.text}</span>
+                    <span>{props.text || props.children}</span>
             }
         </Button>
     );

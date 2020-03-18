@@ -7,30 +7,30 @@ import {
 } from "@material-ui/core";
 
 import {MyContext} from '../Context/ContextProvider';
+import ChallengeAdd from "../Challenge/ChallengeAdd";
 
 class SideBar extends Component {
+    static contextType = MyContext;
     state = {
         arr: [
-            {id: 1, to: '/home', fa: 'fa-home', text: 'Home'},
-            {id: 2, to: '/dn', fa: 'fa-envelope', text: 'Direct neurons'},
-            {id: 3, to: '/profile', fa: 'fa-user', text: 'Profile'},
-            {id: 4, to: '/sign-out', fa: 'fa-sign-out', text: 'Sign out'}
+            {id: 0, to: '/home', fa: 'fa-home', text: 'Home'},
+            {id: 1, to: '/dn', fa: 'fa-envelope', text: 'Direct neurons'},
+            {id: 2, to: '/profile', fa: 'fa-user', text: 'Profile'},
+            {id: 3, to: '/sign-out', fa: 'fa-sign-out', text: 'Sign out'}
         ],
-        clicked: this.props.id,
-    };
-
-    handleRedirect = id => {
-        this.setState({clicked: id})
     };
 
     render() {
-        const {arr, clicked} = this.state;
+        const {arr} = this.state;
 
         return (
             <MyContext.Consumer>
                 {context => (
                     <>
-                        <div className={this.props.className}>
+                        <div
+                            className={this.props.className}
+                            style={{maxHeight: 300}}
+                        >
                             <MenuList className='d-inline-block'>
                                 <Typography className='mt-2 mb-2'>
                                     <Link to={'/'}>
@@ -48,10 +48,9 @@ class SideBar extends Component {
                                         component={Link}
                                         to={element.to}
                                         color='primary'
-                                        onClick={() => this.handleRedirect(element.id)}
                                         className=
                                             {
-                                                clicked === element.id
+                                                context.state.sectionNo === element.id
                                                     ? 'mb-2 button is-rounded is-small is-danger'
                                                     : 'mb-2 button is-rounded is-small'
                                             }
@@ -70,6 +69,10 @@ class SideBar extends Component {
                                 </button>
                             </MenuList>
                         </div>
+                        <ChallengeAdd
+                            public
+                            onNewChallenge={context.handleNewChallenge}
+                        />
                     </>
                 )}
             </MyContext.Consumer>

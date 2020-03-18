@@ -4,13 +4,18 @@ import com.example.nerve.model.Constants;
 import com.example.nerve.model.entity.Challenge;
 import com.example.nerve.model.entity.Role;
 import com.example.nerve.model.entity.User;
+import com.example.nerve.model.security.MyUserDetails;
+import com.example.nerve.model.view_model.DataHolder;
 import com.example.nerve.repository.interfaces.iChallengeRepository;
 import com.example.nerve.repository.interfaces.iRoleRepository;
 import com.example.nerve.repository.interfaces.iUserRepository;
 import com.example.nerve.service.interfaces.iUserService;
+import com.example.nerve.service.jwt.JwtService;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +28,9 @@ import java.util.Optional;
 
 @Service
 public class UserService implements iUserService {
+    @Autowired
+    private JwtService jwtService;
+
     private final BCryptPasswordEncoder encoder;
     private final iUserRepository userRepo;
     private final iRoleRepository roleRepo;
@@ -62,11 +70,12 @@ public class UserService implements iUserService {
     }
 
     @Override
-    public User updateUser(Optional<Long> id,
-                           Optional<String> username,
-                           Optional<String> newUsername,
-                           Optional<String> email,
-                           Optional<String> password) {
+    public DataHolder<User, String> updateUser(String oldPassword,
+                                               Optional<Long> id,
+                                               Optional<String> username,
+                                               Optional<String> newUsername,
+                                               Optional<String> email,
+                                               Optional<String> password) {
 
         if (id.isEmpty() && username.isEmpty())
             throw new RuntimeException("Nothing to search by!");
@@ -80,7 +89,7 @@ public class UserService implements iUserService {
                 user[0] = userRepo.findByUsername(val).orElseThrow(RuntimeException::new));
 
         String name = newUsername.orElse(user[0].getUsername());
-        String pwd = password.orElse(user[0].getPassword());
+        String pwd = password.orElse(null);
         String mail = email.orElse(user[0].getEmail());
 
         // don't change default picture's name
@@ -98,8 +107,14 @@ public class UserService implements iUserService {
 
         user[0].setUsername(name);
         user[0].setEmail(mail);
-        user[0].setPassword(encoder.encode(pwd));
-        return userRepo.save(user[0]);
+        if (pwd != null)
+            user[0].setPassword(encoder.encode(pwd));
+
+        userRepo.save(user[0]);
+        UserDetails userDetails = new MyUserDetails(user[0]);
+
+        String token = jwtService.generateToken(userDetails, true);
+        return new DataHolder<>(user[0], token);
     }
 
     @Override
@@ -128,12 +143,14 @@ public class UserService implements iUserService {
             return user[0];
 
         try {
-            Constants.saveFile(pic, user[0].getUsername(), Constants.profileImageFolder);
+            Constants.deleteFile(user[0].getProfilePicLocation());
+            String loc = Constants.saveFile(pic, user[0].getUsername(), Constants.profileImageFolder);
+            user[0].setProfilePicLocation(loc);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return user[0];
+        return userRepo.save(user[0]);
     }
 
     @Override

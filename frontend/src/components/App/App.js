@@ -6,17 +6,16 @@ import {
     Redirect
 } from "react-router-dom";
 
+import {ContextProvider} from "../Context/ContextProvider";
 import Skeleton from "../Skeleton/Skeleton";
 import SignUp from "../Auth/SignUp";
 import SignIn from '../Auth/SignIn';
+import SignOut from "../Auth/SignOut";
 import Public from "../Sections/Public";
 import Private from "../Sections/Private";
 import Profile from "../Sections/Profile";
 
 import LSService from "../../repository/localStorage";
-import SignOut from "../Auth/SignOut";
-import {ContextProvider} from "../Context/ContextProvider";
-
 
 const PrivateRoute = ({component: Component, ...rest}) => (
     <Route {...rest} render={(props) => (
@@ -24,8 +23,8 @@ const PrivateRoute = ({component: Component, ...rest}) => (
             ? <Component {...props} {...rest} />
             : <Redirect to={{
                 pathname: '/sign-in',
-                state: { from: props.location }
-            }} />
+                state: {from: props.location}
+            }}/>
     )}/>
 );
 

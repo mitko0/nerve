@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useHistory} from 'react-router-dom';
 import {
     TextField,
@@ -16,6 +16,7 @@ import Sign from "./Sign";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import InputError from "../CustomInput/InputError";
 import ButtonLoad from "../CustomInput/ButtonLoad";
+import {MyContext} from '../Context/ContextProvider';
 
 import UserService from "../../repository/axiosUserRepository";
 
@@ -42,38 +43,28 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function SignUp() {
+const SignUp = () => {
+    const context = useContext(MyContext);
     const classes = useStyles();
     const history = useHistory();
     const [values, setValues] = React.useState({
+        error: '',
+        finishAsync: true,
+        dirty: false,
         username: '',
         email: '',
         password: '',
         confirmPassword: '',
         showPassword: false,
         showConfirmPassword: false,
-        finishAsync: true,
         usernameError: false,
         emailError: false,
         passwordError: false,
-        confirmPasswordError: false
     });
 
-   /* const regex = {
-        username: /^[a-zA-Z0-9!.=_]{4,}$/,
-        email: /(^(?![\s\S])|(^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$))/,
-        password: /.{4,}/
-    };*/
-
-    const messages = {
-        username: "Username needs to be at least 4 characters long and can contain only numbers, letters and ! . = _",
-        minLength: "Minimum length is 4",
-        email: "Invalid email",
-        mismatch: "Fields do not have equal values"
-    };
-
     const handleChange = prop => event => {
-        setValues({...values, [prop]: event.target.value});
+        const dirty = Boolean(values.username.length && values.password.length && values.confirmPassword.length);
+        setValues({...values, [prop]: event.target.value, dirty: dirty});
     };
 
     const handleClickShowPassword = val => () => {
@@ -84,35 +75,25 @@ export default function SignUp() {
         event.preventDefault();
     };
 
-  /*  const validate = (value = '', regex = /.{4,}/) => e => {
+    const validate = (value, regex) => e => {
         setValues({...values, [e.target.name + 'Error']: !value.match(regex)});
     };
 
-    const passwordCheck = e => {
-        let flag = values.password !== values.confirmPassword;
-        setValues({...values, confirmPasswordError: flag});
-        handleChange('confirmPassword', e);
-    };*/
-
-    const handleFormSubmit = async (event) => {
+    const handleFormSubmit = event => {
         event.preventDefault();
-        const username = event.target.username.value;
-        const password = event.target.password.value;
-        const email = event.target.email.value;
 
         setValues({...values, finishAsync: false});
-        await UserService.createUser(username, email, password).then(() => {
+        UserService.createUser(username, email, password).then(() => {
             setValues({...values, finishAsync: true});
             history.push("/sign-in");
-        }).catch((err) => {
-            setValues({...values, finishAsync: true});
-            document.getElementById("signUpError")
-                .innerText = err.response ?
-                (err.response.data.error + ": " + err.response.data.message.toString())
-                : err;
+        }).catch(({response, message}) => {
+            const err = response ? response.data.toString() : message;
+            setValues({...values, finishAsync: true, error: err});
         });
     };
 
+    const {username, email, password, confirmPassword} = values;
+    const {error, usernameError, emailError, passwordError} = values;
     return (
         <Sign
             footer
@@ -127,55 +108,53 @@ export default function SignUp() {
             >
                 <InputError>
                     <TextField
-                        margin='normal'
+                        id="username"
                         name="username"
-                        variant="outlined"
+                        label="Username"
                         required
                         fullWidth
-                        id="username"
-                        label="Username"
                         autoFocus
-                        error={values.usernameError}
-                        // onBlur={validate(values.username, regex.username)}
-                        onChange={handleChange('username')}
+                        margin='normal'
+                        variant="outlined"
+                        error={usernameError}
                         inputProps={{tabIndex: "1"}}
+                        onBlur={validate(values.username, context.userValidationRegex.username)}
+                        onChange={handleChange('username')}
                     />
-                    {values.usernameError && <ErrorMessage title={messages.username}/>}
+                    {usernameError && <ErrorMessage title={context.userValidationMessages.username}/>}
                 </InputError>
                 <InputError>
                     <TextField
-                        type='email'
-                        margin='normal'
-                        name="email"
-                        variant="outlined"
-                        fullWidth
                         id="email"
+                        name="email"
                         label="Email"
-                        error={values.emailError}
-                        // onBlur={validate(values.email, regex.email)}
-                        onChange={handleChange('email')}
+                        fullWidth
+                        margin='normal'
+                        variant="outlined"
+                        error={emailError}
                         inputProps={{tabIndex: "2"}}
+                        onBlur={validate(values.email, context.userValidationRegex.email)}
+                        onChange={handleChange('email')}
                     />
-                    {values.emailError && <ErrorMessage title={messages.email}/>}
+                    {emailError && <ErrorMessage title={context.userValidationMessages.email}/>}
                 </InputError>
-
                 <InputError>
                     <FormControl
-                        variant="outlined"
-                        margin="normal"
-                        fullWidth
                         required
+                        fullWidth
+                        margin="normal"
+                        variant="outlined"
                     >
                         <InputLabel htmlFor="password">Password</InputLabel>
                         <OutlinedInput
                             id="password"
                             name={"password"}
-                            type={values.showPassword ? 'text' : 'password'}
                             value={values.password}
-                            onChange={handleChange('password')}
-                            error={values.passwordError}
-                            // onBlur={validate(values.password, regex.password)}
+                            type={values.showPassword ? 'text' : 'password'}
+                            error={passwordError}
                             inputProps={{tabIndex: "3"}}
+                            onChange={handleChange('password')}
+                            onBlur={validate(values.password, context.userValidationRegex.password)}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -191,7 +170,7 @@ export default function SignUp() {
                             labelWidth={80}
                         />
                     </FormControl>
-                    {values.passwordError && <ErrorMessage title={messages.minLength}/>}
+                    {passwordError && <ErrorMessage title={context.userValidationMessages.minLength}/>}
                 </InputError>
                 <InputError>
                     <FormControl
@@ -206,9 +185,9 @@ export default function SignUp() {
                             name={"confirmPassword"}
                             type={values.showConfirmPassword ? 'text' : 'password'}
                             value={values.confirmPassword}
-                            error={values.confirmPasswordError}
-                            onChange={handleChange('confirmPassword')}
                             inputProps={{tabIndex: "4"}}
+                            error={password !== confirmPassword}
+                            onChange={handleChange('confirmPassword')}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -224,11 +203,11 @@ export default function SignUp() {
                             labelWidth={145}
                         />
                     </FormControl>
-                    {values.confirmPasswordError && <ErrorMessage title={messages.mismatch}/>}
+                    {password !== confirmPassword && <ErrorMessage title={context.userValidationMessages.mismatch}/>}
                 </InputError>
                 <ButtonLoad
-                    text={'Sign up'}
                     type="submit"
+                    text={'Sign up'}
                     fullWidth
                     variant="contained"
                     color="secondary"
@@ -236,10 +215,18 @@ export default function SignUp() {
                     loading={!values.finishAsync}
                     radius={"24px"}
                     tabIndex={5}
-                    disabled={!values.finishAsync}
+                    disabled={
+                        !values.dirty
+                        || !values.finishAsync
+                        || usernameError
+                        || emailError
+                        || passwordError
+                        || password !== confirmPassword
+                    }
                 />
-                <div className='text-danger' id={"signUpError"}>&nbsp;</div>
+                <div className='text-danger'>{error}</div>
             </form>
         </Sign>
     );
-}
+};
+export default SignUp;

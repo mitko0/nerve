@@ -1,8 +1,8 @@
 package com.example.nerve.web.rest;
 
 import com.example.nerve.model.entity.User;
+import com.example.nerve.model.view_model.DataHolder;
 import com.example.nerve.service.interfaces.iUserService;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,9 +40,7 @@ public class UserApi {
 
     @GetMapping(params = "term")
     public List<User> search(@RequestParam String term) {
-//        if (term.trim().length() != 0)
-            return service.search(term);
-//        return new ArrayList<>();
+        return service.search(term);
     }
 
     @PostMapping
@@ -59,11 +56,13 @@ public class UserApi {
     }
 
     @PatchMapping
-    public User update(@RequestParam(value = "id", required = false) Long id,
-                       @RequestParam(value = "name", required = false) String username,
-                       @ModelAttribute @Valid User user) {
+    public DataHolder<User, String> update(@RequestParam(value = "id", required = false) Long id,
+                                           @RequestParam(value = "name", required = false) String username,
+                                           @RequestParam String oldPassword,
+                                           @ModelAttribute @Valid User user) {
 
-        return service.updateUser(Optional.ofNullable(id), Optional.ofNullable(username),
+        return service.updateUser(oldPassword,
+                Optional.ofNullable(id), Optional.ofNullable(username),
                 Optional.ofNullable(user.getUsername()),
                 Optional.ofNullable(user.getEmail()),
                 Optional.ofNullable(user.getPassword()));

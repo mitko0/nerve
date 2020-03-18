@@ -44,6 +44,7 @@ const useStyles = makeStyles(theme => ({
 const SignIn = (props) => {
     const classes = useStyles();
     const [values, setValues] = useState({
+        error: '',
         username: '',
         password: '',
         showPassword: false,
@@ -76,10 +77,10 @@ const SignIn = (props) => {
             LSService.setItem('user', attr1);
             LSService.setItem('jwt', attr2);
             setValues({...values, finishAsync: true});
-        }).catch((error) => {
-            document.getElementById("signInError")
-                .innerHTML = error.response ? error.response.data.toString() : error;
-            setValues({...values, finishAsync: true});
+        }).catch(({response, message}) => {
+            debugger
+            const err = response? response.data.toString() : message;
+            setValues({...values, finishAsync: true, error: err});
             //console.clear();
         });
 
@@ -158,7 +159,7 @@ const SignIn = (props) => {
                         loading={!values.finishAsync}
                         radius={"24px"}
                     />
-                    <div className='text-danger' id={"signInError"}>&nbsp;</div>
+                    <div className='text-danger'>{values.error}</div>
                 </form>
             </Sign>
         </div>

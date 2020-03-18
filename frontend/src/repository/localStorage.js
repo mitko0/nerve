@@ -18,6 +18,7 @@ const LSService = {
 
     checkToken: () => {
         const jwt = localStorage.getItem('jwt');
+        const user = localStorage.getItem('user');
         if (!jwt) {
             return false;
         }
@@ -27,7 +28,7 @@ const LSService = {
             const mExp = new Date(exp * 1000);
             console.log('now', mNow.toISOString());
             console.log('exp', mExp.toISOString());
-            return mNow.getTime() < mExp.getTime();
+            return (mNow.getTime() < mExp.getTime()) && user;
         } catch (e) {
             return false;
         }

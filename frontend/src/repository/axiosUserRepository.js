@@ -38,18 +38,19 @@ const UserService = {
         formData.append('username', username);
         formData.append('email', email);
         formData.append('password', password);
-        formData.append('pic', pic);
+        pic && formData.append('pic', pic);
 
         return axios.post('/api/users', formData);
     },
 
-    updateUser: (id, name, username, email, password) => {
+    updateUser: (oldPassword, id, name, username, email, password) => {
         const formData = new FormData();
-        formData.append('id', id);
-        formData.append('name', name);
-        formData.append('username', username);
-        formData.append('email', email);
-        formData.append('password', password);
+        formData.append('oldPassword', oldPassword);
+        id && formData.append('id', id);
+        name && formData.append('name', name);
+        username && formData.append('username', username);
+        email && formData.append('email', email);
+        password && formData.append('password', password);
 
         return axios.patch('/api/users', formData, {
             headers: {
@@ -58,10 +59,10 @@ const UserService = {
         });
     },
 
-     updateProfilePic: (id, name, pic) => {
+     updateProfilePic: ({id, name, pic} = {}) => {
          const formData = new FormData();
-         formData.append('id', id);
-         formData.append('name', name);
+         id && formData.append('id', id);
+         name && formData.append('name', name);
          formData.append('pic', pic);
 
          return axios.patch('/api/users/updatePic', formData, {

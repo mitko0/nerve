@@ -2,6 +2,7 @@
   <dictionary name="mitko">
     <words>
       <w>axios</w>
+      <w>bcrypt</w>
       <w>clsx</w>
       <w>mins</w>
       <w>swipeable</w>

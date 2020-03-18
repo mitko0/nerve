@@ -40,6 +40,11 @@ public class Constants {
         return String.format("%s/%s", profileImageFolder, newName);
     }
 
+    public static void deleteFile(String fileLocation) throws IOException {
+        if (!fileLocation.contains(defaultProfilePicture))
+            Files.delete(Paths.get(fileBasePath, fileLocation));
+    }
+
     public static String fileExtension(String name) {
         int ext = name.lastIndexOf(".");
         return name.substring(ext);
