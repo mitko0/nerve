@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@date-io/moment": "1.3.9",
+    "@fortawesome/fontawesome-free": "^5.12.1",
     "@material-ui/core": "latest",
     "@material-ui/icons": "latest",
     "@material-ui/lab": "latest",
@@ -25,6 +26,7 @@
     "jwt-decode": "latest",
     "mdbreact": "latest",
     "moment": "latest",
+    "node-sass": "^4.13.1",
     "popper.js": "latest",
     "qs": "latest",
     "react": "latest",

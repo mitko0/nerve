@@ -14,6 +14,7 @@ import SignOut from "../Auth/SignOut";
 import Public from "../Sections/Public";
 import Private from "../Sections/Private";
 import Profile from "../Sections/Profile";
+import Admin from "../Sections/Admin";
 
 import LSService from "../../repository/localStorage";
 
@@ -45,6 +46,7 @@ class App extends Component {
                                 <PrivateRoute exact path='/home' component={Public} />
                                 <PrivateRoute exact path='/dn' component={Private} />
                                 <PrivateRoute exact path='/profile' component={Profile} />
+                                {LSService.isUserAdmin() && <PrivateRoute exact path='/admin' component={Admin} />}
                             </Skeleton>
                         </Switch>
                     </Router>

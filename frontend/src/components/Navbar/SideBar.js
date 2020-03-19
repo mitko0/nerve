@@ -8,6 +8,7 @@ import {
 
 import {MyContext} from '../Context/ContextProvider';
 import ChallengeAdd from "../Challenge/ChallengeAdd";
+import LSService from "../../repository/localStorage";
 
 class SideBar extends Component {
     static contextType = MyContext;
@@ -16,8 +17,10 @@ class SideBar extends Component {
             {id: 0, to: '/home', fa: 'fa-home', text: 'Home'},
             {id: 1, to: '/dn', fa: 'fa-envelope', text: 'Direct neurons'},
             {id: 2, to: '/profile', fa: 'fa-user', text: 'Profile'},
-            {id: 3, to: '/sign-out', fa: 'fa-sign-out', text: 'Sign out'}
+            {id: 3, to: '/sign-out', fa: 'fa-sign-out-alt', text: 'Sign out'},
         ],
+        admin: {id: 4, to: '/admin', fa: 'fa-user-cog', text: 'Admin'},
+
     };
 
     render() {
@@ -29,7 +32,7 @@ class SideBar extends Component {
                     <>
                         <div
                             className={this.props.className}
-                            style={{maxHeight: 300}}
+                            style={{maxHeight: 390}}
                         >
                             <MenuList className='d-inline-block'>
                                 <Typography className='mt-2 mb-2'>
@@ -41,7 +44,24 @@ class SideBar extends Component {
                                         />
                                     </Link>
                                 </Typography>
-
+                                {
+                                    LSService.isUserAdmin()
+                                    && <MenuItem
+                                        key={this.state.admin.id}
+                                        component={Link}
+                                        to={this.state.admin.to}
+                                        color='primary'
+                                        className=
+                                            {
+                                                context.state.sectionNo === this.state.admin.id
+                                                    ? 'mb-2 button is-rounded is-small is-danger'
+                                                    : 'mb-2 button is-rounded is-small'
+                                            }
+                                    >
+                                        <i className={'fas ' + this.state.admin.fa} style={{fontSize: 17}}/>
+                                        <span className='ml-2 md-display-none'>{this.state.admin.text}</span>
+                                    </MenuItem>
+                                }
                                 {arr.map(element => (
                                     <MenuItem
                                         key={element.id}
@@ -55,7 +75,7 @@ class SideBar extends Component {
                                                     : 'mb-2 button is-rounded is-small'
                                             }
                                     >
-                                        <i className={'fa ' + element.fa} style={{fontSize: 17}}/>
+                                        <i className={'fas ' + element.fa} style={{fontSize: 17}}/>
                                         <span className='ml-2 md-display-none'>{element.text}</span>
                                     </MenuItem>
                                 ))}

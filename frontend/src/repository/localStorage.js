@@ -26,12 +26,15 @@ const LSService = {
             let {exp} = decode(jwt);
             const mNow = new Date();
             const mExp = new Date(exp * 1000);
-            console.log('now', mNow.toISOString());
-            console.log('exp', mExp.toISOString());
             return (mNow.getTime() < mExp.getTime()) && user;
         } catch (e) {
             return false;
         }
+    },
+
+    isUserAdmin: () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        return user && user.role.roleName === 'ADMIN';
     },
 
     removeItem: (name) => {

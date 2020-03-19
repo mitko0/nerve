@@ -93,6 +93,7 @@ class ChallengeAdd extends Component {
                                         {
                                             !this.props.public
                                             && <InputSearch
+                                                image
                                                 data={users}
                                                 onSelect={this.handleSelect}
                                                 onRemove={this.handleRemove}

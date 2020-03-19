@@ -40,7 +40,7 @@ public class JwtService {
     }
 
     private String createToken(Map<String, Object> claims, String subject, boolean remember) {
-        int mins = remember? Short.MAX_VALUE : 5;
+        int mins = remember? Short.MAX_VALUE : 20;
         Date expiration = new Date(System.currentTimeMillis() + mins * 60 * 1000);
 
         return Jwts.builder().setClaims(claims)

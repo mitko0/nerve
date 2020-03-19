@@ -22,7 +22,7 @@ public class RoleService implements iRoleService {
 
     @Override
     public Role createRole(Role role) {
-        role.setRoleName(role.getRoleName().toLowerCase());
+        role.setRoleName(role.getRoleName().toUpperCase());
         return roleRepo.save(role);
     }
 
