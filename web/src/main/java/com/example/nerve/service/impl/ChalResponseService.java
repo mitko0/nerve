@@ -12,10 +12,10 @@ import com.example.nerve.repository.interfaces.iUserRepository;
 import com.example.nerve.service.interfaces.iChalResponseService;
 import com.example.nerve.service.interfaces.iStreakService;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -37,22 +37,18 @@ public class ChalResponseService implements iChalResponseService {
 
     @Override
     public ChalResponse createResponse(Date challengeDate, ChalResponse response, MultipartFile file, Optional<Long> responderId) {
-        DateTime nowDT = new DateTime();
-        DateTime challengeDateDT = new DateTime(challengeDate);
+        DateTime nowDt = new DateTime(DateTimeZone.UTC);
+        DateTime challengeDateDt = new DateTime(challengeDate, DateTimeZone.UTC);
 
         long responseSenderId = response.getId().getSenderId();
         long responseReceiverId = response.getId().getReceiverId();
 
         User responseUser;
 
-        //db time bug x11x2
-        //ChallengeKey challengeKey = new ChallengeKey(responseReceiverId, responseSenderId, challengeDateDT.plusHours(1).toDate());
-        ChallengeKey challengeKey = new ChallengeKey(responseReceiverId, responseSenderId, challengeDateDT.toDate());
+        ChallengeKey challengeKey = new ChallengeKey(responseReceiverId, responseSenderId, challengeDateDt.toDate());
         Challenge challenge = chalRepo.findById(challengeKey).orElseThrow(() -> new RuntimeException("m:: Invalid challenge!"));
-        //response.getId().setCreateDate(nowDT.plusHours(1).toDate());
-        response.getId().setCreateDate(nowDT.toDate());
-        //response.setChallengeDate(challengeDateDT.plusHours(1).toDate());
-        response.setChallengeDate(challengeDateDT.toDate());
+        response.getId().setCreateDate(nowDt.toDate());
+        response.setChallengeDate(challengeDateDt.toDate());
 
         if (!challenge.isResponded()) {
             if (responseSenderId == Constants.publicChallenge) {
@@ -79,7 +75,7 @@ public class ChalResponseService implements iChalResponseService {
             if (file.getContentType().startsWith("image"))
                 saveLocation = Constants.responseFilesFolder + "/image";
 
-            String createDateS = nowDT.toString();
+            String createDateS = nowDt.toString();
 
             String name = String.format("%d_%d_%s",
                     response.getId().getSenderId(),
@@ -101,9 +97,7 @@ public class ChalResponseService implements iChalResponseService {
     @Override
     public ChalResponse rateResponse(ChallengeKey key, short rating) {
         rating = (short)(Math.abs(rating) % 6);
-        //db time bug
-        //DateTime dt = new DateTime(key.getCreateDate()).plusHours(1);
-        DateTime dt = new DateTime(key.getCreateDate());
+        DateTime dt = new DateTime(key.getCreateDate(), DateTimeZone.UTC);
         key.setCreateDate(dt.toDate());
 
         ChalResponse response = repo.findById(key).orElseThrow();
@@ -114,44 +108,34 @@ public class ChalResponseService implements iChalResponseService {
 
     @Override
     public ChalResponse getById(ChallengeKey key) {
-        //db time bug
-        //DateTime dt = new DateTime(key.getCreateDate()).plusHours(1);
-        DateTime dt = new DateTime(key.getCreateDate());
+        DateTime dt = new DateTime(key.getCreateDate(), DateTimeZone.UTC);
         key.setCreateDate(dt.toDate());
         return repo.findById(key).orElseThrow();
     }
 
     @Override
     public List<ChalResponse> getByChallengeId(Long senderId, Long receiverId, Date challengeDate) {
-        //db time bug
-        //DateTime dt = new DateTime(challengeDate).plusHours(1);
-        DateTime dt = new DateTime(challengeDate);
-
+        DateTime dt = new DateTime(challengeDate, DateTimeZone.UTC);
         return repo.findByChallengeId(senderId, receiverId, dt.toDate());
     }
 
     @Override
     public List<DataHolder<ChalResponse, User>> getWithUserByChallengeId(Long senderId, Long receiverId, Date challengeDate) {
-        //db time bug
-        //DateTime dt = new DateTime(challengeDate).plusHours(1);
-        DateTime dt = new DateTime(challengeDate);
+        DateTime dt = new DateTime(challengeDate, DateTimeZone.UTC);
 
         return repo.findWithUserByChallengeId(senderId, receiverId, dt.toDate());
     }
 
     @Override
     public void deleteById(ChallengeKey key) {
-        //db time bug
-        //DateTime dt = new DateTime(key.getCreateDate()).plusHours(1);
-        //key.setCreateDate(dt.toDate());
+        DateTime dt = new DateTime(key.getCreateDate(), DateTimeZone.UTC);
+        key.setCreateDate(dt.toDate());
         repo.deleteById(key);
     }
 
     @Override
     public void deletePublic(Long responderId, Long receiverId, Date createDate) {
-        //db time bug
-        //DateTime dt = new DateTime(createDate).plusHours(1);
-        DateTime dt = new DateTime(createDate);
+        DateTime dt = new DateTime(createDate, DateTimeZone.UTC);
         repo.deletePublic(responderId, receiverId, dt.toDate());
     }
 }

@@ -54,11 +54,11 @@ const Challenge = props => {
                             <div className='small'>
                                 <div>
                                     <span className='text-info'>Created: </span>
-                                    {moment(data.challenge.id.createDate).calendar()}
+                                    {moment(data.challenge.id.createDate).local().calendar()}
                                 </div>
                                 <div>
                                     <span className='text-info'>Expires: </span>
-                                    {moment(data.challenge.endDate).calendar()}
+                                    {moment(data.challenge.endDate).local().calendar()}
                                 </div>
                             </div>
                         }

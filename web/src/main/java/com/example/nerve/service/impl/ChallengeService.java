@@ -8,6 +8,7 @@ import com.example.nerve.repository.interfaces.iChallengeRepository;
 import com.example.nerve.repository.interfaces.iUserRepository;
 import com.example.nerve.service.interfaces.iChallengeService;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,20 +38,16 @@ public class ChallengeService implements iChallengeService {
         sender.challenge(challenge);
         receiver.acceptChallenge(challenge);
 
-        DateTime nowDt = new DateTime();
-        //db time bug
-        nowDt = nowDt.plusHours(1);
+        DateTime nowDt = new DateTime(DateTimeZone.UTC);
         challenge.getId().setCreateDate(nowDt.toDate());
 
-        if (challenge.getEndDate() == null || challenge.getEndDate().before(nowDt.minusHours(1).toDate())) {
-            /*//production xd
-            challenge.setEndDate(nowDt.plusDays(1).toDate());*/
-            //development
-            challenge.setEndDate(nowDt.plusMinutes(4).toDate());
+        if (challenge.getEndDate() == null) {
+            challenge.setEndDate(nowDt.plusMinutes(10).toDate());
         } else {
-            //db time bug
-            DateTime endDate = new DateTime(challenge.getEndDate());
-            challenge.setEndDate(endDate.plusHours(1).toDate());
+            DateTime challengeEndDt = new DateTime(challenge.getEndDate(), DateTimeZone.UTC);
+            challenge.setEndDate(challengeEndDt.toDate());
+            if (challengeEndDt.isBefore(nowDt))
+                challenge.setEndDate(nowDt.plusMinutes(10).toDate());
         }
 
         challenge.setResponded(false);
@@ -61,27 +58,24 @@ public class ChallengeService implements iChallengeService {
     public List<Challenge> saveChallenges(Long senderId, List<Long> receiverIds, String description, Date endDate) {
         List<Challenge> challenges = new ArrayList<>();
 
-        DateTime endDT;
-        DateTime nowDT = new DateTime();
+        DateTime endDt;
+        DateTime nowDt = new DateTime(DateTimeZone.UTC);
 
-        if (endDate == null || endDate.before(new Date())) {
-            /*//production xd
-            challenge.setEndDate(nowDt.plusDays(1).toDate());*/
-            //development
-            endDT = new DateTime().plusMinutes(10);
+        if (endDate == null) {
+            endDt = nowDt.plusMinutes(10);
         } else {
-            //db time bug
-            endDT = new DateTime(endDate).plusHours(1);
+            endDt = new DateTime(endDate, DateTimeZone.UTC);
+            if (endDt.isBefore(nowDt))
+                endDt = nowDt.plusMinutes(10);
         }
 
         for (long id : receiverIds) {
-            //db time bug
-            ChallengeKey key = new ChallengeKey(senderId, id, nowDT.plusHours(1).toDate());
+            ChallengeKey key = new ChallengeKey(senderId, id, nowDt.toDate());
             Challenge challenge = new Challenge();
 
             challenge.setId(key);
             challenge.setDescription(description);
-            challenge.setEndDate(endDT.toDate());
+            challenge.setEndDate(endDt.toDate());
 
             challenges.add(challenge);
         }
@@ -135,31 +129,26 @@ public class ChallengeService implements iChallengeService {
 
     @Override
     public List<ChallengeUsers> beforeDate(DateTime date) {
-        //db time bug
-        return repo.allBeforeDate(date.plusHours(1).toDate());
+        DateTime utc = new DateTime(date, DateTimeZone.UTC);
+        return repo.allBeforeDate(utc.toDate());
     }
 
     @Override
     public List<ChallengeUsers> afterDate(DateTime date) {
-        //db time bug
-        return repo.allAfterDate(date.plusHours(1).toDate());
+        DateTime utc = new DateTime(date, DateTimeZone.UTC);
+        return repo.allAfterDate(utc.toDate());
     }
 
     @Override
     public Challenge updateChallenge(Challenge challenge) {
-        DateTime cCreateDateDt = new DateTime(challenge.getId().getCreateDate());
-
-        //db time bug
         ChallengeKey key = challenge.getId();
-        key.setCreateDate(cCreateDateDt.plusHours(1).toDate());
 
         Challenge update = repo.findById(key).orElseThrow(() -> new RuntimeException("m:: Invalid id!"));
         update.setDescription(challenge.getDescription());
-        DateTime cEndDateDt = challenge.getEndDate() != null ?
-                new DateTime(challenge.getEndDate()) :
-                new DateTime(update.getEndDate());
-        //db time bug
-        update.setEndDate(cEndDateDt.plusHours(1).toDate());
+        DateTime cEndDateDt = challenge.getEndDate() != null
+                ? new DateTime(challenge.getEndDate(), DateTimeZone.UTC)
+                : new DateTime(update.getEndDate());
+        update.setEndDate(cEndDateDt.toDate());
         return repo.save(update);
     }
 

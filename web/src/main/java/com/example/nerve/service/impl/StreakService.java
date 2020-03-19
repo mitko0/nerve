@@ -7,6 +7,7 @@ import com.example.nerve.repository.interfaces.iStreakRepository;
 import com.example.nerve.repository.interfaces.iUserRepository;
 import com.example.nerve.service.interfaces.iStreakService;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,26 +32,19 @@ public class StreakService implements iStreakService {
         User user1 = userRepo.findById(id1).orElseThrow(() -> new RuntimeException("m:: User not found!"));
         User user2 = userRepo.findById(id2).orElseThrow(() -> new RuntimeException("m:: User not found!"));
 
-        //db time bug
-        DateTime nowDt = new DateTime();
-        nowDt = nowDt.plusHours(1);
+        DateTime nowDt = new DateTime(DateTimeZone.UTC);
 
         StreakKey streakKey = new StreakKey(id1, id2);
-        /*//production xd
-        Streak newStreak = new Streak(streakKey, user1, user2, 1, null, nowDt.plusDays(1).toDate());*/
-        //development
-        Streak newStreak = new Streak(streakKey, user1, user2, 1, null, nowDt.plusMinutes(4).toDate());
+        Streak newStreak = new Streak(streakKey, user1, user2, 1, null, nowDt.plusMinutes(10).toDate());
         Streak streak = repo.findValidById(streakKey).orElse(newStreak);
 
         if (streak.getUpdateDate().before(nowDt.toDate())) {
             int streakLen = streak.getStreak();
-            //streak.setUpdateDate(nowDt.plusDays(1).toDate());
-            streak.setUpdateDate(nowDt.plusMinutes(4).toDate());
+            streak.setUpdateDate(nowDt.plusMinutes(10).toDate());
             streak.setStreak(streakLen + 1);
         }
 
-        //streak.setExpirationDate(nowDt.plusDays(1).toDate());
-        streak.setExpirationDate(nowDt.plusMinutes(4).toDate());
+        streak.setExpirationDate(nowDt.plusMinutes(10).toDate());
         return repo.save(streak);
     }
 
