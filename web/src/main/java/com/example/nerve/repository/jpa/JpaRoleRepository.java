@@ -16,6 +16,9 @@ public interface JpaRoleRepository extends JpaRepository<Role, Integer> {
     @Query("select u from Role r inner join r.users u on(r.id=u.role.id) where r=:role")
     List<User> findUsersWithRole(Role role);
 
+    @Query("select u from Role r inner join r.users u on(r.id=u.role.id) where r<>:role")
+    List<User> findUsersWithoutRole(Role role);
+
     @Transactional
     @Modifying
     void deleteByRoleName(String name);

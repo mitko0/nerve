@@ -56,6 +56,11 @@ public class RoleApi {
         return service.usersWithRole(name);
     }
 
+    @GetMapping(value = "/{name}/no")
+    public List<User> usersWithoutRole(@PathVariable String name) {
+        return service.usersWithoutRole(name);
+    }
+
     @DeleteMapping
     public void deleteRole(@RequestParam(value = "id", required = false) Integer id,
                            @RequestParam(value = "role-name", required = false) String name) {
@@ -63,17 +68,17 @@ public class RoleApi {
         service.deleteRole(Optional.ofNullable(id), Optional.ofNullable(name));
     }
 
-    @PostMapping(value = "/promote-user")
-    public User addRoleToUser(@RequestParam(value = "role-id") Integer roleId,
-                              @RequestParam(value = "user-id") Long userId) {
+    @PostMapping(value = "/promote-users")
+    public List<User> addRoleToUser(@RequestParam(value = "role-id") Integer roleId,
+                                    @RequestParam(value = "user-ids") List<Long> userIds) {
 
-        return service.addRoleToUser(roleId, userId);
+        return service.addRoleToUsers(roleId, userIds);
     }
 
-    @PostMapping(value = "/demote-user")
+    @PostMapping(value = "/demote-users")
     public void removeUserFromRole(@RequestParam(value = "role-id") Integer roleId,
-                                   @RequestParam(value = "user-id") Long userId) {
+                                   @RequestParam(value = "user-ids") List<Long> userIds) {
 
-        service.removeUserFromRole(userId, roleId);
+        service.removeUsersFromRole(userIds, roleId);
     }
 }

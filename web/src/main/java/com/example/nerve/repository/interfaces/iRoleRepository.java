@@ -17,6 +17,8 @@ public interface iRoleRepository {
 
     List<User> findUsersWithRole(Role role);
 
+    List<User> findUsersWithoutRole(Role role);
+
     void deleteById(int id);
 
     void deleteByName(String name);

@@ -17,9 +17,11 @@ public interface iRoleService {
 
     List<User> usersWithRole(String name);
 
+    List<User> usersWithoutRole(String name);
+
     void deleteRole(Optional<Integer> id, Optional<String> name);
 
-    User addRoleToUser(Integer roleId, Long userId);
+    List<User> addRoleToUsers(Integer roleId, List<Long> userIds);
 
-    void removeUserFromRole(Long userId, Integer roleId);
+    void removeUsersFromRole(List<Long> userIds, Integer roleId);
 }

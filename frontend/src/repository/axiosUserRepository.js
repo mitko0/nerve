@@ -1,3 +1,5 @@
+import qs from 'qs';
+
 import axios from '../axios/Axios'
 import LSService from "./localStorage";
 
@@ -77,6 +79,15 @@ const UserService = {
             params: {
                 id, username
             },
+            headers: {
+                'Authorization': 'Bearer ' + LSService.getItem()
+            }
+        });
+    },
+
+    deleteAll: ids => {
+        const userIds = qs.stringify({userIds: ids}, { arrayFormat: 'comma' });
+        return axios.delete(`/api/users?${userIds}`, {
             headers: {
                 'Authorization': 'Bearer ' + LSService.getItem()
             }

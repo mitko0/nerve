@@ -3,43 +3,29 @@
   <component name="ChangeListManager">
     <list default="true" id="8ca0f091-229b-4dcc-98ab-7ac1f772efe3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Challenge/Challenge.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Challenge/Challenge.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/ChalResponseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/ChalResponseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/ChallengeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/ChallengeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/StreakService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/StreakService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/2_1_2020_03_03_00_17_31_263_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/2_1_2020_03_03_00_35_45_470_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/2_1_2020_03_03_00_55_54_596_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/2_1_2020_03_03_01_05_25_694_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/2_1_2020_03_03_10_27_28_110_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/2_1_2020_03_03_10_29_04_790_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/2_1_2020_03_03_10_30_27_915_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_12_00_50_25_712_01_00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_12_13_18_39_775_01_00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_13_18_15_46_066_01_00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_13_18_16_17_804_01_00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_15_19_41_11_725_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_15_19_44_10_097_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_15_19_55_42_569_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_15_20_11_37_552_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_15_20_13_58_098_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_15_20_18_50_735_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_15_21_16_36_663_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_15_21_26_12_510_01_00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_15_21_28_41_950_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_15_21_31_40_432_01_00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_15_21_33_27_647_01_00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_16_14_01_15_729_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_16_14_05_14_922_01_00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_16_23_51_15_592_01_00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_1_2020_03_16_23_53_06_512_01_00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/image/_1_2_2020_03_15_21_34_04_353_01_00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/video/2_1_2020_03_03_12_08_54_075_01_00.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/video/_1_1_2020_03_11_20_21_18_915_01_00.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/video/_1_1_2020_03_12_13_19_19_411_01_00.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/video/_1_1_2020_03_13_17_41_08_101_01_00.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/video/_1_1_2020_03_13_17_58_53_566_01_00.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/responseFiles/video/_1_1_2020_03_15_18_17_25_973_01_00.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Challenge/Challenge2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/CustomInput/ButtonLoad.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/CustomInput/ButtonLoad.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/CustomInput/InputSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/CustomInput/InputSearch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Sections/Admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Sections/Admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/repository/axiosRoleRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/repository/axiosRoleRepository.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/repository/axiosUserRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/repository/axiosUserRepository.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/tests/Test.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/tests/Test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/entity/Challenge.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/entity/Challenge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/entity/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/impl/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/impl/RoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/impl/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/impl/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/interfaces/iRoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/interfaces/iRoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/interfaces/iUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/interfaces/iUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/jpa/JpaRoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/jpa/JpaRoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/interfaces/iRoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/interfaces/iRoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/interfaces/iUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/interfaces/iUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/RoleApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/RoleApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/UserApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/UserApi.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,6 +239,11 @@
       <workItem from="1584550433569" duration="14143000" />
       <workItem from="1584568552775" duration="12232000" />
       <workItem from="1584584290198" duration="5452000" />
+      <workItem from="1584599943780" duration="266000" />
+      <workItem from="1584600222074" duration="1363000" />
+      <workItem from="1584607272005" duration="31917000" />
+      <workItem from="1584708206652" duration="33000" />
+      <workItem from="1584708383225" duration="2911000" />
     </task>
     <servers />
   </component>
@@ -306,10 +297,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1202" y="347" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1582979027503" />
-    <state x="1245" y="253" key="#com.intellij.ide.util.MemberChooser" timestamp="1584385058814">
+    <state x="1245" y="253" key="#com.intellij.ide.util.MemberChooser" timestamp="1584624159289">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1245" y="253" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1584385058814" />
+    <state x="1245" y="253" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1584624159289" />
     <state x="1103" y="324" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1581767379076">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -330,10 +321,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="602" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1583751813251" />
-    <state x="1170" y="291" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584187257033">
+    <state x="1170" y="291" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584642310226">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1170" y="291" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584187257033" />
+    <state x="1170" y="291" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584642310226" />
     <state x="690" y="287" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1582128444620">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -350,54 +341,54 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1012" y="0" key="FileDocumentManager.FileCacheConflict/0.0.1920.1080@0.0.1920.1080" timestamp="1584554568103" />
-    <state width="914" height="330" key="GridCell.Tab.0.bottom" timestamp="1584590253696">
+    <state width="914" height="329" key="GridCell.Tab.0.bottom" timestamp="1584712061589">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="330" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584590253696" />
-    <state width="914" height="330" key="GridCell.Tab.0.center" timestamp="1584590253696">
+    <state width="914" height="329" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061589" />
+    <state width="914" height="329" key="GridCell.Tab.0.center" timestamp="1584712061589">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="330" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584590253696" />
-    <state width="914" height="330" key="GridCell.Tab.0.left" timestamp="1584590253696">
+    <state width="914" height="329" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061589" />
+    <state width="914" height="329" key="GridCell.Tab.0.left" timestamp="1584712061589">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="330" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584590253696" />
-    <state width="914" height="330" key="GridCell.Tab.0.right" timestamp="1584590253696">
+    <state width="914" height="329" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061589" />
+    <state width="914" height="329" key="GridCell.Tab.0.right" timestamp="1584712061589">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="330" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584590253696" />
-    <state width="914" height="330" key="GridCell.Tab.1.bottom" timestamp="1584590253696">
+    <state width="914" height="329" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061589" />
+    <state width="914" height="329" key="GridCell.Tab.1.bottom" timestamp="1584712061590">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="330" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584590253696" />
-    <state width="914" height="330" key="GridCell.Tab.1.center" timestamp="1584590253696">
+    <state width="914" height="329" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061590" />
+    <state width="914" height="329" key="GridCell.Tab.1.center" timestamp="1584712061589">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="330" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584590253696" />
-    <state width="914" height="330" key="GridCell.Tab.1.left" timestamp="1584590253696">
+    <state width="914" height="329" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061589" />
+    <state width="914" height="329" key="GridCell.Tab.1.left" timestamp="1584712061589">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="330" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584590253696" />
-    <state width="914" height="330" key="GridCell.Tab.1.right" timestamp="1584590253696">
+    <state width="914" height="329" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061589" />
+    <state width="914" height="329" key="GridCell.Tab.1.right" timestamp="1584712061589">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="330" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584590253696" />
-    <state width="914" height="330" key="GridCell.Tab.2.bottom" timestamp="1584590253696">
+    <state width="914" height="329" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061589" />
+    <state width="914" height="329" key="GridCell.Tab.2.bottom" timestamp="1584712061590">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="330" key="GridCell.Tab.2.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584590253696" />
-    <state width="914" height="330" key="GridCell.Tab.2.center" timestamp="1584590253696">
+    <state width="914" height="329" key="GridCell.Tab.2.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061590" />
+    <state width="914" height="329" key="GridCell.Tab.2.center" timestamp="1584712061590">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="330" key="GridCell.Tab.2.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584590253696" />
-    <state width="914" height="330" key="GridCell.Tab.2.left" timestamp="1584590253696">
+    <state width="914" height="329" key="GridCell.Tab.2.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061590" />
+    <state width="914" height="329" key="GridCell.Tab.2.left" timestamp="1584712061590">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="330" key="GridCell.Tab.2.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584590253696" />
-    <state width="914" height="330" key="GridCell.Tab.2.right" timestamp="1584590253696">
+    <state width="914" height="329" key="GridCell.Tab.2.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061590" />
+    <state width="914" height="329" key="GridCell.Tab.2.right" timestamp="1584712061590">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="330" key="GridCell.Tab.2.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584590253696" />
+    <state width="914" height="329" key="GridCell.Tab.2.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061590" />
     <state width="196" height="457" key="HiddenNamespacesPopup" timestamp="1583184723015">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -410,6 +401,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="980" y="199" key="Maven.ArtifactSearchDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1583697860288" />
+    <state x="1283" y="250" key="RollbackChangesDialog" timestamp="1584607678649">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1283" y="250" key="RollbackChangesDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584607678649" />
     <state x="880" y="113" width="998" height="718" key="SettingsEditor" timestamp="1584585586458">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -422,10 +417,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="487" height="543" key="XDebugger.FullValuePopup/0.0.1920.1080@0.0.1920.1080" timestamp="1582063039657" />
-    <state x="1136" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1584584299728">
+    <state x="1136" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1584708415997">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1136" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584584299728" />
+    <state x="1136" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584708415997" />
     <state x="1249" y="461" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1581796751092">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -438,10 +433,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1170" y="310" key="extract.method.dialog/0.0.1920.1080@0.0.1920.1080" timestamp="1581894876101" />
-    <state x="1048" y="336" width="607" height="536" key="find.popup" timestamp="1584586481056">
+    <state x="1048" y="336" width="737" height="606" key="find.popup" timestamp="1584642427232">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1048" y="336" width="607" height="536" key="find.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1584586481056" />
+    <state x="1048" y="336" width="737" height="606" key="find.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1584642427232" />
     <state x="685" y="161" key="new project wizard" timestamp="1583954945837">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -450,19 +445,14 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1096" y="254" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1584573661517" />
-    <state x="1103" y="240" width="672" height="676" key="search.everywhere.popup" timestamp="1584579451364">
+    <state x="1103" y="240" width="672" height="676" key="search.everywhere.popup" timestamp="1584642373884">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1103" y="240" width="672" height="676" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1584579451364" />
+    <state x="1103" y="240" width="672" height="676" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1584642373884" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/RoleApi.java</url>
-          <line>31</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/controllers/mRestController.java</url>
           <line>24</line>

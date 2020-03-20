@@ -44,6 +44,8 @@ public class Challenge {
     @Column(columnDefinition = "boolean default false")
     private boolean responded;
 
+    // version i responses
+
     @Override
     public String toString() {
         return "";

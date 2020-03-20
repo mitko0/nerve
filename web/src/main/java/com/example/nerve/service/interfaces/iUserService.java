@@ -30,4 +30,6 @@ public interface iUserService {
     User getUser(Optional<Long> id, Optional<String> username);
 
     void deleteUser(Optional<Long> id, Optional<String> username);
+
+    void deleteAll(List<Long> userIds);
 }

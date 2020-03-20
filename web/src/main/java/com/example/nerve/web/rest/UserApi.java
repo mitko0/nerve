@@ -85,4 +85,9 @@ public class UserApi {
         service.deleteUser(Optional.ofNullable(id), Optional.ofNullable(username));
     }
 
+    @DeleteMapping
+    public void deleteAll(@RequestParam List<Long> userIds) {
+        service.deleteAll(userIds);
+    }
+
 }

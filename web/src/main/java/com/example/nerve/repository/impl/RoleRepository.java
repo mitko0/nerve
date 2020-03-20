@@ -44,6 +44,11 @@ public class RoleRepository implements iRoleRepository {
     }
 
     @Override
+    public List<User> findUsersWithoutRole(Role role) {
+        return repo.findUsersWithoutRole(role);
+    }
+
+    @Override
     public void deleteById(int id) {
         repo.deleteById(id);
     }

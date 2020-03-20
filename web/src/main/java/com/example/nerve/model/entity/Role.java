@@ -42,13 +42,16 @@ public class Role {
         return "";
     }
 
-    public void setRoleToUser(User user) {
-        users.add(user);
-        user.setRole(this);
+    public void setRoleToUsers(List<User> usrs) {
+        this.users.addAll(usrs);
+        for (var user : usrs)
+            user.setRole(this);
     }
 
-    public void removeUser(User user) {
-        user.setRole(null);
-        users.remove(user);
+    public void removeUsers(List<User> usrs, Role def) {
+        for (var user : usrs)
+            user.setRole(def);
+        this.users.removeAll(usrs);
+
     }
 }

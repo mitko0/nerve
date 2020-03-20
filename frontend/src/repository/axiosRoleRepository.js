@@ -52,6 +52,14 @@ const RoleService = {
         })
     },
 
+    usersWithoutRole: (name) => {
+        return axios.get(`/api/roles/${name}/no`, {
+            headers: {
+                'Authorization': 'Bearer ' + LSService.getItem()
+            }
+        })
+    },
+
     deleteRole: (id, roleName) => {
         return axios.delete('/api/roles', {
             params: {
@@ -64,22 +72,26 @@ const RoleService = {
         })
     },
 
-    promoteUser: (roleId, userId) => {
+    promoteUsers: (roleId, userIds) => {
         const formData = new FormData();
         formData.append('role-id', roleId);
-        formData.append('user-id', userId);
+        userIds.forEach(id => {
+            formData.append('user-ids', id);
+        });
 
-        return axios.post(`/api/roles/promote-user`, formData, {
+        return axios.post(`/api/roles/promote-users`, formData, {
             headers: {
                 'Authorization': 'Bearer ' + LSService.getItem()
             }
         })
     },
 
-    demoteUser: (roleId, userId) => {
+    demoteUser: (roleId, userIds) => {
         const formData = new FormData();
         formData.append('role-id', roleId);
-        formData.append('user-id', userId);
+        userIds.forEach(id => {
+            formData.append('user-ids', id);
+        });
 
         return axios.post('/api/roles/demote-user', formData, {
             headers: {

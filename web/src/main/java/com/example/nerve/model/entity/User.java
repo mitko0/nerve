@@ -99,7 +99,7 @@ public class User {
     @PostLoad
     @PostPersist
     @PostUpdate
-    public void updateFileDetails() throws IOException {
+    public void updateUser() throws IOException {
         fileDetails = Constants.fileDetails(this.profilePicLocation);
     }
 }

@@ -13,11 +13,13 @@ import {Search} from "@material-ui/icons";
 
 import UserService from "../../repository/axiosUserRepository";
 import RoleService from "../../repository/axiosRoleRepository";
+import LSService from "../../repository/localStorage";
 
 /*
 * props:
+*   filterCurrent - remove current user, boolean
 *   data - selected items, Map
-*   roles - search target, boolean
+*   type - search target, string: users(default), roles
 *   image - show Avatar, boolean
 *   onSelect - what happens on item click, CB
 *   onRemove - what happens on item remove, CB
@@ -34,13 +36,18 @@ class InputSearch extends Component {
         this.setState({value: value});
         !value.trim().length && this.setState({results: []});
 
-        this.props.roles
-            ? value.trim().length && RoleService.search(value).then(({data}) => {
+        (!this.props.type || this.props.type === 'users')
+        && value.trim().length && UserService.searchUsers(value).then(({data}) => {
+            this.props.filterCurrent && (data = data.filter(curr => (
+                curr.id !== LSService.getItem('user').id
+            )));
             this.setState({results: data});
-        })
-            : value.trim().length && UserService.searchUsers(value).then(({data}) => {
+        });
+
+        this.props.type === 'roles'
+        && value.trim().length && RoleService.search(value).then(({data}) => {
             this.setState({results: data});
-        })
+        });
     };
 
     handleSelect = item => {
@@ -59,6 +66,7 @@ class InputSearch extends Component {
                 <div className='bg-light mb-1 p-3 is-rounded'>
                     <FormControl fullWidth>
                         <Input
+                            color='secondary'
                             autoComplete='off'
                             value={this.state.value}
                             onChange={this.handleChange}
@@ -67,7 +75,7 @@ class InputSearch extends Component {
                             autoFocus
                             startAdornment={
                                 <InputAdornment position="start">
-                                    <Search/>
+                                    <Search color='secondary'/>
                                 </InputAdornment>
                             }
                         />
@@ -83,6 +91,7 @@ class InputSearch extends Component {
                     }
                 </div>
                 <SearchResult
+                    type={this.props.type}
                     image={this.props.image}
                     roles={this.props.roles}
                     results={this.state.results}
@@ -99,7 +108,7 @@ export default InputSearch;
 const SearchResult = props => {
     return (
         <>
-            <div className='position-relative'>
+            <div className='position-relative' style={{zIndex: 200}}>
                 <div className='search-result mb-4 bg-light position-absolute w-100'>
                     {props.results.map(item => (
                         <Media
@@ -117,9 +126,8 @@ const SearchResult = props => {
                                 >R</Avatar>
                             }
                             <Media.Body className='control'>
-                                {props.roles
-                                    ? item.roleName
-                                    : item.username}
+                                {(!props.type || props.type === 'users') && item.username}
+                                {props.type === 'roles' && item.roleName}
                             </Media.Body>
                         </Media>
                     ))}

@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface iUserRepository {
     User save(User user);
 
+    List<User> saveAll(List<User> users);
+
     List<User> findAll();
 
     Page<User> findPageable(Pageable pageable);
@@ -24,6 +26,6 @@ public interface iUserRepository {
 
     void deleteById(Long id);
 
-    void deleteAll();
+    void deleteAll(List<User> users);
 
 }

@@ -24,6 +24,11 @@ public class UserRepository implements iUserRepository {
     }
 
     @Override
+    public List<User> saveAll(List<User> users) {
+        return repo.saveAll(users);
+    }
+
+    @Override
     public List<User> findAll() {
         return repo.findAll();
     }
@@ -59,8 +64,8 @@ public class UserRepository implements iUserRepository {
     }
 
     @Override
-    public void deleteAll() {
-        repo.deleteAll();
+    public void deleteAll(List<User> users) {
+        repo.deleteAll(users);
     }
 
 }

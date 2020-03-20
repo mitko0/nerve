@@ -7,6 +7,7 @@ import com.example.nerve.repository.interfaces.iUserRepository;
 import com.example.nerve.service.interfaces.iRoleService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +60,12 @@ public class RoleService implements iRoleService {
     }
 
     @Override
+    public List<User> usersWithoutRole(String name) {
+        Role role = roleRepo.findByName(name).orElseThrow(() -> new RuntimeException("Role doesn't exist!"));
+        return roleRepo.findUsersWithoutRole(role);
+    }
+
+    @Override
     public void deleteRole(Optional<Integer> id, Optional<String> name) {
         if (id.isEmpty() && name.isEmpty())
             throw new RuntimeException("m:: Nothing to search by!");
@@ -68,22 +75,32 @@ public class RoleService implements iRoleService {
     }
 
     @Override
-    public User addRoleToUser(Integer roleId, Long userId) {
+    public List<User> addRoleToUsers(Integer roleId, List<Long> userIds) {
         Role role = roleRepo.findById(roleId).orElseThrow(() -> new RuntimeException("m:: Role not found !"));
-        User user = userRepo.findById(userId).orElseThrow(() -> new RuntimeException("m:: User not found !"));
 
-        role.setRoleToUser(user);
+        List<User> users = new ArrayList<>();
+        for (long id : userIds) {
+            var user = userRepo.findById(id);
+            user.ifPresent(users::add);
+        }
+
+        role.setRoleToUsers(users);
         roleRepo.save(role);
-        return userRepo.save(user);
+        return userRepo.saveAll(users);
     }
 
     @Override
-    public void removeUserFromRole(Long userId, Integer roleId) {
+    public void removeUsersFromRole(List<Long> userIds, Integer roleId) {
         Role role = roleRepo.findById(roleId).orElseThrow(() -> new RuntimeException("m:: Role not found !"));
-        User user = userRepo.findById(userId).orElseThrow(() -> new RuntimeException("m:: User not found !"));
+        Role def = roleRepo.findById(0).get();
+        List<User> users = new ArrayList<>();
+        for (long id : userIds) {
+            var user = userRepo.findById(id);
+            user.ifPresent(users::add);
+        }
 
-        role.removeUser(user);
+        role.removeUsers(users, def);
         roleRepo.save(role);
-        userRepo.save(user);
+        userRepo.saveAll(users);
     }
 }

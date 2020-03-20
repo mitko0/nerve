@@ -205,4 +205,14 @@ public class UserService implements iUserService {
             userRepo.deleteByUsername(val);
         });
     }
+
+    @Override
+    public void deleteAll(List<Long> userIds) {
+        List<User> users = new ArrayList<>();
+        for (long id : userIds) {
+            var user = userRepo.findById(id);
+            user.ifPresent(users::add);
+        }
+        userRepo.deleteAll(users);
+    }
 }
