@@ -17,6 +17,7 @@ import Profile from "../Sections/Profile";
 import Admin from "../Sections/Admin";
 
 import LSService from "../../repository/localStorage";
+import Message from "../Sections/Message";
 
 const PrivateRoute = ({component: Component, ...rest}) => (
     <Route {...rest} render={(props) => (
@@ -45,6 +46,7 @@ class App extends Component {
                                 <PrivateRoute exact path='/' component={Public} />
                                 <PrivateRoute exact path='/home' component={Public} />
                                 <PrivateRoute exact path='/dn' component={Private} />
+                                <PrivateRoute exact path='/dn/:id' component={Message} />
                                 <PrivateRoute exact path='/profile' component={Profile} />
                                 {LSService.isUserAdmin() && <PrivateRoute exact path='/admin' component={Admin} />}
                             </Skeleton>

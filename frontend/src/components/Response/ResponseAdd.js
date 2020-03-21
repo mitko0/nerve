@@ -41,50 +41,56 @@ const ResponseAdd = props => {
 
     const {file, showAdd, disabled} = state;
     return (
-        <div>
-            <CardActions disableSpacing>
-                <IconButton
-                    aria-label="respond"
-                    onClick={handleRespond}
-                    disabled={showAdd && disabled}
-                >
+        <>
+            <div>
+                <CardActions disableSpacing>
                     {
-                        showAdd
-                            ? <Publish fontSize='large'/>
-                            : <AddPhotoAlternate fontSize='large'/>
+                        !props.responded
+                        && <IconButton
+                            aria-label="respond"
+                            onClick={handleRespond}
+                            disabled={showAdd && disabled}
+                        >
+                            {
+                                showAdd
+                                    ? <Publish fontSize='large'/>
+                                    : <AddPhotoAlternate fontSize='large'/>
+                            }
+                        </IconButton>
                     }
-                </IconButton>
-                {showAdd && <IconButton
-                    aria-label="respond"
-                    onClick={() => setState({...state, showAdd: false})}
-                >
-                    <Close fontSize='large'/>
-                </IconButton>}
-            </CardActions>
+                    {showAdd && <IconButton
+                        aria-label="respond"
+                        onClick={() => setState({...state, showAdd: false})}
+                    >
+                        <Close fontSize='large'/>
+                    </IconButton>}
+                </CardActions>
 
-            <CardActions>
-                {showAdd &&
-                <div className="file has-name">
-                    <label className="file-label">
-                        <input
-                            className="file-input"
-                            type="file"
-                            name="file"
-                            accept='image/*, video/*'
-                            onChange={handleFileSelect}
-                        />
-                        <span className="file-cta">
+                <CardActions>
+                    {showAdd &&
+                    <div className="file has-name">
+                        <label className="file-label">
+                            <input
+                                className="file-input"
+                                type="file"
+                                name="file"
+                                accept='image/*, video/*'
+                                onChange={handleFileSelect}
+                            />
+                            <span className="file-cta">
                         <span className="file-icon">
                             <i className="fa fa-search"/>
                         </span>
                     </span>
-                        <span className="file-name">
+                            <span className="file-name">
                         {file.name}
                     </span>
-                    </label>
-                </div>}
-            </CardActions>
-        </div>
+                        </label>
+                    </div>}
+                </CardActions>
+            </div>
+        </>
+
     );
 };
 

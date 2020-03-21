@@ -19,6 +19,8 @@ const UserService = {
     getAllUsers: () => {
         return axios.get('/api/users/all', {
             headers: {
+                'page-number': 0,
+                'list-size': 5,
                 'Authorization': 'Bearer ' + LSService.getItem()
             }
         });

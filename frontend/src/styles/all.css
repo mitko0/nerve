@@ -2,12 +2,24 @@
     border: 1px solid red;
 }
 
+.bot-0 {
+    bottom: 0;
+}
+
+.top-0 {
+    top: 0;
+}
+
 .bg-gray {
     background-color: #3d5466 !important;
 }
 
 .hover:hover {
     cursor: help;
+}
+
+.hover-dim:hover {
+    background-color: #e6ecf0;
 }
 
 .cursor-pointer {

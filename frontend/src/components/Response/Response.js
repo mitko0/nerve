@@ -52,6 +52,7 @@ const Response = props => {
     const theme = useTheme();
 
     const [state, setState] = useState({
+        responded: props.challenge.responded,
         responses: [],
         activeStep: 0,
         showModal: false,
@@ -84,7 +85,7 @@ const Response = props => {
     };
 
     const loadResponses = () => {
-        const id = props.challengeId;
+        const id = props.challenge.id;
         ResponseService.getResponsesForChallengeWithUser(id.senderId, id.receiverId, id.createDate).then(({data}) => {
             setState({...state, responses: data});
         });
@@ -100,12 +101,14 @@ const Response = props => {
     };
 
     const handleAddFinish = (response) => {
+        const responded = props.challenge.id.receiverId !== -1;
+
         responses.unshift(response);
-        setState({...state, activeStep: 0, responses: responses})
+        setState({...state, activeStep: 0, responses: responses, responded: responded})
     };
 
     const flag = state.responses.length !== 0;
-    const {responses, activeStep, showModal} = state;
+    const {responses, activeStep, showModal, responded} = state;
     return (
         <div className=''>
             {
@@ -129,7 +132,7 @@ const Response = props => {
                                         >
                                             <Rating
                                                 readOnly={props.owner !== LSService.getUsername()}
-                                                name={responses[activeStep].attr1.id.createDate.toString()}
+                                                name={props.id.toString() + responses[activeStep].attr1.id.createDate.toString()}
                                                 value={flag ? responses[activeStep].attr1.rating : 0}
                                                 onChange={(event, value) => handleRating(value)}
                                             />
@@ -228,13 +231,13 @@ const Response = props => {
                             </Button>
                         </Modal.Footer>
                     </Modal>
-
                 </Media>
             }
             <ResponseAdd
-                senderId={-1}
-                receiverId={props.challengeId.senderId}
-                challengedDate={props.challengeId.createDate}
+                responded={responded}
+                senderId={props.challenge.id.receiverId}
+                receiverId={props.challenge.id.senderId}
+                challengedDate={props.challenge.id.createDate}
                 responderId={LSService.getItem('user').id}
                 onFinish={handleAddFinish}
             />

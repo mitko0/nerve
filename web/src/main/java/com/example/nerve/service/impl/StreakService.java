@@ -35,16 +35,16 @@ public class StreakService implements iStreakService {
         DateTime nowDt = new DateTime(DateTimeZone.UTC);
 
         StreakKey streakKey = new StreakKey(id1, id2);
-        Streak newStreak = new Streak(streakKey, user1, user2, 1, null, nowDt.plusMinutes(10).toDate());
+        Streak newStreak = new Streak(streakKey, user1, user2, 1, null, nowDt.plusDays(1).toDate());
         Streak streak = repo.findValidById(streakKey).orElse(newStreak);
 
         if (streak.getUpdateDate().before(nowDt.toDate())) {
             int streakLen = streak.getStreak();
-            streak.setUpdateDate(nowDt.plusMinutes(10).toDate());
+            streak.setUpdateDate(nowDt.plusDays(1).toDate());
             streak.setStreak(streakLen + 1);
         }
 
-        streak.setExpirationDate(nowDt.plusMinutes(10).toDate());
+        streak.setExpirationDate(nowDt.plusDays(1).toDate());
         return repo.save(streak);
     }
 

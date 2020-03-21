@@ -17,8 +17,9 @@ const Post = props => {
                         className={props.className}
                     />
                     <Response
+                        id={props.id}
                         owner={props.data.sender.username}
-                        challengeId={props.data.challenge.id}
+                        challenge={props.data.challenge}
                     />
                 </div>
             }

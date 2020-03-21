@@ -10,10 +10,10 @@ const Public = () => {
     const context = useContext(MyContext);
 
     useEffect(() => {
+        context.handleSectionNoChange(0);
         ChallengeService.forUser('for', -1, null).then(({data}) => {
             context.handlePublicChallengesUpdate(data);
         });
-        context.handleSectionNoChange(0);
     }, []);
 
     return (
@@ -23,6 +23,7 @@ const Public = () => {
                     return (
                         <Post
                             key={i}
+                            id={i}
                             data={challenge}
                             showMore
                         />

@@ -13,6 +13,9 @@ import java.util.Optional;
 public interface JpaUserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
 
+    @Query("select count(u.id) from User u")
+    long totalUserCount();
+
     @Query("select u from User u where length(:username)>=1 and u.username like :username%")
     List<User> searchByUsername(String username);
 

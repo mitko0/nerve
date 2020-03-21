@@ -22,7 +22,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("*")
                 .allowCredentials(true)
-                .allowedHeaders("Access-Control-Allow-Origin", "X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization")
+                .allowedHeaders("Access-Control-Allow-Origin", "X-Requested-With",
+                        "Origin", "Content-Type", "Accept", "Authorization",
+                        "page-number", "list-size")
                 .allowedMethods("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH");
     }
 }

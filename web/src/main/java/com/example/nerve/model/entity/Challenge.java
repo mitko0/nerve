@@ -9,6 +9,7 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -44,7 +45,9 @@ public class Challenge {
     @Column(columnDefinition = "boolean default false")
     private boolean responded;
 
-    // version i responses
+    @Version
+    @Column(name = "version_")
+    private Timestamp version;
 
     @Override
     public String toString() {

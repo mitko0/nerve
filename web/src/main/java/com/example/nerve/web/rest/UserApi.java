@@ -33,7 +33,7 @@ public class UserApi {
 
     @GetMapping("/all")
     public Page<User> allPaged(@RequestHeader(value = "page-number", required = false, defaultValue = "0") int pageNo,
-                               @RequestHeader(value = "list-size", required = false, defaultValue = "10") int listSize) {
+                               @RequestHeader(value = "list-size", required = false, defaultValue = "5") int listSize) {
 
         return service.usersPaged(listSize, pageNo);
     }

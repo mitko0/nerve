@@ -160,7 +160,9 @@ public class UserService implements iUserService {
 
     @Override
     public Page<User> usersPaged(int listSize, int pageNo) {
-        return userRepo.findPageable(PageRequest.of(pageNo, listSize));
+        long count = userRepo.usersLength();
+
+        return userRepo.findPageable(PageRequest.of((int) (count/listSize), listSize));
     }
 
     @Override

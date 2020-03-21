@@ -19,6 +19,11 @@ public class UserRepository implements iUserRepository {
     }
 
     @Override
+    public long usersLength() {
+        return repo.totalUserCount();
+    }
+
+    @Override
     public User save(User user) {
         return repo.save(user);
     }

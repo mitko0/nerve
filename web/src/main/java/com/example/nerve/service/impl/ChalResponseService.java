@@ -57,6 +57,10 @@ public class ChalResponseService implements iChalResponseService {
                 responseUser.setPoints(responseUser.getPoints() + Constants.points);
                 response.setPublicResponder(val);
                 userRepo.save(responseUser);
+
+                DateTime challengeEndDt = new DateTime(challenge.getEndDate(), DateTimeZone.UTC);
+                challenge.setEndDate(challengeEndDt.plusMillis(1).toDate());
+                chalRepo.save(challenge);
             }
             else {
                 DateTime longDT = new DateTime().plusYears(1);

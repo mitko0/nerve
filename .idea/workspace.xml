@@ -3,28 +3,28 @@
   <component name="ChangeListManager">
     <list default="true" id="8ca0f091-229b-4dcc-98ab-7ac1f772efe3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Challenge/Challenge2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/CustomInput/ButtonLoad.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/CustomInput/ButtonLoad.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/CustomInput/InputSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/CustomInput/InputSearch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Sections/Admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Sections/Admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/repository/axiosRoleRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/repository/axiosRoleRepository.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/App/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Challenge/ChallengeAdd.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Challenge/ChallengeAdd.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Context/ContextProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Context/ContextProvider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Navbar/SideBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Navbar/SideBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Post/Post.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Post/Post.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Response/Response.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Response/Response.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Response/ResponseAdd.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Response/ResponseAdd.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Sections/Private.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Sections/Private.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Sections/Public.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Sections/Public.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Skeleton/Skeleton.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Skeleton/Skeleton.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/repository/axiosUserRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/repository/axiosUserRepository.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/tests/Test.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/tests/Test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/repository/localStorage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/repository/localStorage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles/all.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/all.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/config/WebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/config/WebMvcConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/entity/Challenge.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/entity/Challenge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/entity/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/model/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/impl/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/impl/RoleRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/impl/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/impl/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/interfaces/iRoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/interfaces/iRoleRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/interfaces/iUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/interfaces/iUserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/jpa/JpaRoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/jpa/JpaRoleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/jpa/JpaChallengeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/jpa/JpaChallengeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/jpa/JpaUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/repository/jpa/JpaUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/ChalResponseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/ChalResponseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/StreakService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/StreakService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/interfaces/iRoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/interfaces/iRoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/interfaces/iUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/interfaces/iUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/RoleApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/RoleApi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/UserApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/UserApi.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -117,11 +117,11 @@
       <recent name="com.example.nerve.repository.jpa" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\wp\frontend\src\components\Sections" />
       <recent name="D:\wp\web\src\main\resources\static\profilePics" />
       <recent name="D:\wp\frontend\src" />
       <recent name="D:\wp\frontend\src\styles" />
       <recent name="D:\wp\frontend\src\components\SignIn" />
-      <recent name="D:\wp\frontend\src\components\App" />
     </key>
   </component>
   <component name="RunManager">
@@ -244,6 +244,12 @@
       <workItem from="1584607272005" duration="31917000" />
       <workItem from="1584708206652" duration="33000" />
       <workItem from="1584708383225" duration="2911000" />
+      <workItem from="1584713705889" duration="646000" />
+      <workItem from="1584716316248" duration="3480000" />
+      <workItem from="1584720053078" duration="5971000" />
+      <workItem from="1584730557461" duration="10669000" />
+      <workItem from="1584793509093" duration="12649000" />
+      <workItem from="1584813549821" duration="11536000" />
     </task>
     <servers />
   </component>
@@ -269,10 +275,10 @@
     </ignored-roots>
   </component>
   <component name="WindowStateProjectService">
-    <state x="1032" y="202" key="#Assign_Data_Sources" timestamp="1583184626324">
+    <state x="1032" y="202" key="#Assign_Data_Sources" timestamp="1584718242586">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1032" y="202" key="#Assign_Data_Sources/0.0.1920.1080@0.0.1920.1080" timestamp="1583184626324" />
+    <state x="1032" y="202" key="#Assign_Data_Sources/0.0.1920.1080@0.0.1920.1080" timestamp="1584718242586" />
     <state x="552" y="199" key="#Auto_Import" timestamp="1582132209764">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -297,10 +303,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1202" y="347" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1582979027503" />
-    <state x="1245" y="253" key="#com.intellij.ide.util.MemberChooser" timestamp="1584624159289">
+    <state x="1245" y="253" key="#com.intellij.ide.util.MemberChooser" timestamp="1584824169342">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1245" y="253" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1584624159289" />
+    <state x="1245" y="253" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1584824169342" />
     <state x="1103" y="324" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1581767379076">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -341,54 +347,54 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1012" y="0" key="FileDocumentManager.FileCacheConflict/0.0.1920.1080@0.0.1920.1080" timestamp="1584554568103" />
-    <state width="914" height="329" key="GridCell.Tab.0.bottom" timestamp="1584712061589">
+    <state width="914" height="330" key="GridCell.Tab.0.bottom" timestamp="1584825351641">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="329" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061589" />
-    <state width="914" height="329" key="GridCell.Tab.0.center" timestamp="1584712061589">
+    <state width="914" height="330" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584825351641" />
+    <state width="914" height="330" key="GridCell.Tab.0.center" timestamp="1584825351641">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="329" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061589" />
-    <state width="914" height="329" key="GridCell.Tab.0.left" timestamp="1584712061589">
+    <state width="914" height="330" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584825351641" />
+    <state width="914" height="330" key="GridCell.Tab.0.left" timestamp="1584825351641">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="329" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061589" />
-    <state width="914" height="329" key="GridCell.Tab.0.right" timestamp="1584712061589">
+    <state width="914" height="330" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584825351641" />
+    <state width="914" height="330" key="GridCell.Tab.0.right" timestamp="1584825351641">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="329" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061589" />
-    <state width="914" height="329" key="GridCell.Tab.1.bottom" timestamp="1584712061590">
+    <state width="914" height="330" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584825351641" />
+    <state width="914" height="330" key="GridCell.Tab.1.bottom" timestamp="1584825351641">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="329" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061590" />
-    <state width="914" height="329" key="GridCell.Tab.1.center" timestamp="1584712061589">
+    <state width="914" height="330" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584825351641" />
+    <state width="914" height="330" key="GridCell.Tab.1.center" timestamp="1584825351641">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="329" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061589" />
-    <state width="914" height="329" key="GridCell.Tab.1.left" timestamp="1584712061589">
+    <state width="914" height="330" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584825351641" />
+    <state width="914" height="330" key="GridCell.Tab.1.left" timestamp="1584825351641">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="329" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061589" />
-    <state width="914" height="329" key="GridCell.Tab.1.right" timestamp="1584712061589">
+    <state width="914" height="330" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584825351641" />
+    <state width="914" height="330" key="GridCell.Tab.1.right" timestamp="1584825351641">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="329" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061589" />
-    <state width="914" height="329" key="GridCell.Tab.2.bottom" timestamp="1584712061590">
+    <state width="914" height="330" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584825351641" />
+    <state width="914" height="330" key="GridCell.Tab.2.bottom" timestamp="1584825351641">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="329" key="GridCell.Tab.2.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061590" />
-    <state width="914" height="329" key="GridCell.Tab.2.center" timestamp="1584712061590">
+    <state width="914" height="330" key="GridCell.Tab.2.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584825351641" />
+    <state width="914" height="330" key="GridCell.Tab.2.center" timestamp="1584825351641">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="329" key="GridCell.Tab.2.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061590" />
-    <state width="914" height="329" key="GridCell.Tab.2.left" timestamp="1584712061590">
+    <state width="914" height="330" key="GridCell.Tab.2.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584825351641" />
+    <state width="914" height="330" key="GridCell.Tab.2.left" timestamp="1584825351641">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="329" key="GridCell.Tab.2.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061590" />
-    <state width="914" height="329" key="GridCell.Tab.2.right" timestamp="1584712061590">
+    <state width="914" height="330" key="GridCell.Tab.2.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584825351641" />
+    <state width="914" height="330" key="GridCell.Tab.2.right" timestamp="1584825351641">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="914" height="329" key="GridCell.Tab.2.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584712061590" />
+    <state width="914" height="330" key="GridCell.Tab.2.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584825351641" />
     <state width="196" height="457" key="HiddenNamespacesPopup" timestamp="1583184723015">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -417,10 +423,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="487" height="543" key="XDebugger.FullValuePopup/0.0.1920.1080@0.0.1920.1080" timestamp="1582063039657" />
-    <state x="1136" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1584708415997">
+    <state x="1136" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1584813551434">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1136" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584708415997" />
+    <state x="1136" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584813551434" />
     <state x="1249" y="461" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1581796751092">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -433,22 +439,22 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1170" y="310" key="extract.method.dialog/0.0.1920.1080@0.0.1920.1080" timestamp="1581894876101" />
-    <state x="1048" y="336" width="737" height="606" key="find.popup" timestamp="1584642427232">
+    <state x="1048" y="336" width="737" height="606" key="find.popup" timestamp="1584823359249">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1048" y="336" width="737" height="606" key="find.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1584642427232" />
+    <state x="1048" y="336" width="737" height="606" key="find.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1584823359249" />
     <state x="685" y="161" key="new project wizard" timestamp="1583954945837">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="685" y="161" key="new project wizard/0.0.1920.1080@0.0.1920.1080" timestamp="1583954945837" />
-    <state x="1096" y="254" key="run.anything.popup" timestamp="1584573661517">
+    <state x="1096" y="254" key="run.anything.popup" timestamp="1584801894890">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1096" y="254" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1584573661517" />
-    <state x="1103" y="240" width="672" height="676" key="search.everywhere.popup" timestamp="1584642373884">
+    <state x="1096" y="254" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1584801894890" />
+    <state x="1103" y="240" width="672" height="676" key="search.everywhere.popup" timestamp="1584822669264">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1103" y="240" width="672" height="676" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1584642373884" />
+    <state x="1103" y="240" width="672" height="676" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1584822669264" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -485,11 +491,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/StreakApi.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/web/src/main/java/com/example/nerve/web/rest/StreakApi.java</url>
           <line>37</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
@@ -512,11 +513,6 @@
           <url>file://$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/ChallengeService.java</url>
           <line>40</line>
           <option name="timeStamp" value="78" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/web/src/main/java/com/example/nerve/service/impl/ChalResponseService.java</url>
-          <line>39</line>
-          <option name="timeStamp" value="82" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -91,7 +91,9 @@ class SideBar extends Component {
                         </div>
                         <ChallengeAdd
                             public
+                            show={context.state.showNewChallengeModal}
                             onNewChallenge={context.handleNewChallenge}
+                            onHide={context.handleShowNewChallengeModal}
                         />
                     </>
                 )}

@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface iUserRepository {
+    long usersLength();
+
     User save(User user);
 
     List<User> saveAll(List<User> users);

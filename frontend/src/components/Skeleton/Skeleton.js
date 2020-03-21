@@ -3,6 +3,7 @@ import {Row, Col} from "react-bootstrap";
 import {Card} from "@material-ui/core";
 
 import SideBar from "../Navbar/SideBar";
+import FeaturedNew from "../Featured/FeaturedNew";
 
 const Skeleton = props => {
     return (
@@ -24,7 +25,7 @@ const Skeleton = props => {
                     sm={9}
                     lg={6}
                     id="center"
-                    style={{height: '98vh'}}
+                    style={{height: '99vh'}}
                 >
                     {props.children}
                 </Col>
@@ -34,9 +35,11 @@ const Skeleton = props => {
                 >
                     <Card
                         raised
-                        className='position-fixed mr-3'
+                        className='position-fixed mr-3 p-3'
                     >
-                        oscce ce si se sera f nego
+                        <h3 className='text-danger is-italic'>Latest neurons added</h3>
+                        <hr/>
+                        <FeaturedNew className='w-100'/>
                     </Card>
                 </Col>
             </Row>

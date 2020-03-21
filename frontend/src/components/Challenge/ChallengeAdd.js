@@ -23,7 +23,7 @@ import LSService from "../../repository/localStorage";
 class ChallengeAdd extends Component {
     state = {
         users: new Map(),
-        selectedDate: moment(),
+        selectedDate: moment().add(1, "day"),
         validDate: true,
         description: '',
     };
@@ -66,7 +66,7 @@ class ChallengeAdd extends Component {
             e.target.description.value,
             e.target.endDate.value)
             .then(({data}) => {
-                this.props.onNewChallenge(data);
+                this.props.onNewChallenge(data, users);
             }).catch(err => {
             console.log(err);
         });
@@ -79,14 +79,14 @@ class ChallengeAdd extends Component {
         return (
             <>
                 {user && <MyContext.Consumer>
-                    {context => (
+                    {() => (
                         <>
                             <MuiPickersUtilsProvider utils={MomentUtils}>
                                 <Modal
                                     size={"lg"}
                                     backdropClassName='bg-danger'
-                                    show={context.state.showNewChallengeModal}
-                                    onHide={() => context.handleShowNewChallengeModal(false)}
+                                    show={this.props.show}
+                                    onHide={() => this.props.onHide(false)}
                                 >
                                     <Modal.Header closeButton/>
                                     <Modal.Body>
@@ -108,14 +108,16 @@ class ChallengeAdd extends Component {
                                                     R
                                                 </Avatar>
                                                 <Media.Body className='control'>
-                                        <textarea
-                                            value={description}
-                                            onChange={this.handleDescriptionChange}
-                                            name='description'
-                                            className="textarea border-0"
-                                            placeholder="Go easy on them..."
-                                        />
+                                                    <textarea
+                                                        value={description}
+                                                        onChange={this.handleDescriptionChange}
+                                                        name='description'
+                                                        className="textarea border-0"
+                                                        placeholder="Go easy on them..."
+                                                    />
                                                     <KeyboardDateTimePicker
+                                                        ampm={false}
+                                                        animateYearScrolling
                                                         fullWidth
                                                         autoOk
                                                         disablePast
@@ -140,7 +142,7 @@ class ChallengeAdd extends Component {
                                                             type="submit"
                                                             className='mt-1'
                                                             variant="danger"
-                                                            onClick={() => context.handleShowNewChallengeModal(false)}
+                                                            onClick={() => this.props.onHide(false)}
                                                         >
                                                             Challenge
                                                         </Button>
