@@ -233,6 +233,16 @@ const Response = props => {
                     </Modal>
                 </Media>
             }
+           {/* {(props.challenge.id.receiverId !== -1
+                || props.challenge.id.senderId !== )
+                && <ResponseAdd
+                responded={responded}
+                senderId={props.challenge.id.receiverId}
+                receiverId={props.challenge.id.senderId}
+                challengedDate={props.challenge.id.createDate}
+                responderId={LSService.getItem('user').id}
+                onFinish={handleAddFinish}
+            />}*/}
             <ResponseAdd
                 responded={responded}
                 senderId={props.challenge.id.receiverId}

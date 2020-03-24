@@ -13,7 +13,6 @@ import './styles/App.css';
 import './styles/index.css';
 
 import App from './components/App/App';
-import Test from "./tests/Test";
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

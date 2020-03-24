@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import UserService from "../../repository/axiosUserRepository";
 import {Avatar} from "@material-ui/core";
 import {Media} from "react-bootstrap";
+import LSService from "../../repository/localStorage";
 
 class FeaturedNew extends Component {
     state = {
@@ -9,7 +10,7 @@ class FeaturedNew extends Component {
     };
 
     componentDidMount() {
-        UserService.getAllUsers().then(({data}) => {
+        LSService.checkToken() && UserService.getAllUsers().then(({data}) => {
             this.setState({users: data.content})
         })
     }
