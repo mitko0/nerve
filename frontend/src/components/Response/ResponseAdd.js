@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {CardActions, IconButton} from "@material-ui/core";
 import {
     AddPhotoAlternate,
     Close,
@@ -6,7 +7,6 @@ import {
 } from "@material-ui/icons";
 
 import ResponseService from "../../repository/axiosResponseRepository";
-import {CardActions, IconButton} from "@material-ui/core";
 import LSService from "../../repository/localStorage";
 
 const ResponseAdd = props => {
@@ -35,8 +35,8 @@ const ResponseAdd = props => {
         });
     };
 
-    const handleFileSelect = (e) => {
-        setState({...state, file: e.target.files[0], disabled: false});
+    const handleFileSelect = e => {
+        Boolean(e.target.files.length) && setState({...state, file: e.target.files[0], disabled: false});
     };
 
     const {file, showAdd, disabled} = state;
@@ -44,20 +44,17 @@ const ResponseAdd = props => {
         <>
             <div>
                 <CardActions disableSpacing>
-                    {
-                        !props.responded
-                        && <IconButton
-                            aria-label="respond"
-                            onClick={handleRespond}
-                            disabled={showAdd && disabled}
-                        >
-                            {
-                                showAdd
-                                    ? <Publish fontSize='large'/>
-                                    : <AddPhotoAlternate fontSize='large'/>
-                            }
-                        </IconButton>
-                    }
+                    <IconButton
+                        aria-label="respond"
+                        onClick={handleRespond}
+                        disabled={showAdd && disabled}
+                    >
+                        {
+                            showAdd
+                                ? <Publish fontSize='large'/>
+                                : <AddPhotoAlternate fontSize='large'/>
+                        }
+                    </IconButton>
                     {showAdd && <IconButton
                         aria-label="respond"
                         onClick={() => setState({...state, showAdd: false})}

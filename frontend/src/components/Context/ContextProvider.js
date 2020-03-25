@@ -42,10 +42,11 @@ export class ContextProvider extends Component {
                         challenge: data[0],
                         sender: LSService.getItem('user')
                     };
-                    debugger
-                    let idk = [item, ...challenges];
-                    // challenges.unshift(item);
-                    this.setState({publicChallenges: idk})
+                    // challenges.push(item);
+                    console.log(challenges);
+                    challenges.unshift(item);
+                    console.log(challenges);
+                    this.setState({publicChallenges: challenges})
                 }
             }}>
                 {this.props.children}

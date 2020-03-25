@@ -1,4 +1,5 @@
 import React from 'react';
+import qs from 'qs';
 import {
     Card,
 } from '@material-ui/core';
@@ -10,7 +11,7 @@ const Post = props => {
     return (
         <Card raised className='card-response ml-auto mr-auto'>
             {
-                props.data && <div>
+                props.data && <div key={qs.stringify(props.data.challenge.id, {allowDots: true})}>
                     <Challenge
                         data={props.data}
                         showMore={props.showMore}

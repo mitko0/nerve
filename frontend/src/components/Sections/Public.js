@@ -1,6 +1,5 @@
 import React, {useContext, useEffect} from 'react';
 
-
 import Post from "../Post/Post";
 import {MyContext} from '../Context/ContextProvider';
 

@@ -60,17 +60,12 @@ class ChallengeAdd extends Component {
         const user = LSService.getItem('user');
         const receivers = this.props.public ? [-1] : [...users.keys()];
 
-        ChallengeService.newChallenges(
-            user.id,
-            receivers,
-            e.target.description.value,
-            e.target.endDate.value)
-            .then(({data}) => {
-                this.props.onNewChallenge(data, users);
-            }).catch(err => {
+        ChallengeService.newChallenges(user.id, receivers, e.target.description.value, e.target.endDate.value).then(({data}) => {
+            this.props.onNewChallenge(data, users);
+        }).catch(err => {
             console.log(err);
         });
-        this.setState({description: '', selectedDate: moment()});
+        this.setState({description: '', selectedDate: moment().add(1, "day")});
     };
 
     render() {

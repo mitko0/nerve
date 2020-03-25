@@ -52,7 +52,6 @@ const Response = props => {
     const theme = useTheme();
 
     const [state, setState] = useState({
-        responded: props.challenge.responded,
         responses: [],
         activeStep: 0,
         showModal: false,
@@ -101,14 +100,12 @@ const Response = props => {
     };
 
     const handleAddFinish = (response) => {
-        const responded = props.challenge.id.receiverId !== -1;
-
         responses.unshift(response);
-        setState({...state, activeStep: 0, responses: responses, responded: responded})
+        setState({...state, responses: responses, activeStep: 0});
     };
 
     const flag = state.responses.length !== 0;
-    const {responses, activeStep, showModal, responded} = state;
+    const {responses, activeStep, showModal} = state;
     return (
         <div className=''>
             {
@@ -233,24 +230,15 @@ const Response = props => {
                     </Modal>
                 </Media>
             }
-           {/* {(props.challenge.id.receiverId !== -1
-                || props.challenge.id.senderId !== )
+            {(props.challenge.id.receiverId === -1
+                || responses.length === 0)
                 && <ResponseAdd
-                responded={responded}
                 senderId={props.challenge.id.receiverId}
                 receiverId={props.challenge.id.senderId}
                 challengedDate={props.challenge.id.createDate}
                 responderId={LSService.getItem('user').id}
                 onFinish={handleAddFinish}
-            />}*/}
-            <ResponseAdd
-                responded={responded}
-                senderId={props.challenge.id.receiverId}
-                receiverId={props.challenge.id.senderId}
-                challengedDate={props.challenge.id.createDate}
-                responderId={LSService.getItem('user').id}
-                onFinish={handleAddFinish}
-            />
+            />}
         </div>
     )
 };
