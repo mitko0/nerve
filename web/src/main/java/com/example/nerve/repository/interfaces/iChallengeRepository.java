@@ -3,6 +3,8 @@ package com.example.nerve.repository.interfaces;
 import com.example.nerve.model.composite_key.ChallengeKey;
 import com.example.nerve.model.entity.Challenge;
 import com.example.nerve.model.view_model.ChallengeUsers;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Date;
 import java.util.List;
@@ -17,6 +19,8 @@ public interface iChallengeRepository {
     Optional<Challenge> findById(ChallengeKey key);
 
     List<ChallengeUsers> search(String username);
+
+    Page<ChallengeUsers> findPageableForUserId(Long userId, Pageable pageable);
 
     List<ChallengeUsers> allBeforeDate(Date tDate);
 

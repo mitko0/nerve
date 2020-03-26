@@ -5,6 +5,8 @@ import com.example.nerve.model.composite_key.ChallengeKey;
 import com.example.nerve.model.entity.ChalResponse;
 import com.example.nerve.model.entity.Challenge;
 import com.example.nerve.model.entity.User;
+import com.example.nerve.model.event.ChallengeEvent;
+import com.example.nerve.model.view_model.ChallengeUsers;
 import com.example.nerve.model.view_model.DataHolder;
 import com.example.nerve.repository.interfaces.iChalResponseRepository;
 import com.example.nerve.repository.interfaces.iChallengeRepository;
@@ -13,6 +15,7 @@ import com.example.nerve.service.interfaces.iChalResponseService;
 import com.example.nerve.service.interfaces.iStreakService;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,12 +30,14 @@ public class ChalResponseService implements iChalResponseService {
     private final iChallengeRepository chalRepo;
     private final iUserRepository userRepo;
     private final iStreakService streakService;
+    private final ApplicationEventPublisher eventPublisher;
 
-    public ChalResponseService(iChalResponseRepository repo, iChallengeRepository chalRepo, iUserRepository userRepo, iStreakService streakService) {
+    public ChalResponseService(iChalResponseRepository repo, iChallengeRepository chalRepo, iUserRepository userRepo, iStreakService streakService, ApplicationEventPublisher eventPublisher) {
         this.repo = repo;
         this.chalRepo = chalRepo;
         this.userRepo = userRepo;
         this.streakService = streakService;
+        this.eventPublisher = eventPublisher;
     }
 
     @Override
@@ -52,15 +57,16 @@ public class ChalResponseService implements iChalResponseService {
 
         if (!challenge.isResponded()) {
             if (responseSenderId == Constants.publicChallenge) {
-                Long val = responderId.orElseThrow(() -> new RuntimeException("m:: Invalid id!"));
-                responseUser = userRepo.findById(val).orElseThrow(() -> new RuntimeException("m:: User not found!"));
+                Long responderIdVal = responderId.orElseThrow(() -> new RuntimeException("m:: Invalid id!"));
+                responseUser = userRepo.findById(responderIdVal).orElseThrow(() -> new RuntimeException("m:: User not found!"));
                 responseUser.setPoints(responseUser.getPoints() + Constants.points);
-                response.setPublicResponder(val);
+                response.setPublicResponder(responderIdVal);
                 userRepo.save(responseUser);
 
                 DateTime challengeEndDt = new DateTime(challenge.getEndDate(), DateTimeZone.UTC);
                 challenge.setEndDate(challengeEndDt.plusMillis(1).toDate());
                 chalRepo.save(challenge);
+                eventPublisher.publishEvent(new ChallengeEvent(challenge));
             }
             else {
                 DateTime longDT = new DateTime().plusYears(1);

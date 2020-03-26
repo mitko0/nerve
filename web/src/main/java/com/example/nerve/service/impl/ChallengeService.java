@@ -3,12 +3,17 @@ package com.example.nerve.service.impl;
 import com.example.nerve.model.composite_key.ChallengeKey;
 import com.example.nerve.model.entity.Challenge;
 import com.example.nerve.model.entity.User;
+import com.example.nerve.model.event.ChallengeEvent;
 import com.example.nerve.model.view_model.ChallengeUsers;
 import com.example.nerve.repository.interfaces.iChallengeRepository;
 import com.example.nerve.repository.interfaces.iUserRepository;
 import com.example.nerve.service.interfaces.iChallengeService;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,10 +26,12 @@ import java.util.Optional;
 public class ChallengeService implements iChallengeService {
     private final iChallengeRepository repo;
     private final iUserRepository userRepo;
+    private final ApplicationEventPublisher eventPublisher;
 
-    public ChallengeService(iChallengeRepository repo, iUserRepository userRepo) {
+    public ChallengeService(iChallengeRepository repo, iUserRepository userRepo, ApplicationEventPublisher eventPublisher) {
         this.repo = repo;
         this.userRepo = userRepo;
+        this.eventPublisher = eventPublisher;
     }
 
     @Override
@@ -51,7 +58,9 @@ public class ChallengeService implements iChallengeService {
         }
 
         challenge.setResponded(false);
-        return repo.save(challenge);
+        repo.save(challenge);
+        eventPublisher.publishEvent(new ChallengeEvent(challenge));
+        return challenge;
     }
 
     @Override
@@ -78,6 +87,7 @@ public class ChallengeService implements iChallengeService {
             challenge.setEndDate(endDt.toDate());
 
             challenges.add(challenge);
+            eventPublisher.publishEvent(new ChallengeEvent(challenge));
         }
 
         return repo.saveAll(challenges);
@@ -86,6 +96,11 @@ public class ChallengeService implements iChallengeService {
     @Override
     public List<ChallengeUsers> search(String username) {
         return repo.search(username);
+    }
+
+    @Override
+    public Page<ChallengeUsers> findPageableForUserId(Long userId, int pageNo, int listSize) {
+        return repo.findPageableForUserId(userId, PageRequest.of(pageNo, listSize, Sort.Direction.DESC, "version"));
     }
 
     @Override

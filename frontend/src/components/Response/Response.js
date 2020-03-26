@@ -148,7 +148,7 @@ const Response = props => {
                                             }
                                         </Paper>
                                         <div
-                                            className='d-flex justify-content-center align-items-center media-holder'>
+                                            className='mb-1 d-flex justify-content-center align-items-center media-holder'>
                                             {
                                                 flag && responses[activeStep].attr1.fileDetails.mimeType.includes('image') ?
                                                     <img
@@ -231,7 +231,8 @@ const Response = props => {
                 </Media>
             }
             {(props.challenge.id.receiverId === -1
-                || responses.length === 0)
+                || (props.challenge.id.senderId !== LSService.getItem('user').id
+                && responses.length === 0))
                 && <ResponseAdd
                 senderId={props.challenge.id.receiverId}
                 receiverId={props.challenge.id.senderId}

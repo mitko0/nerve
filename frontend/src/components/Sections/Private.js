@@ -9,6 +9,7 @@ import ChallengeAdd from "../Challenge/ChallengeAdd";
 import ChallengeService from "../../repository/axiosChallengeRepository";
 import StreakService from "../../repository/axiosStreakRepository";
 import LSService from "../../repository/localStorage";
+import GlobalService from "../../repository/GlobalService";
 
 class Private extends Component {
     static contextType = MyContext;
@@ -44,7 +45,7 @@ class Private extends Component {
             };
             messages.unshift(obj);
         });
-        const newMessageMap = LSService.groupBy(messages, obj => obj.challenge.id.senderId !== currentUser.id, obj => obj.sender.id, obj => obj.receiver.id);
+        const newMessageMap = GlobalService.groupBy(messages, obj => obj.challenge.id.senderId !== currentUser.id, obj => obj.sender.id, obj => obj.receiver.id);
         this.setState({messageMap: newMessageMap, messages: messages})
     };
 
@@ -52,12 +53,12 @@ class Private extends Component {
         const userId = this.user.id;
         ChallengeService.forUser('for', this.user.id).then(({data}) => {
             data = data.filter(obj => obj.receiver.id !== -1);
-            let map = LSService.groupBy(data, obj => obj.challenge.id.senderId !== userId, obj => obj.sender.id, obj => obj.receiver.id);
+            let map = GlobalService.groupBy(data, obj => obj.challenge.id.senderId !== userId, obj => obj.sender.id, obj => obj.receiver.id);
             this.setState({messages: data, messageMap: map});
         });
 
         StreakService.getForId(this.user.id).then(({data}) => {
-            let map = LSService.groupBy(data, obj => obj.id.user1Id !== userId, obj => obj.id.user1Id, obj => obj.id.user2Id);
+            let map = GlobalService.groupBy(data, obj => obj.id.user1Id !== userId, obj => obj.id.user1Id, obj => obj.id.user2Id);
             this.setState({streakMap: map});
         })
     };

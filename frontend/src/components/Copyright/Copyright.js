@@ -4,7 +4,7 @@ import {
     Link
 } from "@material-ui/core";
 
-const Copyright = props => {
+const Copyright = () => {
     return (
         <Typography
             variant="body2"

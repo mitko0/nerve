@@ -3,6 +3,8 @@ package com.example.nerve.repository.jpa;
 import com.example.nerve.model.entity.Challenge;
 import com.example.nerve.model.composite_key.ChallengeKey;
 import com.example.nerve.model.view_model.ChallengeUsers;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,6 +14,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface JpaChallengeRepository extends JpaRepository<Challenge, ChallengeKey> {
+
+    @Query("select new com.example.nerve.model.view_model.ChallengeUsers(c, s, r) " +
+            "from Challenge c join c.sender s on c.id.senderId = s.id join c.receiver r on c.id.receiverId = r.id " +
+            "where c.endDate >= current_timestamp " +
+            "and (c.id.receiverId = :id or c.id.senderId = :id)")
+    Page<ChallengeUsers> findPageableForId(long id, Pageable pageable);
 
     @Query("select c from Challenge c " +
             "where c.endDate >= current_timestamp " +

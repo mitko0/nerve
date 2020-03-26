@@ -4,6 +4,7 @@ import com.example.nerve.model.entity.Challenge;
 import com.example.nerve.model.view_model.ChallengeUsers;
 import com.example.nerve.service.interfaces.iChallengeService;
 import org.joda.time.DateTime;
+import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,14 @@ public class ChallengeApi {
     @GetMapping(value = "/search", params = "username")
     public List<ChallengeUsers> search(@RequestParam String username) {
         return service.search(username);
+    }
+
+    @GetMapping("/paged")
+    public Page<ChallengeUsers> challengeUsersPaged(@RequestParam Long id,
+                                                    @RequestHeader(value = "page-number", required = false, defaultValue = "0") int pageNo,
+                                                    @RequestHeader(value = "list-size", required = false, defaultValue = "5") int listSize) {
+
+        return service.findPageableForUserId(id, pageNo, listSize);
     }
 
     @GetMapping("/{searchBy}")

@@ -62,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .regexMatchers("/api/roles.*").hasAuthority("ADMIN")
                 .regexMatchers("/api/authenticate.*").permitAll()
+                .regexMatchers("/ws.*").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/users").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

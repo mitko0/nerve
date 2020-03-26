@@ -56,6 +56,19 @@ const ChallengeService = {
         })
     },
 
+    pagedForUserId: (id, pageNo = 0, listSize = 5) => {
+        return axios.get(`/api/challenges/paged`, {
+            params: {
+                id
+            },
+            headers: {
+                'page-number': pageNo,
+                'list-size': listSize,
+                'Authorization': 'Bearer ' + LSService.getItem()
+            }
+        })
+    },
+
     forUser: (searchBy = 'for', id, username) => {
         return axios.get(`/api/challenges/${searchBy}`, {
             params: {

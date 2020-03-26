@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import LSService from "../../repository/localStorage";
+import UserService from "../../repository/axiosUserRepository";
 
 export const MyContext = React.createContext();
 
@@ -8,6 +9,9 @@ export class ContextProvider extends Component {
         sectionNo: 0,
         showNewChallengeModal: false,
         publicChallenges: [],
+        pageNo: 0,
+        listSize: 5,
+        last: false
     };
 
     render() {
@@ -33,19 +37,32 @@ export class ContextProvider extends Component {
                 handleSectionNoChange: no => {
                     this.setState({sectionNo: no})
                 },
-                handlePublicChallengesUpdate: challenges => {
-                    this.setState({publicChallenges: challenges});
+                handlePublicChallengesUpdate: (challenges, last) => {
+                    const {pageNo} = this.state;
+                    this.setState({publicChallenges: challenges, last: last, pageNo: pageNo + 1});
                 },
-                handleNewChallenge: data => {
+                handleNewChallenge: (data, beginning = true) => {
                     const challenges = this.state.publicChallenges;
                     const item = {
                         challenge: data[0],
                         sender: LSService.getItem('user')
                     };
-                    // challenges.push(item);
-                    console.log(challenges);
-                    challenges.unshift(item);
-                    console.log(challenges);
+                   beginning
+                       ? challenges.unshift(item)
+                       : challenges.push(item);
+                    this.setState({publicChallenges: challenges})
+                },
+                handleWsChallengeResponse: async data => {
+                    const challenges = this.state.publicChallenges;
+                    const currentUser = LSService.getItem('user');
+                    let sender = data.id.senderId === currentUser.id
+                    ? currentUser
+                        : await UserService.getUser(data.id.senderId);
+                    const item = {
+                        challenge: data,
+                        sender: sender.data ? sender.data : sender
+                    };
+                    challenges.push(item);
                     this.setState({publicChallenges: challenges})
                 }
             }}>

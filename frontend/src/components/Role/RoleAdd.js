@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {TextField} from "@material-ui/core";
+import {Col, Row} from "react-bootstrap";
 
 import ButtonLoad from "../CustomInput/ButtonLoad";
 
 import RoleService from "../../repository/axiosRoleRepository";
-import {Col, Row} from "react-bootstrap";
 
 const RoleAdd = () => {
     const [loading, setLoading] = useState(false);

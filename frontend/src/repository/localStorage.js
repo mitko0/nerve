@@ -1,22 +1,6 @@
 import decode from "jwt-decode";
 
 const LSService = {
-    groupBy: (list, condition, trueKeyGetter, falseKeyGetter) => {
-        const map = new Map();
-        list.forEach(item => {
-            const key = condition(item)
-                ? trueKeyGetter(item)
-                : falseKeyGetter(item);
-            const collection = map.get(key);
-            if (!collection) {
-                map.set(key, [item]);
-            } else {
-                collection.push(item);
-            }
-        });
-        return map;
-    },
-
     setItem: (name, value) => {
         window.localStorage.setItem(name, JSON.stringify(value));
     },

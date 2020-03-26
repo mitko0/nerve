@@ -1,6 +1,9 @@
 package com.example.nerve.model;
 
 import com.example.nerve.model.view_model.FileDetails;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,6 +18,7 @@ import java.nio.file.*;
 import java.util.Base64;
 import java.util.Objects;
 
+@Component
 public class Constants {
     public static final long points = 10;
     public static final long publicChallenge = -1;
@@ -23,6 +27,8 @@ public class Constants {
     public static final String defaultProfilePicture = "default.jpg";
     public static final String fileBasePath = System.getProperty("user.dir") + "/web/src/main/resources/static";
 
+    @Autowired
+    public static SimpMessagingTemplate messagingTemplate;
 
     public static String saveFile(@NotNull MultipartFile file, String name, String location) throws IOException {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));

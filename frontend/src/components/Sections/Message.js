@@ -1,8 +1,9 @@
 import React, {useContext, useEffect} from 'react';
+import {Link} from "react-router-dom";
+
 import Post from "../Post/Post";
 import {MyContext} from "../Context/ContextProvider";
 import LSService from "../../repository/localStorage";
-import {Link} from "react-router-dom";
 
 const Message = props => {
     const context = useContext(MyContext);

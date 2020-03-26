@@ -5,6 +5,8 @@ import com.example.nerve.model.entity.Challenge;
 import com.example.nerve.model.view_model.ChallengeUsers;
 import com.example.nerve.repository.interfaces.iChallengeRepository;
 import com.example.nerve.repository.jpa.JpaChallengeRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -37,6 +39,11 @@ public class ChallengeRepository implements iChallengeRepository {
     @Override
     public List<ChallengeUsers> search(String username) {
         return repo.search(username);
+    }
+
+    @Override
+    public Page<ChallengeUsers> findPageableForUserId(Long userId, Pageable pageable) {
+        return repo.findPageableForId(userId, pageable);
     }
 
     @Override
