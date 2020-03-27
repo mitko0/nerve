@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -160,9 +161,7 @@ public class UserService implements iUserService {
 
     @Override
     public Page<User> usersPaged(int listSize, int pageNo) {
-        long count = userRepo.usersLength();
-
-        return userRepo.findPageable(PageRequest.of((int) (count/listSize), listSize));
+        return userRepo.findPageable(PageRequest.of(pageNo, listSize, Sort.Direction.DESC, "id"));
     }
 
     @Override

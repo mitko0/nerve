@@ -30,6 +30,14 @@ const PrivateRoute = ({component: Component, ...rest}) => (
     )}/>
 );
 
+const AdminRoute = ({component: Component, ...rest}) => (
+    <Route {...rest} render={(props) => (
+        LSService.checkToken()
+        && LSService.isUserAdmin()
+        && <Component {...props} {...rest} />
+    )}/>
+);
+
 const App = () => {
     return (
         <ContextProvider>
@@ -46,7 +54,7 @@ const App = () => {
                             <PrivateRoute exact path='/dn' component={Private}/>
                             <PrivateRoute exact path='/dn/:id' component={Message}/>
                             <PrivateRoute exact path='/profile' component={Profile}/>
-                            {LSService.isUserAdmin() && <PrivateRoute exact path='/admin' component={Admin}/>}
+                            <AdminRoute exact path='/admin' component={Admin}/>
                         </Skeleton>
                     </Switch>
                 </Router>
