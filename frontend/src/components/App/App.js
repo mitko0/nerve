@@ -16,6 +16,7 @@ import Private from "../Sections/Private";
 import Message from "../Sections/Message";
 import Profile from "../Sections/Profile";
 import Admin from "../Sections/Admin";
+import Error from "../Sections/Error";
 
 import LSService from "../../repository/localStorage";
 
@@ -47,14 +48,20 @@ const App = () => {
                         <Route exact path='/sign-up' component={SignUp}/>
                         <Route exact path='/sign-in' component={SignIn}/>
                         <Route exact path='/sign-out' component={SignOut}/>
+                        <Route exact path='/error' component={Error}/>
 
                         <Skeleton>
-                            <PrivateRoute exact path='/' component={Public}/>
-                            <PrivateRoute exact path='/home' component={Public}/>
-                            <PrivateRoute exact path='/dn' component={Private}/>
-                            <PrivateRoute exact path='/dn/:id' component={Message}/>
-                            <PrivateRoute exact path='/profile' component={Profile}/>
-                            <AdminRoute exact path='/admin' component={Admin}/>
+                            <Switch>
+                                <PrivateRoute exact path='/' component={Public}/>
+                                <PrivateRoute exact path='/home' component={Public}/>
+                                <PrivateRoute exact path='/dn' component={Private}/>
+                                <PrivateRoute exact path='/dn/:id' component={Message}/>
+                                <PrivateRoute exact path='/profile' component={Profile}/>
+                                <AdminRoute exact path='/admin' component={Admin}/>
+                                <Route path='*' render={() =>
+                                    <Redirect to={'/error'}/>
+                                }/>
+                            </Switch>
                         </Skeleton>
                     </Switch>
                 </Router>
