@@ -64,7 +64,7 @@ public class UserService implements iUserService {
             }
         }
 
-        Role role = roleRepo.findByName("user").orElseThrow();
+        Role role = roleRepo.findByName("USER").orElseThrow();
         user.setRole(role);
         user.setPassword(encoder.encode(user.getPassword()));
         return userRepo.save(user);

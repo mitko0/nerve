@@ -9,7 +9,11 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 public class NerveApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(NerveApplication.class, args);
+        SpringApplication application =
+                new SpringApplication(NerveApplication.class);
+        application.setAdditionalProfiles("h2db");
+        application.run(args);
+//        SpringApplication.run(NerveApplication.class, args);
     }
 
 }

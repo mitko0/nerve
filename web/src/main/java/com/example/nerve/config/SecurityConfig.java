@@ -63,10 +63,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .regexMatchers("/api/roles.*").hasAuthority("ADMIN")
                 .regexMatchers("/api/authenticate.*").permitAll()
                 .regexMatchers("/ws.*").permitAll()
+                .regexMatchers("/h2.*").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/users").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        http.headers().frameOptions().disable();
     }
 }
