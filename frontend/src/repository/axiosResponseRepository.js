@@ -4,6 +4,8 @@ import DateFormatter from "../formatter/DateFormatter";
 
 const ResponseService = {
     newResponse: (senderId, receiverId, challengedDate, media, responderId) => {
+        console.log(DateFormatter.formatIso(challengedDate));
+
         let formData = new FormData();
         formData.append('id.senderId', senderId);
         formData.append('id.receiverId', receiverId);

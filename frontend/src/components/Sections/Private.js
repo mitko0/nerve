@@ -109,16 +109,20 @@ class Private extends Component {
                             <Media.Body className='control d-flex justify-content-between'>
                                 <span>
                                     {this.user.id !== item[0].receiver.id
-                                        ? <span className='mr-2'>{item[0].receiver.username}</span>
-                                        : <span className='mr-2'>{item[0].sender.username}</span>
+                                        ? <span className='mr-4'>{item[0].receiver.username}</span>
+                                        : <span className='mr-4'>{item[0].sender.username}</span>
                                     }
-                                    {sMapSize !== 0
-                                    && streakMap.has(key)
-                                    && streakMap.get(key)[0].streak > 1
-                                    && streakMap.get(key)[0].streak}
-                                    {sMapSize !== 0
-                                    && streakMap.has(key)
-                                    && <i className='fa fa-fire text-danger'/>}
+                                    <span
+                                        className = {(sMapSize !== 0 && streakMap.has(key) && streakMap.get(key)[0].streak > 1) ? 'p-1 rounded bg-lighter' : ''}
+                                    >
+                                        {sMapSize !== 0
+                                        && streakMap.has(key)
+                                        && streakMap.get(key)[0].streak > 1
+                                        && streakMap.get(key)[0].streak}
+                                        {sMapSize !== 0
+                                        && streakMap.has(key)
+                                        && <i className='fa fa-fire text-danger'/>}
+                                    </span>
                                 </span>
                                 <span>
                                     {moment(item[0].challenge.version).fromNow()}

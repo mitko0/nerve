@@ -21,7 +21,8 @@ const Public = () => {
 
     useEffect(() => {
         context.handleSectionNoChange(0);
-        ChallengeService.pagedForUserId(-1).then(({data}) => {
+        context.state.publicChallenges.length === 0
+        && ChallengeService.pagedForUserId(-1).then(({data}) => {
             context.handlePublicChallengesUpdate(data.content, data.last);
         });
 

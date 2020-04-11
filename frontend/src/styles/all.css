@@ -14,6 +14,10 @@
     background-color: #3d5466 !important;
 }
 
+.bg-lighter {
+    background-color: #e6ecf0;
+}
+
 .hover:hover {
     cursor: help;
 }
